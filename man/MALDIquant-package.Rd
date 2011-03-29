@@ -14,14 +14,16 @@ Up to now only importing and plotting of a single mass spectrum are supported.
 \details{
 \tabular{ll}{
 Package: \tab MALDIquant\cr
-Version: \tab 0.1\cr
-Date: \tab 2011-02-22\cr
+Version: \tab 0.2\cr
+Date: \tab 2011-03-29\cr
 License: \tab GPL (>= 3)\cr
 URL: \tab http://www.sebastiangibb.de/maldiquant\cr
 }
 
 Main classes:
 
+\code{\linkS4class{SinglePeakList}}: Represents a peak list of a single
+spectrum.\cr
 \code{\linkS4class{SingleSpectrum}}: Represents a single spectrum.
 }
 
@@ -35,5 +37,6 @@ See website: \url{http://www.sebastiangibb.de/maldiquant}
 }
 \keyword{package}
 \seealso{
+\code{\linkS4class{SinglePeakList}},
 \code{\linkS4class{SingleSpectrum}}
 }

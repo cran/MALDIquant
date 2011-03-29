@@ -1,4 +1,4 @@
-## $Id: AllClasses.R 446 2011-03-10 16:44:59Z sgibb $
+## $Id: length-methods.R 430 2011-03-05 09:23:32Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,19 +18,10 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## basic class for all spectra based information
-setClass("AbstractSpectrumData",
-    representation=representation(mass="vector", intensity="vector",
-        metaData="list", .cache="environment"),
-    prototype=prototype(mass=vector(mode="numeric"), 
-        peaks=vector(mode="numeric"), metaData=list()),
-    contains="VIRTUAL");
-
-## represent a spectrum
-setClass("SingleSpectrum",
-    contains="AbstractSpectrumData");
-
-## represent a peak list from a single spectrum
-setClass("SinglePeakList",
-    contains="AbstractSpectrumData");
-
+## AbstractSpectrumData 
+setMethod(f="length",
+    signature=signature(x="AbstractSpectrumData"),
+    definition=function(x) {
+    
+    return(length(x@intensity));
+});

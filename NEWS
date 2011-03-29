@@ -1,5 +1,12 @@
 RELEASE HISTORY OF THE "MALDIquant" PACKAGE
-===================================================
+===========================================
+
+Version 0.2 [2011-03-29]:
+- Add baseline correction algorithm SNIP (implemented in C) [default]
+- Add MovingEstimator and ConvexHull baseline estimation algorithm
+- Add as.matrix, intensity, length, lines, mass and metaData methods
+- Add basic SinglePeakList class, adopt plot and lines, add labelPeaks
+  (still useless)
 
 Version 0.1 [2011-02-22]:
 - First public release

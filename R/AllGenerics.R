@@ -1,4 +1,4 @@
-## $Id: AllGenerics.R 414 2011-02-22 17:11:25Z sgibb $
+## $Id: AllGenerics.R 471 2011-03-18 16:11:11Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,6 +18,41 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
+## AbstractSpectrumData
+if (is.null(getGeneric("as.matrix")))
+    setGeneric("as.matrix", function(x, ...) standardGeneric("as.matrix"));
+if (is.null(getGeneric("length")))
+    setGeneric("length", function(x, ...) standardGeneric("length"));
+if (is.null(getGeneric("lines")))
+    setGeneric("lines", function(x, ...) standardGeneric("lines"));
 if (is.null(getGeneric("plot")))
     setGeneric("plot", function(x, y, ...) standardGeneric("plot"));
 
+## get/set slots
+if (is.null(getGeneric("mass")))
+    setGeneric("mass", function(object) standardGeneric("mass"));
+if (is.null(getGeneric("mass<-")))
+    setGeneric("mass<-", function(object, value) standardGeneric("mass<-"));
+if (is.null(getGeneric("intensity")))
+    setGeneric("intensity", function(object) standardGeneric("intensity"));
+if (is.null(getGeneric("intensity<-")))
+    setGeneric("intensity<-", function(object, value) standardGeneric("intensity<-"));
+if (is.null(getGeneric("isEmpty")))
+    setGeneric("isEmpty", function(x, ...) standardGeneric("isEmpty"));
+if (is.null(getGeneric("metaData")))
+    setGeneric("metaData", function(object) standardGeneric("metaData"));
+if (is.null(getGeneric("metaData<-")))
+    setGeneric("metaData<-", function(object, value) standardGeneric("metaData<-"));
+## end of AbstractSpectrumData
+
+## SingleSpectrum
+if (is.null(getGeneric("estimateBaseline")))
+    setGeneric("estimateBaseline", function(object, ...) standardGeneric("estimateBaseline"));
+if (is.null(getGeneric("removeBaseline")))
+    setGeneric("removeBaseline", function(object, ...) standardGeneric("removeBaseline"));
+## end of SingleSpectrum
+
+## SinglePeakList
+if (is.null(getGeneric("labelPeaks")))
+    setGeneric("labelPeaks", function(x, ...) standardGeneric("labelPeaks"));
+## end of SinglePeakList

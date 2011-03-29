@@ -1,4 +1,4 @@
-## $Id: AllClasses.R 446 2011-03-10 16:44:59Z sgibb $
+## $Id: intensity-methods.R 417 2011-02-23 16:15:21Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,19 +18,25 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## basic class for all spectra based information
-setClass("AbstractSpectrumData",
-    representation=representation(mass="vector", intensity="vector",
-        metaData="list", .cache="environment"),
-    prototype=prototype(mass=vector(mode="numeric"), 
-        peaks=vector(mode="numeric"), metaData=list()),
-    contains="VIRTUAL");
+## AbstractSpectrumData 
+setMethod(f="intensity",
+    signature=signature(object="AbstractSpectrumData"),
+    definition=function(object) {
+    
+    return(object@intensity);
+});
 
-## represent a spectrum
-setClass("SingleSpectrum",
-    contains="AbstractSpectrumData");
+## AbstractSpectrumData
+setReplaceMethod(f="intensity",
+    signature=signature(object="AbstractSpectrumData"),
+    definition=function(object, value) {
 
-## represent a peak list from a single spectrum
-setClass("SinglePeakList",
-    contains="AbstractSpectrumData");
+    if (length(object@intensity) == length(value)) {
+        object@intensity <- value;
+    } else {
+        stop("Lengths of intensity(", length(object@intensity), 
+             ") and value (", length(value), ") have to be equal.");
+    }
+    return(object);
+});
 

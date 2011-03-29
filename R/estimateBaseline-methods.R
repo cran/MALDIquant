@@ -1,0 +1,53 @@
+## $Id: estimateBaseline-methods.R 507 2011-03-29 08:56:55Z sgibb $
+##
+## Copyright 2011 Sebastian Gibb
+## <mail@sebastiangibb.de>
+##
+## This file is part of MALDIquant for R and related languages.
+##
+## MALDIquant is free software: you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation, either version 3 of the License, or
+## (at your option) any later version.
+##
+## MALDIquant is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License
+## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
+
+## SingleSpectrum 
+setMethod(f="estimateBaseline",
+    signature=signature(object="SingleSpectrum"),
+    definition=function(object, 
+                        method=c("SNIP", "ConvexHull",
+                                 "MovingEstimator"),
+                        ...) {
+        
+    if (isEmpty(object))
+        stop("Spectrum is empty!");
+
+    method=match.arg(method, several.ok=FALSE);
+
+    b <- switch(method,
+                "SNIP" = {
+                    .estimateBaselineSnip(object@mass, object@intensity, ...);
+                },
+                "ConvexHull" = {
+                    .estimateBaselineConvexHull(object@mass, object@intensity);
+                },
+                "MovingEstimator" = {
+                    .estimateBaselineMovingEstimator(object@mass, 
+                                                     object@intensity, ...);
+                },
+                {
+                    stop("Unknown ", sQuote("method"), ".");
+                }
+    );
+
+    colnames(b) <- c("mass", "intensity");
+    return(b);
+});
+

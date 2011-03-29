@@ -13,24 +13,23 @@ Up to now only import and plot of a \code{\linkS4class{SingleSpectrum}} object
 is supported.
 }
 \section{Objects from the Class}{
-\code{\link{createSingleSpectrum}}: Creates a
+\code{\link[MALDIquant]{createSingleSpectrum}}: Creates a
 \code{\linkS4class{SingleSpectrum}} object.
 
-\code{\link{importSingleSpectrum}}: Reads a single mass spectrum from file and
+\code{\link[MALDIquant]{importSingleSpectrum}}: Reads a single mass spectrum from file and
 creates a \code{\linkS4class{SingleSpectrum}} object.
 }
-\section{Slots}{
-  \describe{
-    \item{\code{mass}:}{\code{"vector"}, mass or mass-to-charge ratio}
-    \item{\code{intensity}:}{\code{"vector"}, intensities for measured
-    mass-to-charge ratios}
-    \item{\code{metaData}:}{\code{"list"}, some metadata to describe the
-    spectrum}
-  }
+\section{Extends}{
+Class \code{\linkS4class{AbstractSpectrumData}}, directly.
 }
 \section{Methods}{
-\code{\link[MALDIquant]{plot,SingleSpectrum,missing-method}}: Plots a 
-\code{\linkS4class{SingleSpectrum}} object.
+\describe{
+    \item{removeBaseline}{\code{signature(x = "SingleSpectrum")}:
+        Estimates and removes the baseline of a
+        \code{\linkS4class{SingleSpectrum}} object.
+        See \code{\link[MALDIquant]{removeBaseline,SingleSpectrum-method}} for 
+        details.}
+}
 }
 \references{
 See website: \url{http://www.sebastiangibb.de/maldiquant}
@@ -39,19 +38,30 @@ See website: \url{http://www.sebastiangibb.de/maldiquant}
 Sebastian Gibb
 }
 \seealso{
-\code{\link{createSingleSpectrum}},
-\code{\link{importSingleSpectrum}},
-\code{\link[MALDIquant]{plot,SingleSpectrum,missing-method}}
+\code{\link[MALDIquant]{createSingleSpectrum}},
+\code{\link[MALDIquant]{importSingleSpectrum}},
+\code{\link[MALDIquant]{removeBaseline,SingleSpectrum-method}},
+\code{\linkS4class{AbstractSpectrumData}}
 }
 \examples{
+## load library
+library("MALDIquant");
+
 ## create a SingleSpectrum object by default constructor
 s <- createSingleSpectrum(mass=1:100, intensity=rnorm(100)^2,
-metaData=list(name="unrealistic example"));
+    metaData=list(name="unrealistic example"));
 
 ## show some details
 s;
 
 ## plot spectrum
+plot(s);
+
+## modify intensity and metaData
+intensity(s)[1:50] <- 0;
+metaData(s) <- list(name="modified example");
+
+## plot again
 plot(s);
 }
 \keyword{classes}

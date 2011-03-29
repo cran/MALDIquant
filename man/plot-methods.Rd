@@ -2,17 +2,20 @@
 \docType{methods}
 \alias{plot,AbstractSpectrumData,missing-method}
 \alias{plot,SingleSpectrum,missing-method}
-\title{Plots a \code{\linkS4class{SingleSpectrum}} object.}
+\title{Plots a AbstractSpectrumData object.}
 \description{
 This is an overloaded method to allow plotting of a
-\code{\linkS4class{SingleSpectrum}} object.
+\code{\linkS4class{AbstractSpectrumData}} object.
 }
 \usage{
 \S4method{plot}{AbstractSpectrumData,missing}(x, col="black", 
      xlab="mass", ylab="intensity", 
-     type="l", xlim=c(min(x@mass), max(x@mass)), 
-     ylim=c(0, max(x@intensity)), main=x@metaData$name, 
-     sub=x@metaData$file, cex.sub=0.75, col.sub="#808080", 
+     type=ifelse(is(object=x, class2="SinglePeakList"), "h", "l"),
+     xlim=c(ifelse(length(x@mass)>0, min(x@mass), 0),
+            ifelse(length(x@mass)>0, max(x@mass), 1)),
+     ylim=c(0, ifelse(length(x@intensity>0), max(x@intensity), 1)),
+     main=x@metaData$name, sub=x@metaData$file, 
+     cex.sub=0.75, col.sub="#808080", 
      abline.col="#808080", \dots)
 }
 \arguments{
@@ -39,12 +42,16 @@ See website: \url{http://www.sebastiangibb.de/maldiquant}
 Sebastian Gibb
 }
 \seealso{
-\code{\link{importSingleSpectrum}}
+\code{\linkS4class{AbstractSpectrumData}},
+\code{\link[MALDIquant]{importSingleSpectrum}}
 }
 \examples{
+## load library
+library("MALDIquant");
+
 ## create a SingleSpectrum object by default constructor
 s <- createSingleSpectrum(mass=1:100, intensity=rnorm(100)^2,
-metaData=list(name="unrealistic example"));
+    metaData=list(name="unrealistic example"));
 
 ## show some details
 s;

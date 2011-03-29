@@ -1,4 +1,4 @@
-## $Id: plot-methods.R 414 2011-02-22 17:11:25Z sgibb $
+## $Id: plot-methods.R 446 2011-03-10 16:44:59Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -22,13 +22,16 @@
 setMethod(f="plot", 
     signature=signature(x="AbstractSpectrumData", y="missing"),
     definition=function(x, col="black", xlab="mass", ylab="intensity",
-        type="l", xlim=c(min(x@mass), max(x@mass)), 
-        ylim=c(0, max(x@intensity)), main=x@metaData$name, 
-        sub=x@metaData$file, cex.sub=0.75, col.sub="#808080", 
+        type=ifelse(is(object=x, class2="SinglePeakList"), "h", "l"),
+        xlim=c(ifelse(length(x@mass)>0, min(x@mass), 0),
+               ifelse(length(x@mass)>0, max(x@mass), 1)),
+        ylim=c(0, ifelse(length(x@intensity>0), max(x@intensity), 1)),
+        main=x@metaData$name, sub=x@metaData$file, cex.sub=0.75, 
+        col.sub="#808080", 
         abline.col="#808080", ...) {
 
     plot(x=x@mass, y=x@intensity, col=col, type=type, xlab=xlab, ylab=ylab, 
-        xlim=xlim, ylim=ylim, main=main, sub=sub, cex.sub=cex.sub,
+        xlim=xlim, ylim=ylim, main=main, sub=sub, cex.sub=cex.sub, 
         col.sub=col.sub, ...);
     abline(h=0, col=abline.col);
 });

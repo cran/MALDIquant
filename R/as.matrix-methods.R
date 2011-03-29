@@ -1,4 +1,4 @@
-## $Id: AllClasses.R 446 2011-03-10 16:44:59Z sgibb $
+## $Id: as.matrix-methods.R 421 2011-03-01 12:10:12Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,19 +18,20 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## basic class for all spectra based information
-setClass("AbstractSpectrumData",
-    representation=representation(mass="vector", intensity="vector",
-        metaData="list", .cache="environment"),
-    prototype=prototype(mass=vector(mode="numeric"), 
-        peaks=vector(mode="numeric"), metaData=list()),
-    contains="VIRTUAL");
+## AbstractSpectrumData 
+setMethod(f="as.matrix",
+    signature=signature(x="AbstractSpectrumData"),
+    definition=function(x, index) {
+    
+    if (missing(index)) {
+        mass <- x@mass;
+        intensity <- x@intensity;
+    } else { 
+        mass <- x@mass[index];
+        intensity <- x@intensity[index];
+    }
 
-## represent a spectrum
-setClass("SingleSpectrum",
-    contains="AbstractSpectrumData");
-
-## represent a peak list from a single spectrum
-setClass("SinglePeakList",
-    contains="AbstractSpectrumData");
+    return(matrix(c(mass, intensity), ncol=2, byrow=FALSE,
+                dimnames=list(NULL, c("mass", "intensity"))));
+});
 

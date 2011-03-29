@@ -18,17 +18,17 @@ Bruker Daltonics \emph{fid} file \tab \pkg{readBrukerFlexData} \cr
 importSingleSpectrum(file, verbose = FALSE, ...)
 }
 \arguments{
-  \item{file}{
-  Path to file which should be read.
-}
-  \item{verbose}{
-  Logical. Print verbose messages?
-}
-  \item{\dots}{
-  Arguments to be passed to import functions. For details please see
-  \code{\link[readBrukerFlexData]{readBrukerFlexFile}} and/or
-  \code{\link[readMzXmlData]{readMzXmlFile}}.
-}
+    \item{file}{
+        Path to file which should be read.
+    }
+    \item{verbose}{
+        Logical. Print verbose messages?
+    }
+    \item{\dots}{
+        Arguments to be passed to import functions. For details please see
+        \code{\link[readBrukerFlexData]{readBrukerFlexFile}} and/or
+        \code{\link[readMzXmlData]{readMzXmlFile}}.
+    }
 }
 \value{
 Returns a \code{\linkS4class{SingleSpectrum}} object.
@@ -46,8 +46,12 @@ Sebastian Gibb
 \code{\link[readMzXmlData]{readMzXmlFile}}.
 }
 \examples{
-## load library (is also done automatically by importSingleSpectrum)
-library(readBrukerFlexData);
+## load library
+library("MALDIquant");
+
+## load readBrukerFlexData library for fid file import 
+## (is also done automatically by importSingleSpectrum)
+library("readBrukerFlexData");
 
 ## get examples directory
 exampleDirectory <- system.file("Examples", package="readBrukerFlexData");
