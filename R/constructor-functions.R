@@ -1,4 +1,4 @@
-## $Id: constructor-functions.R 414 2011-02-22 17:11:25Z sgibb $
+## $Id: constructor-functions.R 562 2011-05-26 08:56:09Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,8 +18,10 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## createSingleSpectrum
-##  default constructor: SingleSpectrum class
+## MassSpectrum
+
+## createMassSpectrum
+##  default constructor: MassSpectrum class
 ##
 ## params:
 ##  mass: vector, spectrum mass
@@ -27,61 +29,32 @@
 ##  metaData: list, metadata
 ##
 ## returns:
-##  a SingleSpectrum object
+##  a MassSpectrum object
 ##
-createSingleSpectrum <- function(mass, intensity, metaData=list()) {
-    return(new(Class="SingleSpectrum", mass=mass, intensity=intensity,
+createMassSpectrum <- function(mass, intensity, metaData=list()) {
+    return(new(Class="MassSpectrum", mass=mass, intensity=intensity,
             metaData=metaData));
 }
 
-## importSingleSpectrum
-##  reads a single spectrum from file
-##  user function for .importSingleSpectrum
+## end of MassSpectrum
+
+## MassPeaks
+
+## createMassPeaks
+##  default constructor: MassPeaks class
 ##
 ## params:
-##  file: string, path to file
-##  verbose: logical, verbose output
-##  ...: arguments to be passed to import functions
+##  mass: vector, spectrum mass
+##  intensity: vector, spectrum intensities
+##  metaData: list, metadata
 ##
 ## returns:
-##  a SingleSpectrum object
+##  a MassPeaks object
 ##
-importSingleSpectrum <- function(file, verbose=FALSE, ...) {
-    if (!file.exists(file) | file.info(file)$isdir) {
-        stop("Could not read mass spectrum from ", sQuote(file), ".");
-    }
-
-    bname <- tolower(basename(file));
-
-    if ("fid" == bname) {
-        ## fid file of Bruker Daltonics' *flex-series
-        library(readBrukerFlexData);
-        return(.importSingleSpectrum(importFunction=readBrukerFlexFile,
-                fidFile=file, verbose=verbose, ...));
-    } else if (grepl(pattern="\\.mzxml$|\\.xml$", x=bname)) {
-        ## mzXML file
-        library(readMzXmlData);
-        return(.importSingleSpectrum(importFunction=readMzXmlFile,
-                mzXmlFile=file, verbose=verbose, ...));
-    } else {
-        stop("Could not detect file format of ", sQuote(file), ".");
-    }
+createMassPeaks <- function(mass, intensity, metaData=list()) {
+    return(new(Class="MassPeaks", mass=mass, intensity=intensity,
+            metaData=metaData));
 }
 
-## .importSingleSpectrum 
-##  reads a single spectrum from file
-##  (uses external libraries for file loading)
-##
-## params:
-##  importFunction: which function should be used to import data
-##  ...: arguments passed to importFunction
-##
-## returns:
-##  a SingleSpectrum object
-.importSingleSpectrum <- function(importFunction, ...) {
+## end of MassPeaks
 
-    importFunction <- match.fun(importFunction);
-    spec <- importFunction(...);
-    return(createSingleSpectrum(mass=spec$spectrum$mass,
-            intensity=spec$spectrum$intensity, metaData=spec$metaData));
-}

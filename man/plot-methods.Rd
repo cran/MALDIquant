@@ -1,16 +1,16 @@
 \name{plot-methods}
 \docType{methods}
-\alias{plot,AbstractSpectrumData,missing-method}
-\alias{plot,SingleSpectrum,missing-method}
-\title{Plots a AbstractSpectrumData object.}
+\alias{plot,AbstractMassSpectrumData,missing-method}
+\alias{plot,MassSpectrum,missing-method}
+\title{Plots an AbstractMassSpectrumData object.}
 \description{
-This is an overloaded method to allow plotting of a
-\code{\linkS4class{AbstractSpectrumData}} object.
+This is an overloaded method to allow plotting of an
+\code{\linkS4class{AbstractMassSpectrumData}} object.
 }
 \usage{
-\S4method{plot}{AbstractSpectrumData,missing}(x, col="black", 
+\S4method{plot}{AbstractMassSpectrumData,missing}(x, col="black", 
      xlab="mass", ylab="intensity", 
-     type=ifelse(is(object=x, class2="SinglePeakList"), "h", "l"),
+     type=ifelse(is(object=x, class2="MassPeaks"), "h", "l"),
      xlim=c(ifelse(length(x@mass)>0, min(x@mass), 0),
             ifelse(length(x@mass)>0, max(x@mass), 1)),
      ylim=c(0, ifelse(length(x@intensity>0), max(x@intensity), 1)),
@@ -19,7 +19,7 @@ This is an overloaded method to allow plotting of a
      abline.col="#808080", \dots)
 }
 \arguments{
-    \item{x}{\code{\linkS4class{SingleSpectrum}} object}
+    \item{x}{\code{\linkS4class{MassSpectrum}} object}
     \item{col}{line colour, see \code{\link[graphics]{par}}}
     \item{xlab}{title for the x-axis, see \code{\link[graphics]{title}}}
     \item{ylab}{title for the y-axis, see \code{\link[graphics]{title}}}
@@ -36,21 +36,20 @@ This is an overloaded method to allow plotting of a
     \item{\dots}{arguments to be passed to \code{\link[graphics]{plot}}}
 }
 \references{
-See website: \url{http://www.sebastiangibb.de/maldiquant}
+See website: \url{http://strimmerlab.org/software/maldiquant/}
 }
 \author{
 Sebastian Gibb
 }
 \seealso{
-\code{\linkS4class{AbstractSpectrumData}},
-\code{\link[MALDIquant]{importSingleSpectrum}}
+\code{\linkS4class{AbstractMassSpectrumData}},
 }
 \examples{
 ## load library
 library("MALDIquant");
 
-## create a SingleSpectrum object by default constructor
-s <- createSingleSpectrum(mass=1:100, intensity=rnorm(100)^2,
+## create a MassSpectrum object by default constructor
+s <- createMassSpectrum(mass=1:100, intensity=rnorm(100)^2,
     metaData=list(name="unrealistic example"));
 
 ## show some details

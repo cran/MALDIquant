@@ -1,4 +1,4 @@
-## $Id: removeBaseline-methods.R 581 2011-05-28 16:36:54Z sgibb $
+## $Id: findLocalMaxima-methods.R 562 2011-05-26 08:56:09Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -19,31 +19,32 @@
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
 ## MassSpectrum 
-setMethod(f="removeBaseline",
+setMethod(f="findLocalMaxima",
     signature=signature(object="MassSpectrum"),
-    definition=function(object, baseline,
-                        ...) {
-
-    ## empty spectrum?
+    definition=function(object, 
+                        halfWindowSize=20) {
+        
     if (isEmpty(object))
         stop("Spectrum is empty!");
 
-    ## no baseline argument given => compute baseline
-    if (missing(baseline))
-        baseline <- estimateBaseline(object=object, ...);
-
-    ## wrong baseline argument given?
-    isBaselineMatrix <- is.matrix(baseline) &&
-                        nrow(baseline) == length(object) &&
-                        ncol(baseline) == 2;
-
-    if (!isBaselineMatrix) {
-        stop("The baseline argument is not a valid!");
+    if (halfWindowSize<1) {
+        stop(sQuote("halfWindowSize"), "=", halfWindowSize, " is too small!");
     }
 
-    ## substract baseline
-    object@intensity <- object@intensity - baseline[,2];
+    ## based on a posting of Brian Ripley on r-help mailinglist
+    ## https://stat.ethz.ch/pipermail/r-help/2001-January/010704.html
+    windowSize <- 2*halfWindowSize+1;
+
+    windows <- embed(object@intensity, windowSize);
+
+    localMaxima <- max.col(windows, "first") == halfWindowSize+1
     
-    return(object);
+    localMaxima <- c(rep(FALSE, halfWindowSize), localMaxima, 
+                     rep(FALSE, halfWindowSize));
+
+    m <- cbind(object@mass, object@intensity)[localMaxima,];
+    colnames(m) <- c("mass", "intensity");
+
+    return(m);
 });
 

@@ -1,4 +1,4 @@
-## $Id: show-methods.R 412 2011-02-21 14:34:36Z sgibb $
+## $Id: show-methods.R 583 2011-05-28 18:00:49Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,34 +18,40 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractSpectrumData 
+## AbstractMassSpectrumData 
 setMethod(f="show",
-    signature=signature(object="AbstractSpectrumData"),
+    signature=signature(object="AbstractMassSpectrumData"),
     definition=function(object) {
     
-    groups <- c("Number of m/z values", 
-        "Range of m/z values",
-        "Range of intensity values");
+    groups <- c("S4 class type",
+                "Number of m/z values", 
+                "Range of m/z values",
+                "Range of intensity values");
 
-    values <- c(length(object@mass), 
+    values <- c(class(object)[1], 
+        length(object@mass), 
         paste(round(range(object@mass), digits=3), collapse=" - "),
         paste(round(range(object@intensity), digits=3), collapse=" - "));
 
-    if (!is.null(object@metaData$file)) {
-        groups <- c("File", groups);    
-        values <- c(object@metaData$file, values);
-    }
-
     if (!is.null(object@metaData$name)) {
-        groups <- c("Name", groups);    
-        values <- c(object@metaData$name, values);
+        groups <- c(groups, "Name");    
+        values <- c(values, object@metaData$name);
     }
 
     groups <- format(groups, justify="left");
-    values <- format(values, justify="right");
+    values <- format(values, justify="left");
+
+    if (!is.null(object@metaData$file)) {
+        groups <- c(groups, "File");    
+        groups <- format(groups, justify="left");
+
+        ## to avoid newlines in other values don't format filenames
+        ## (they could be very long)
+        values <- c(values, object@metaData$file);
+    }
 
     for (i in seq(along=groups)) {
-        cat(groups[i], ":", values[i], "\n", sep=" ");
+        cat(groups[i], ": ", values[i], "\n", sep="");
     }
 });
 

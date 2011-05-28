@@ -1,4 +1,4 @@
-## $Id: AllGenerics.R 471 2011-03-18 16:11:11Z sgibb $
+## $Id: AllGenerics.R 575 2011-05-27 18:15:09Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,7 +18,7 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractSpectrumData
+## AbstractMassSpectrumData
 if (is.null(getGeneric("as.matrix")))
     setGeneric("as.matrix", function(x, ...) standardGeneric("as.matrix"));
 if (is.null(getGeneric("length")))
@@ -27,6 +27,8 @@ if (is.null(getGeneric("lines")))
     setGeneric("lines", function(x, ...) standardGeneric("lines"));
 if (is.null(getGeneric("plot")))
     setGeneric("plot", function(x, y, ...) standardGeneric("plot"));
+if (is.null(getGeneric("transformIntensity")))
+    setGeneric("transformIntensity", function(object, ...) standardGeneric("transformIntensity"));
 
 ## get/set slots
 if (is.null(getGeneric("mass")))
@@ -43,16 +45,25 @@ if (is.null(getGeneric("metaData")))
     setGeneric("metaData", function(object) standardGeneric("metaData"));
 if (is.null(getGeneric("metaData<-")))
     setGeneric("metaData<-", function(object, value) standardGeneric("metaData<-"));
-## end of AbstractSpectrumData
+## end of AbstractMassSpectrumData
 
-## SingleSpectrum
+## MassSpectrum
+if (is.null(getGeneric("detectPeaks")))
+    setGeneric("detectPeaks", function(object, ...) standardGeneric("detectPeaks"));
 if (is.null(getGeneric("estimateBaseline")))
     setGeneric("estimateBaseline", function(object, ...) standardGeneric("estimateBaseline"));
+if (is.null(getGeneric("estimateNoise")))
+    setGeneric("estimateNoise", function(object, ...) standardGeneric("estimateNoise"));
+if (is.null(getGeneric("findLocalMaxima")))
+    setGeneric("findLocalMaxima", function(object, ...) standardGeneric("findLocalMaxima"));
 if (is.null(getGeneric("removeBaseline")))
     setGeneric("removeBaseline", function(object, ...) standardGeneric("removeBaseline"));
-## end of SingleSpectrum
+## end of MassSpectrum
 
-## SinglePeakList
+## MassPeaks
 if (is.null(getGeneric("labelPeaks")))
-    setGeneric("labelPeaks", function(x, ...) standardGeneric("labelPeaks"));
-## end of SinglePeakList
+    setGeneric("labelPeaks", function(object, ...) standardGeneric("labelPeaks"));
+if (is.null(getGeneric("points")))
+    setGeneric("points", function(x, ...) standardGeneric("points"));
+## end of MassPeaks
+

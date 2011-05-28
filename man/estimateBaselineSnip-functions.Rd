@@ -7,7 +7,7 @@ The baseline estimation is based on the Statistics-sensitive Non-linear
 Iterative Peak-clipping algorithm (SNIP) described in
 Ryan et al 1988.\cr
 It is hidden by \code{NAMESPACE} because it is a private function and 
-\code{\link[MALDIquant]{estimateBaseline,SingleSpectrum-method}} should be used
+\code{\link[MALDIquant]{estimateBaseline,MassSpectrum-method}} should be used
 instead.
 }
 \usage{
@@ -16,7 +16,9 @@ instead.
 \arguments{
     \item{x}{vector of x values (only needed to return a two-column matrix)}
     \item{y}{vector of y values}
-    \item{iterations}{maximal window size}
+    \item{iterations}{half window size\cr
+        The resulting window reaches from \code{mass[cur_index-iterations]}
+        to \code{mass[cur_index+iterations]}.}
 }
 \value{
     Returns a two column matrix (first column: mass, second column: intensity)
@@ -40,24 +42,19 @@ ISSN 0168-583X. doi:10.1016/0168-583X(88)90063-8. \cr
 Sebastian Gibb
 }
 \seealso{
-\code{\linkS4class{SingleSpectrum}},
-\code{\link[MALDIquant]{estimateBaseline,SingleSpectrum-method}},
-\code{\link[MALDIquant]{removeBaseline,SingleSpectrum-method}}
+\code{\linkS4class{MassSpectrum}},
+\code{\link[MALDIquant]{estimateBaseline,MassSpectrum-method}},
+\code{\link[MALDIquant]{removeBaseline,MassSpectrum-method}}
 }
 \examples{
 ## load library
 library("MALDIquant");
 
-## load readBrukerFlexData library for fid file import 
-## (is also done automatically by importSingleSpectrum)
-library("readBrukerFlexData");
+## load example data
+data("sA1", package="MALDIquant");
 
-## get examples directory
-exampleDirectory <- system.file("Examples", package="readBrukerFlexData");
-
-## read example spectrum
-s <- importSingleSpectrum(file.path(exampleDirectory,
-    "2010_05_19_Gibb_C8_A1/0_A1/1/1SLin/fid"));
+## choose only the first mass spectrum
+s <- sA1[[1]];
 
 ## plot spectrum
 plot(s);
@@ -72,5 +69,5 @@ lines(b2, col=3);
 
 ## draw legend
 legend(x="topright", lwd=1, legend=paste("iterations=", c(75, 150), sep=""), 
-    col=c(2, 3));
+       col=c(2, 3));
 }

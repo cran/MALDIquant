@@ -1,4 +1,4 @@
-## $Id: intensity-methods.R 417 2011-02-23 16:15:21Z sgibb $
+## $Id: intensity-methods.R 562 2011-05-26 08:56:09Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,17 +18,17 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractSpectrumData 
+## AbstractMassSpectrumData 
 setMethod(f="intensity",
-    signature=signature(object="AbstractSpectrumData"),
+    signature=signature(object="AbstractMassSpectrumData"),
     definition=function(object) {
     
     return(object@intensity);
 });
 
-## AbstractSpectrumData
+## AbstractMassSpectrumData
 setReplaceMethod(f="intensity",
-    signature=signature(object="AbstractSpectrumData"),
+    signature=signature(object="AbstractMassSpectrumData"),
     definition=function(object, value) {
 
     if (length(object@intensity) == length(value)) {

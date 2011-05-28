@@ -1,4 +1,4 @@
-## $Id: estimateBaseline-functions.R 493 2011-03-25 11:14:09Z sgibb $
+## $Id: estimateBaseline-functions.R 574 2011-05-27 12:52:31Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -19,7 +19,11 @@
 ## along with PACKAGE. If not, see <http://www.gnu.org/licenses/>
 
 ## estimateBaselineConvexHull 
-##  estimate basline by creating a convex hull 
+##  estimate baseline by creating a convex hull 
+##
+##  A. M. Andrew, "Another Efficient Algorithm for Convex Hulls in Two
+##  Dimensions", Info. Proc. Letters 9, 216-219 (1979).
+##  only calculate lower hull (we don't need the upper one)
 ##
 ## params:
 ##  x: vector of x values
@@ -28,65 +32,84 @@
 ## returns:
 ##  a matrix of the estimate baseline (col1: mass; col2: intensity)
 ##
-.estimateBaselineConvexHull <- function(x, y) {
 
-    if (!require("fdrtool")) {
-        stop("Could not load package ", sQuote("fdrtool"), ".");
+## C version
+.estimateBaselineConvexHull <- function(x, y) {
+    n <- length(x);
+    y <- .C("R_lowerConvexHull",
+            as.double(x),
+            as.double(y),
+            as.integer(n),
+            output=double(n),
+            DUP=TRUE,
+            PACKAGE="MALDIquant")$output;
+    return(cbind(x, y));
+}
+
+## R only: obsolete because too slow
+.lowerConvexHullR <- function(x, y) {
+    
+    ## .left()
+    ## build cross product of 2 vectors and compare to zero
+    ## returns true for >= P2(x2, y2) left/on the line of P0->P1
+    .left <- function(x0, y0, x1, y1, x2, y2) {
+        return(((x1-x0)*(y2-y0) - (x2-x0)*(y1-y0)) > 0);
     }
 
-    ## greatest convex minorant
-    gcm <- gcmlcm(x=x, y=y, type="gcm");
+    # typically x values have to been sorted
+    # our x values are already sorted
+    index <- double(length(x));
+    k <- 1;
 
-    n <- length(gcm$x.knots);
+    for (i in seq(along=x)) {
+        while (k > 2 && !.left(x[index[k-2]], y[index[k-2]],
+                               x[index[k-1]], y[index[k-1]],
+                               x[i], y[i])) {
+            ## remove last point
+            k <- k-1;
+        }
+        index[k] <- i;
+        k <- k+1;
+    }
+
+    index <- index[1:(k-1)];
 
     b <- matrix(c(x, y), nrow=length(x), ncol=2);
 
-    for (i in seq(from=1, to=(n-1))) {
-        ## build linear function y=mx+c to calculate values between knots
-        m <- (gcm$y.knots[i+1]-gcm$y.knots[i])/(gcm$x.knots[i+1]-gcm$x.knots[i]);
-        c <- gcm$y.knots[i]-m*gcm$x.knots[i];
+    ## build linear function y=mx+c to calculate values between nodes
+    for (i in seq(from=1, to=length(index)-1)) {
+        m=(y[index[i+1]]-y[index[i]])/(x[index[i+1]]-x[index[i]]);
+        c=y[index[i]]-m*x[index[i]];
 
-        w <- which(x>=gcm$x.knots[i] & x<gcm$x.knots[i+1]);
-
-        b[w, 2] <- m*x[w]+c;
+        b[index[i]:index[i+1] ,2] <- m*x[index[i]:index[i+1]]+c;
     }
 
     return(b);
 }
 
-## estimateBaselineMovingEstimator
-##  estimate basline by a moving estimator function 
+## estimateBaselineMedian
+##  estimate baseline by computing moving median
 ##
 ## params:
 ##  x: vector of x values
 ##  y: vector of y values
-##  windowSize: size of local window (should be odd)
-##  relativeWindowSize: logical, use movingEstimator or
-##      movingEstimatorRelative [default]
-##  fun: estimator function [default: median]
+##  halfWindowSize: size of local window 
 ##
 ## returns:
 ##  a matrix of the estimate baseline (col1: mass; col2: intensity)
 ##
-.estimateBaselineMovingEstimator <- function(x, y, 
-    windowSize=0.04, relativeWindowSize=TRUE, fun=median) {
-
-    if (relativeWindowSize) {
-        m <- .movingEstimatorRelative(x=x, y=y,
-                                      windowSize=windowSize,
-                                      fun=fun);
-    } else {
-        if (windowSize<3) {
-            stop(sQuote("windowSize"), "=", windowSize, " is too small!");
-        }
-        m <- .movingEstimator(x=y, windowSize=windowSize, fun=fun);
+.estimateBaselineMedian <- function(x, y, halfWindowSize=100) {
+    if (halfWindowSize<1) {
+        stop(sQuote("halfWindowSize"), "=", halfWindowSize, " is too small!");
     }
+    
+    m <- runmed(y, k=(2*halfWindowSize+1));
 
     return(cbind(x, m));
 }
 
 ## estimateBaselineSnip
-##  estimate basline by SNIP algorithm 
+##  estimate baseline by SNIP algorithm 
 ##
 ##  SNIP algorithm based on:
 ##  C.G. Ryan, E. Clayton, W.L. Griffin, S.H. Sie, and D.R. Cousens. 
@@ -113,7 +136,7 @@
             as.integer(n),
             as.integer(iterations),
             output=double(n),
-            DUP=FALSE,
+            DUP=TRUE,
             PACKAGE="MALDIquant")$output;
     return(cbind(x, y));
 }
@@ -134,3 +157,4 @@
     }
     return(cbind(x, y));
 }
+

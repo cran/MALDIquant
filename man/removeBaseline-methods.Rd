@@ -1,57 +1,51 @@
 \name{removeBaseline-methods}
 \docType{methods}
 \alias{removeBaseline}
-\alias{removeBaseline,SingleSpectrum-method}
-\title{Removes the baseline of a SingleSpectrum object.}
+\alias{removeBaseline,MassSpectrum-method}
+\title{Removes the baseline of a MassSpectrum object.}
 \description{
 This method removes the baseline of mass spectrometry data
-(represented by a \code{\linkS4class{SingleSpectrum}} object).\cr
+(represented by a \code{\linkS4class{MassSpectrum}} object).\cr
 The intensity of the mass spectrometry data would be reduced by 
 \code{baseline}.
 }
 \usage{
-\S4method{removeBaseline}{SingleSpectrum}(object,
-    baseline=NULL,
+\S4method{removeBaseline}{MassSpectrum}(object,
+    baseline,
     \dots)
 }
 \arguments{
-    \item{object}{\code{\linkS4class{SingleSpectrum}} object}
+    \item{object}{\code{\linkS4class{MassSpectrum}} object}
     \item{baseline}{a two column matrix with intensities (y-values) as second
         column. If no baseline argument is given the baseline would be estimate
         automatically by calling
-        \code{\link[MALDIquant]{estimateBaseline,SingleSpectrum-method}}.}
+        \code{\link[MALDIquant]{estimateBaseline,MassSpectrum-method}}.}
     \item{\dots}{arguments to be passed to
-        \code{\link[MALDIquant]{estimateBaseline,SingleSpectrum-method}}}
+        \code{\link[MALDIquant]{estimateBaseline,MassSpectrum-method}}}
 }
 \value{
-    Returns a modified \code{\linkS4class{SingleSpectrum}} object with reduced
+    Returns a modified \code{\linkS4class{MassSpectrum}} object with reduced
     intensities.
 }
 \references{
-See website: \url{http://www.sebastiangibb.de/maldiquant}
+See website: \url{http://strimmerlab.org/software/maldiquant/}
 }
 \author{
 Sebastian Gibb
 }
 \seealso{
-\code{\linkS4class{SingleSpectrum}},
-\code{\link[MALDIquant]{estimateBaseline,SingleSpectrum-method}},
-\code{\link{loess}}
+\code{\linkS4class{MassSpectrum}},
+\code{\link[MALDIquant]{estimateBaseline,MassSpectrum-method}}
 }
 \examples{
 ## load library
 library("MALDIquant");
 
-## load readBrukerFlexData library for fid file import 
-## (is also done automatically by importSingleSpectrum)
-library("readBrukerFlexData");
+## load example data
+data("sA1", package="MALDIquant");
 
-## get examples directory
-exampleDirectory <- system.file("Examples", package="readBrukerFlexData");
-
-## read example spectrum
-s <- importSingleSpectrum(file.path(exampleDirectory,
-    "2010_05_19_Gibb_C8_A1/0_A1/1/1SLin/fid"));
+## choose only the first mass spectrum
+s <- sA1[[1]];
 
 ## plot spectrum
 plot(s);

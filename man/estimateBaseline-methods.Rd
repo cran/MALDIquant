@@ -1,23 +1,23 @@
 \name{estimateBaseline-methods}
 \docType{methods}
 \alias{estimateBaseline}
-\alias{estimateBaseline,SingleSpectrum-method}
-\title{Estimates the baseline of a SingleSpectrum object.}
+\alias{estimateBaseline,MassSpectrum-method}
+\title{Estimates the baseline of a MassSpectrum object.}
 \description{
 This methods estimates the baseline of mass spectrometry data
-(represented by a \code{\linkS4class{SingleSpectrum}} object).\cr
+(represented by a \code{\linkS4class{MassSpectrum}} object).\cr
 }
 \usage{
-\S4method{estimateBaseline}{SingleSpectrum}(object, 
-    method=c("SNIP", "ConvexHull", "MovingEstimator"),
+\S4method{estimateBaseline}{MassSpectrum}(object, 
+    method=c("SNIP", "ConvexHull", "Median"),
     \dots)
 }
 \arguments{
-    \item{object}{\code{\linkS4class{SingleSpectrum}} object}
+    \item{object}{\code{\linkS4class{MassSpectrum}} object}
     \item{method}{a baseline estimation function; see
         \code{\link[MALDIquant]{.estimateBaselineSnip}},
         \code{\link[MALDIquant]{.estimateBaselineConvexHull}},
-        \code{\link[MALDIquant]{.estimateBaselineMovingEstimator}}
+        \code{\link[MALDIquant]{.estimateBaselineMedian}}
     }
     \item{\dots}{arguments to be passed to \code{method}}
 }
@@ -29,32 +29,27 @@ This methods estimates the baseline of mass spectrometry data
 Sebastian Gibb
 }
 \seealso{
-\code{\linkS4class{SingleSpectrum}},
+\code{\linkS4class{MassSpectrum}},
 \code{\link[MALDIquant]{.estimateBaselineSnip}},
 \code{\link[MALDIquant]{.estimateBaselineConvexHull}},
-\code{\link[MALDIquant]{.estimateBaselineMovingEstimator}},
-\code{\link[MALDIquant]{removeBaseline,SingleSpectrum-method}}
+\code{\link[MALDIquant]{.estimateBaselineMedian}},
+\code{\link[MALDIquant]{removeBaseline,MassSpectrum-method}}
 }
 \examples{
 ## load library
 library("MALDIquant");
 
-## load readBrukerFlexData library for fid file import 
-## (is also done automatically by importSingleSpectrum)
-library("readBrukerFlexData");
+## load example data
+data("sA1", package="MALDIquant");
 
-## get examples directory
-exampleDirectory <- system.file("Examples", package="readBrukerFlexData");
-
-## read example spectrum
-s <- importSingleSpectrum(file.path(exampleDirectory,
-    "2010_05_19_Gibb_C8_A1/0_A1/1/1SLin/fid"));
+## choose only the first mass spectrum
+s <- sA1[[1]];
 
 ## plot spectrum
 plot(s);
 
 ## estimate baseline
-b <- estimateBaseline(s);
+b <- removeBaseline(s);
 
 ## draw baseline on the plot
 lines(b, col="red");

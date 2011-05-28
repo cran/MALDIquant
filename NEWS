@@ -1,6 +1,21 @@
 RELEASE HISTORY OF THE "MALDIquant" PACKAGE
 ===========================================
 
+Version 0.3 [2011-05-28]:
+- Add transformIntensity, estimateNoise, findLocalMaxima, detectPeaks and 
+  points method
+- Add createMassPeaks constructor
+- Replace .estimateBaselineMovingEstimator by .estimateBaselineMedian (uses 
+  runmed instead of an own slow movingEstimator function)
+- Remove fdrtool dependency and rewrite .estimateBaselineConvexHull in C
+- Rename SingleSpectrum class to MassSpectrum
+- Rename SinglePeakList class to MassPeaks
+- Rewerite labelPeaks (some parameter changed)
+- Move importing functions to the following R-packages: readBrukerFlexData,
+  readMzXmlData
+- Bugfix: change .C(..., DUP=F) to .C(..., DUP=T) in .estimateBaselineSnip
+  to avoid changes of global variables
+
 Version 0.2 [2011-03-29]:
 - Add baseline correction algorithm SNIP (implemented in C) [default]
 - Add MovingEstimator and ConvexHull baseline estimation algorithm

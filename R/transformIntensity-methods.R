@@ -1,4 +1,4 @@
-## $Id: plot-methods.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: transformIntensity-methods.R 562 2011-05-26 08:56:09Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -19,20 +19,20 @@
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
 ## AbstractMassSpectrumData 
-setMethod(f="plot", 
-    signature=signature(x="AbstractMassSpectrumData", y="missing"),
-    definition=function(x, col="black", xlab="mass", ylab="intensity",
-        type=ifelse(is(object=x, class2="MassPeaks"), "h", "l"),
-        xlim=c(ifelse(length(x@mass)>0, min(x@mass), 0),
-               ifelse(length(x@mass)>0, max(x@mass), 1)),
-        ylim=c(0, ifelse(length(x@intensity>0), max(x@intensity), 1)),
-        main=x@metaData$name, sub=x@metaData$file, cex.sub=0.75, 
-        col.sub="#808080", 
-        abline.col="#808080", ...) {
+setMethod(f="transformIntensity",
+    signature=signature(object="AbstractMassSpectrumData"),
+    definition=function(object, fun, na.rm=TRUE, ...) {
 
-    plot(x=x@mass, y=x@intensity, col=col, type=type, xlab=xlab, ylab=ylab, 
-        xlim=xlim, ylim=ylim, main=main, sub=sub, cex.sub=cex.sub, 
-        col.sub=col.sub, ...);
-    abline(h=0, col=abline.col);
+    fun <- match.fun(fun);
+
+    object@intensity <- fun(object@intensity, ...);
+    
+    if (na.rm) {
+        na <- is.na(object@intensity);
+        object@intensity <- object@intensity[!na]; 
+        object@mass <- object@mass[!na]; 
+    }
+
+    return(object);
 });
 

@@ -1,4 +1,4 @@
-/* $Id: $
+/* $Id: snip.c 573 2011-05-27 12:21:50Z sgibb $
  * 
  * Copyright 2011 Sebastian Gibb
  * <mail@sebastiangibb.de>
@@ -57,8 +57,9 @@ void R_snip(double* y, int* length, int* iterations, double* output) {
         }
     }
 
-    for(int i=0; i<n; ++i)
+    for(int i=0; i<n; ++i) {
         output[i]=y[i];
+    }
 
     Free(tmp);
 }

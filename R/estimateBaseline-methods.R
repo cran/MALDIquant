@@ -1,4 +1,4 @@
-## $Id: estimateBaseline-methods.R 507 2011-03-29 08:56:55Z sgibb $
+## $Id: estimateBaseline-methods.R 562 2011-05-26 08:56:09Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,12 +18,11 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## SingleSpectrum 
+## MassSpectrum 
 setMethod(f="estimateBaseline",
-    signature=signature(object="SingleSpectrum"),
+    signature=signature(object="MassSpectrum"),
     definition=function(object, 
-                        method=c("SNIP", "ConvexHull",
-                                 "MovingEstimator"),
+                        method=c("SNIP", "ConvexHull", "Median"),
                         ...) {
         
     if (isEmpty(object))
@@ -38,9 +37,8 @@ setMethod(f="estimateBaseline",
                 "ConvexHull" = {
                     .estimateBaselineConvexHull(object@mass, object@intensity);
                 },
-                "MovingEstimator" = {
-                    .estimateBaselineMovingEstimator(object@mass, 
-                                                     object@intensity, ...);
+                "Median" = {
+                    .estimateBaselineMedian(object@mass, object@intensity, ...);
                 },
                 {
                     stop("Unknown ", sQuote("method"), ".");

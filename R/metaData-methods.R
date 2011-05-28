@@ -1,4 +1,4 @@
-## $Id: metaData-methods.R 417 2011-02-23 16:15:21Z sgibb $
+## $Id: metaData-methods.R 562 2011-05-26 08:56:09Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,17 +18,17 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractSpectrumData 
+## AbstractMassSpectrumData 
 setMethod(f="metaData",
-    signature=signature(object="AbstractSpectrumData"),
+    signature=signature(object="AbstractMassSpectrumData"),
     definition=function(object) {
     
     return(object@metaData);
 });
 
-## AbstractSpectrumData
+## AbstractMassSpectrumData
 setReplaceMethod(f="metaData",
-    signature=signature(object="AbstractSpectrumData"),
+    signature=signature(object="AbstractMassSpectrumData"),
     definition=function(object, value) {
      
     object@metaData <- value;

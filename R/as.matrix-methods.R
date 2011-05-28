@@ -1,4 +1,4 @@
-## $Id: as.matrix-methods.R 421 2011-03-01 12:10:12Z sgibb $
+## $Id: as.matrix-methods.R 562 2011-05-26 08:56:09Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,9 +18,9 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractSpectrumData 
+## AbstractMassSpectrumData 
 setMethod(f="as.matrix",
-    signature=signature(x="AbstractSpectrumData"),
+    signature=signature(x="AbstractMassSpectrumData"),
     definition=function(x, index) {
     
     if (missing(index)) {

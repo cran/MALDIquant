@@ -1,4 +1,4 @@
-## $Id: mass-methods.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: points-methods.R 567 2011-05-26 10:30:44Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,25 +18,11 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractMassSpectrumData 
-setMethod(f="mass",
-    signature=signature(object="AbstractMassSpectrumData"),
-    definition=function(object) {
-    
-    return(object@mass);
-});
+## MassPeaks
+setMethod(f="points", 
+    signature=signature(x="AbstractMassSpectrumData"),
+    definition=function(x, ...) {
 
-## AbstractMassSpectrumData
-setReplaceMethod(f="mass",
-    signature=signature(object="AbstractMassSpectrumData"),
-    definition=function(object, value) {
-
-    if (length(object@mass) == length(value)) {
-        object@mass <- value;
-    } else {
-        stop("Lengths of mass (", length(object@mass), ") and value (",
-             length(value), ") have to be equal.");
-    }
-    return(object);
+    points(x=x@mass, y=x@intensity, ...);
 });
 

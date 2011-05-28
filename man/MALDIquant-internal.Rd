@@ -1,7 +1,5 @@
 \name{MALDIquant-internal}
 
-\alias{.importSingleSpectrum}
-\alias{.movingEstimator}
 \alias{show}
 
 \title{Internal MALDIquant Functions}

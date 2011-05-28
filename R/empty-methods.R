@@ -1,4 +1,4 @@
-## $Id: empty-methods.R 474 2011-03-20 07:31:56Z sgibb $
+## $Id: empty-methods.R 562 2011-05-26 08:56:09Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,10 +18,11 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractSpectrumData 
+## AbstractMassSpectrumData 
 setMethod(f="isEmpty",
-    signature=signature(x="AbstractSpectrumData"),
+    signature=signature(x="AbstractMassSpectrumData"),
     definition=function(x) {
     
-    return(length(x@intensity)==0);
+    return(length(x@intensity) == 0);
 });
+

@@ -1,4 +1,4 @@
-## $Id: mass-methods.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: estimateNoise-methods.R 562 2011-05-26 08:56:09Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,25 +18,18 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractMassSpectrumData 
-setMethod(f="mass",
-    signature=signature(object="AbstractMassSpectrumData"),
-    definition=function(object) {
-    
-    return(object@mass);
-});
+## MassSpectrum 
+setMethod(f="estimateNoise",
+    signature=signature(object="MassSpectrum"),
+    definition=function(object, 
+                        fun=mad,
+                        ...) {
+        
+    if (isEmpty(object))
+        stop("Spectrum is empty!");
 
-## AbstractMassSpectrumData
-setReplaceMethod(f="mass",
-    signature=signature(object="AbstractMassSpectrumData"),
-    definition=function(object, value) {
+    fun <- match.fun(fun);
 
-    if (length(object@mass) == length(value)) {
-        object@mass <- value;
-    } else {
-        stop("Lengths of mass (", length(object@mass), ") and value (",
-             length(value), ") have to be equal.");
-    }
-    return(object);
+    return(fun(object@intensity, ...));
 });
 

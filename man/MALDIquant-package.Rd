@@ -6,25 +6,27 @@
 Quantitative analysis of MALDI-TOF MS data
 }
 \description{
-This package should provide an easy framework for quantitative analysis of 
-matrix-assisted laser desorption/ionization - time-of-flight (MALDI-TOF) 
-mass spectrometry data.
-Up to now only importing and plotting of a single mass spectrum are supported.
+This package is intended to provide an easy-to-use framework for quantitative
+analysis of MALDI-TOF mass spectrometry data.
+
+MALDIquant is currently under active development. Features available in future
+versions include quantitative calibration and classification so that MALDIquant
+is useful for clinical diagnostics.
 }
 \details{
 \tabular{ll}{
 Package: \tab MALDIquant\cr
-Version: \tab 0.2\cr
-Date: \tab 2011-03-29\cr
+Version: \tab 0.3\cr
+Date: \tab 2011-05-28\cr
 License: \tab GPL (>= 3)\cr
-URL: \tab http://www.sebastiangibb.de/maldiquant\cr
+URL: \tab http://strimmerlab.org/software/maldiquant/\cr
 }
 
 Main classes:
 
-\code{\linkS4class{SinglePeakList}}: Represents a peak list of a single
+\code{\linkS4class{MassPeaks}}: Represents a peak list of a single
 spectrum.\cr
-\code{\linkS4class{SingleSpectrum}}: Represents a single spectrum.
+\code{\linkS4class{MassSpectrum}}: Represents a single spectrum.\cr
 }
 
 \author{
@@ -33,10 +35,50 @@ Sebastian Gibb
 Maintainer: Sebastian Gibb <mail@sebastiangibb.de>
 }
 \references{
-See website: \url{http://www.sebastiangibb.de/maldiquant}
+See website: \url{http://strimmerlab.org/software/maldiquant/}
+}
+\examples{
+## load library
+library("MALDIquant");
+
+## load example data
+data("sA1", package="MALDIquant");
+
+## show some information
+sA1
+
+## running typical workflow
+
+## transform intensities
+t <- lapply(sA1, function(x)transformIntensity(x, sqrt));
+
+## smoothing function
+movingAvg <- function(y) {
+    ma <- rep(1, 5)/5;
+    return(filter(y, ma, sides=2));
+}
+
+## smooth spectra
+s <- lapply(t, function(x)transformIntensity(x, movingAvg));
+
+## baseline correction
+b <- lapply(s, function(x)removeBaseline(x));
+
+## detect peaks
+p <- lapply(b, function(x)detectPeaks(x));
+
+## plot results
+par(mfcol=c(3, length(sA1)));
+for (i in seq(along=sA1)) {
+    plot(sA1[[i]], main="raw spectrum");
+    plot(s[[i]], main="transformed (sqrt) and smoothed (ma5)");
+    plot(b[[i]], main="baseline removed and peaks detected");
+    points(p[[i]], pch=4, col=2);
+}
+par(mfrow=c(1, 1));
 }
 \keyword{package}
 \seealso{
-\code{\linkS4class{SinglePeakList}},
-\code{\linkS4class{SingleSpectrum}}
+\code{\linkS4class{MassPeaks}},
+\code{\linkS4class{MassSpectrum}}
 }

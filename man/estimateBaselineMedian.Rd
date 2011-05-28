@@ -1,20 +1,25 @@
-\name{.estimateBaselineConvexHull}
-\alias{.estimateBaselineConvexHull}
-\title{Estimates the baseline by a Convex Hull.}
+\name{.estimateBaselineMedian}
+\alias{.estimateBaselineMedian}
+\title{Estimates the baseline by moving estimators.}
 \description{
 This function estimates the baseline of mass spectrometry data.\cr
-The baseline estimation is based on creating a Convex Hull below the
-spectrum.\cr
+The baseline estimation is based on median which is used in a
+moving window.\cr
 It is hidden by \code{NAMESPACE} because it is a private function and 
 \code{\link[MALDIquant]{estimateBaseline,MassSpectrum-method}} should be used
 instead.
 }
 \usage{
-.estimateBaselineConvexHull(x, y)
+.estimateBaselineMedian(x, y,
+    halfWindowSize=100) 
 }
 \arguments{
     \item{x}{vector of x values}
     \item{y}{vector of y values}
+    \item{halfWindowSize}{half size of the moving window for the median 
+        (based on \code{\link{runmed}})\cr 
+        The resulting window reaches from \code{mass[cur_index-halfWindowSize]}
+        to \code{mass[cur_index+halfWindowSize]}.}
 }
 \value{
     Returns a two column matrix (first column: mass, second column: intensity)
@@ -26,7 +31,7 @@ Sebastian Gibb
 \seealso{
 \code{\linkS4class{MassSpectrum}},
 \code{\link[MALDIquant]{estimateBaseline,MassSpectrum-method}},
-\code{\link[MALDIquant]{removeBaseline,MassSpectrum-method}},
+\code{\link[MALDIquant]{removeBaseline,MassSpectrum-method}}
 }
 \examples{
 ## load library
@@ -42,7 +47,7 @@ s <- sA1[[1]];
 plot(s);
 
 ## estimate baseline
-b <- estimateBaseline(s, method="ConvexHull");
+b <- estimateBaseline(s, method="Median");
 
 ## draw baseline on the plot
 lines(b, col="red");
