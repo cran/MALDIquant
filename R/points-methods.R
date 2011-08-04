@@ -1,4 +1,4 @@
-## $Id: points-methods.R 567 2011-05-26 10:30:44Z sgibb $
+## $Id: points-methods.R 659 2011-07-20 12:11:47Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -20,7 +20,7 @@
 
 ## MassPeaks
 setMethod(f="points", 
-    signature=signature(x="AbstractMassSpectrumData"),
+    signature=signature(x="AbstractMassObject"),
     definition=function(x, ...) {
 
     points(x=x@mass, y=x@intensity, ...);

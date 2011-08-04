@@ -14,8 +14,8 @@ This methods looks for local maxima in mass spectrometry data
 \arguments{
     \item{object}{\code{\linkS4class{MassSpectrum}} object}
     \item{halfWindowSize}{half window size\cr
-        The resulting window reaches from \code{mass[cur_index-halfWindowSize]}
-        to \code{mass[cur_index+halfWindowSize]}.}
+        The resulting window reaches from \code{mass[currentIndex-halfWindowSize]}
+        to \code{mass[currentIndex+halfWindowSize]}.}
 }
 \value{
     Returns a two column matrix (first column: mass, second column: intensity)

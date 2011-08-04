@@ -1,4 +1,4 @@
-## $Id: valid-methods.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: valid-methods.R 659 2011-07-20 12:11:47Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,8 +18,8 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractMassSpectrumData 
-.validAbstractMassSpectrumData <- function(object) {
+## AbstractMassObject 
+.validAbstractMassObject <- function(object) {
     if (length(object@mass) != length(object@intensity)) {
         return(paste("Lengths of mass (", length(object@mass), 
                 ") and intensity (", length(object@intensity), 
@@ -28,5 +28,5 @@
     return(TRUE)
 }
 
-setValidity("AbstractMassSpectrumData", method=.validAbstractMassSpectrumData);
+setValidity("AbstractMassObject", method=.validAbstractMassObject);
 

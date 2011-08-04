@@ -1,4 +1,4 @@
-## $Id: detectPeaks-methods.R 581 2011-05-28 16:36:54Z sgibb $
+## $Id: detectPeaks-methods.R 652 2011-07-19 15:16:34Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -26,8 +26,11 @@ setMethod(f="detectPeaks",
                         ...) {
 
     ## empty spectrum?
-    if (isEmpty(object))
-        stop("Spectrum is empty!");
+    if (.isEmptyWarning(object)) {
+        return(createMassPeaks(mass=object@mass,
+                                intensity=object@intensity,
+                                metaData=object@metaData));
+    }
 
     ## save optional arguments
     optArgs <- list(...);

@@ -16,7 +16,7 @@ something like that. \cr
 \code{\linkS4class{MassSpectrum}} object.
 }
 \section{Extends}{
-Class \code{\linkS4class{AbstractMassSpectrumData}}, directly.
+Class \code{\linkS4class{AbstractMassObject}}, directly.
 }
 \section{Methods}{
 \describe{
@@ -60,7 +60,7 @@ Sebastian Gibb
 \code{\link[MALDIquant]{estimateNoise,MassSpectrum-method}},
 \code{\link[MALDIquant]{findLocalMaxima,MassSpectrum-method}},
 \code{\link[MALDIquant]{removeBaseline,MassSpectrum-method}},
-\code{\linkS4class{AbstractMassSpectrumData}}
+\code{\linkS4class{AbstractMassObject}}
 }
 \examples{
 ## load library

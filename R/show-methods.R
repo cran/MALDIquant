@@ -1,4 +1,4 @@
-## $Id: show-methods.R 583 2011-05-28 18:00:49Z sgibb $
+## $Id: show-methods.R 674 2011-07-26 14:14:55Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,9 +18,9 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractMassSpectrumData 
+## AbstractMassObject 
 setMethod(f="show",
-    signature=signature(object="AbstractMassSpectrumData"),
+    signature=signature(object="AbstractMassObject"),
     definition=function(object) {
     
     groups <- c("S4 class type",
@@ -28,10 +28,17 @@ setMethod(f="show",
                 "Range of m/z values",
                 "Range of intensity values");
 
-    values <- c(class(object)[1], 
-        length(object@mass), 
-        paste(round(range(object@mass), digits=3), collapse=" - "),
-        paste(round(range(object@intensity), digits=3), collapse=" - "));
+    values <- class(object)[1];
+
+    if (isEmpty(object)) {
+        values <- c(values, 0, NA, NA);
+    } else {
+        values <- c(values,
+                    length(object@mass), 
+                    paste(round(range(object@mass), digits=3), collapse=" - "),
+                    paste(round(range(object@intensity), digits=3), 
+                          collapse=" - "));
+    }
 
     if (!is.null(object@metaData$name)) {
         groups <- c(groups, "Name");    
@@ -42,7 +49,13 @@ setMethod(f="show",
     values <- format(values, justify="left");
 
     if (!is.null(object@metaData$file)) {
-        groups <- c(groups, "File");    
+        n <- length(object@metaData$file);
+
+        if (n > 1) {
+            groups <- c(groups, paste("File", 1:n, sep=""));
+        } else {
+            groups <- c(groups, "File");
+        }
         groups <- format(groups, justify="left");
 
         ## to avoid newlines in other values don't format filenames

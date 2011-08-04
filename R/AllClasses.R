@@ -1,4 +1,4 @@
-## $Id: AllClasses.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: AllClasses.R 659 2011-07-20 12:11:47Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -19,7 +19,7 @@
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
 ## basic class for all spectra based information
-setClass("AbstractMassSpectrumData",
+setClass("AbstractMassObject",
     representation=representation(mass="vector", intensity="vector",
         metaData="list", .cache="environment"),
     prototype=prototype(mass=vector(mode="numeric"), 
@@ -28,9 +28,9 @@ setClass("AbstractMassSpectrumData",
 
 ## represent a spectrum
 setClass("MassSpectrum",
-    contains="AbstractMassSpectrumData");
+    contains="AbstractMassObject");
 
 ## represent a peak list from a single spectrum
 setClass("MassPeaks",
-    contains="AbstractMassSpectrumData");
+    contains="AbstractMassObject");
 

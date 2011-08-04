@@ -1,4 +1,4 @@
-## $Id: mass-methods.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: mass-methods.R 659 2011-07-20 12:11:47Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,17 +18,17 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractMassSpectrumData 
+## AbstractMassObject 
 setMethod(f="mass",
-    signature=signature(object="AbstractMassSpectrumData"),
+    signature=signature(object="AbstractMassObject"),
     definition=function(object) {
     
     return(object@mass);
 });
 
-## AbstractMassSpectrumData
+## AbstractMassObject
 setReplaceMethod(f="mass",
-    signature=signature(object="AbstractMassSpectrumData"),
+    signature=signature(object="AbstractMassObject"),
     definition=function(object, value) {
 
     if (length(object@mass) == length(value)) {

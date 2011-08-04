@@ -1,6 +1,15 @@
 RELEASE HISTORY OF THE "MALDIquant" PACKAGE
 ===========================================
 
+Version 0.4 [2011-08-04]:
+- Add functions: isMassObjectList, isMassPeaksList, isMassSpectrumList,
+  findEmptyMassObjects, removeEmptyMassObjects, intensityMatrix and calibrate
+  (only TIC supported up to now)
+- Change default value for verticalOffset parameter in labelPeaks
+- Add mass and massTolerance parameter to labelPeaks
+- Rename AbstractMassSpectrumData to AbstractMassObject
+- Add pA1 dataset
+
 Version 0.3 [2011-05-28]:
 - Add transformIntensity, estimateNoise, findLocalMaxima, detectPeaks and 
   points method

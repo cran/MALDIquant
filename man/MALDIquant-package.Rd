@@ -10,14 +10,14 @@ This package is intended to provide an easy-to-use framework for quantitative
 analysis of MALDI-TOF mass spectrometry data.
 
 MALDIquant is currently under active development. Features available in future
-versions include quantitative calibration and classification so that MALDIquant
-is useful for clinical diagnostics.
+versions include peak alignment, quantitative calibration and 
+classification so that MALDIquant is useful for clinical diagnostics.
 }
 \details{
 \tabular{ll}{
 Package: \tab MALDIquant\cr
-Version: \tab 0.3\cr
-Date: \tab 2011-05-28\cr
+Version: \tab 0.4\cr
+Date: \tab 2011-08-04\cr
 License: \tab GPL (>= 3)\cr
 URL: \tab http://strimmerlab.org/software/maldiquant/\cr
 }
@@ -50,7 +50,7 @@ sA1
 ## running typical workflow
 
 ## transform intensities
-t <- lapply(sA1, function(x)transformIntensity(x, sqrt));
+t <- lapply(sA1, transformIntensity, fun=sqrt);
 
 ## smoothing function
 movingAvg <- function(y) {
@@ -59,13 +59,13 @@ movingAvg <- function(y) {
 }
 
 ## smooth spectra
-s <- lapply(t, function(x)transformIntensity(x, movingAvg));
+s <- lapply(t, transformIntensity, fun=movingAvg);
 
 ## baseline correction
-b <- lapply(s, function(x)removeBaseline(x));
+b <- lapply(s, removeBaseline);
 
 ## detect peaks
-p <- lapply(b, function(x)detectPeaks(x));
+p <- lapply(b, detectPeaks);
 
 ## plot results
 par(mfcol=c(3, length(sA1)));

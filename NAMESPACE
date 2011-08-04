@@ -1,6 +1,6 @@
 import(methods)
 import(utils)
-importFrom(graphics, legend, lines, plot, points)
+importFrom(graphics, legend, lines, plot, points, identify)
 
 exportPattern("^[[:alpha:]]+")
 

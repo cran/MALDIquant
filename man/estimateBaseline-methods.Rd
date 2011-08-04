@@ -22,8 +22,8 @@ This methods estimates the baseline of mass spectrometry data
     \item{\dots}{arguments to be passed to \code{method}}
 }
 \value{
-    Returns a two column matrix (first column: mass, second column: intensity)
-    of the estimated baseline.
+Returns a two column matrix (first column: mass, second column: intensity)
+of the estimated baseline.
 }
 \author{
 Sebastian Gibb
@@ -49,7 +49,7 @@ s <- sA1[[1]];
 plot(s);
 
 ## estimate baseline
-b <- removeBaseline(s);
+b <- estimateBaseline(s);
 
 ## draw baseline on the plot
 lines(b, col="red");

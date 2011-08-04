@@ -1,15 +1,15 @@
 \name{transformIntensity-methods}
 \docType{methods}
 \alias{transformIntensity}
-\alias{transformIntensity,AbstractMassSpectrumData-method}
+\alias{transformIntensity,AbstractMassObject-method}
 \alias{transformIntensity,MassSpectrum-method}
-\title{Transforms Intensities of an AbstractMassSpectrumData object.}
+\title{Transforms Intensities of an AbstractMassObject object.}
 \description{
 This methods performs a transformation (e.g. sqrt-transformation) on the
-intensities of an \code{\linkS4class{AbstractMassSpectrumData}} object.
+intensities of an \code{\linkS4class{AbstractMassObject}} object.
 }
 \usage{
-\S4method{transformIntensity}{AbstractMassSpectrumData}(object,
+\S4method{transformIntensity}{AbstractMassObject}(object,
      fun, na.rm = TRUE,
      \dots)
 }
@@ -42,7 +42,7 @@ See website: \url{http://strimmerlab.org/software/maldiquant/}
 Sebastian Gibb
 }
 \seealso{
-\code{\linkS4class{AbstractMassSpectrumData}},
+\code{\linkS4class{AbstractMassObject}},
 \code{\linkS4class{MassSpectrum}}
 }
 \examples{

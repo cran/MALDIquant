@@ -1,4 +1,4 @@
-## $Id: lines-methods.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: lines-methods.R 659 2011-07-20 12:11:47Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,9 +18,9 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractMassSpectrumData 
+## AbstractMassObject 
 setMethod(f="lines", 
-    signature=signature(x="AbstractMassSpectrumData"),
+    signature=signature(x="AbstractMassObject"),
     definition=function(x, 
         type=ifelse(is(object=x, class2="MassPeaks"), "h", "l"),
         ...) {

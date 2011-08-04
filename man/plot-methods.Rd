@@ -1,14 +1,14 @@
 \name{plot-methods}
 \docType{methods}
-\alias{plot,AbstractMassSpectrumData,missing-method}
+\alias{plot,AbstractMassObject,missing-method}
 \alias{plot,MassSpectrum,missing-method}
-\title{Plots an AbstractMassSpectrumData object.}
+\title{Plots an AbstractMassObject object.}
 \description{
 This is an overloaded method to allow plotting of an
-\code{\linkS4class{AbstractMassSpectrumData}} object.
+\code{\linkS4class{AbstractMassObject}} object.
 }
 \usage{
-\S4method{plot}{AbstractMassSpectrumData,missing}(x, col="black", 
+\S4method{plot}{AbstractMassObject,missing}(x, col="black", 
      xlab="mass", ylab="intensity", 
      type=ifelse(is(object=x, class2="MassPeaks"), "h", "l"),
      xlim=c(ifelse(length(x@mass)>0, min(x@mass), 0),
@@ -42,7 +42,7 @@ See website: \url{http://strimmerlab.org/software/maldiquant/}
 Sebastian Gibb
 }
 \seealso{
-\code{\linkS4class{AbstractMassSpectrumData}},
+\code{\linkS4class{AbstractMassObject}},
 }
 \examples{
 ## load library

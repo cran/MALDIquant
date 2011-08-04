@@ -1,4 +1,4 @@
-## $Id: findLocalMaxima-methods.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: findLocalMaxima-methods.R 658 2011-07-20 06:46:34Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -24,8 +24,9 @@ setMethod(f="findLocalMaxima",
     definition=function(object, 
                         halfWindowSize=20) {
         
-    if (isEmpty(object))
-        stop("Spectrum is empty!");
+    if (.isEmptyWarning(object)) {
+        return(matrix(ncol=2, dimnames=list(list(), list("mass", "intensity"))));
+    }
 
     if (halfWindowSize<1) {
         stop(sQuote("halfWindowSize"), "=", halfWindowSize, " is too small!");

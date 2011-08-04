@@ -1,4 +1,4 @@
-## $Id: AllGenerics.R 575 2011-05-27 18:15:09Z sgibb $
+## $Id: AllGenerics.R 659 2011-07-20 12:11:47Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,7 +18,7 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractMassSpectrumData
+## AbstractMassObject
 if (is.null(getGeneric("as.matrix")))
     setGeneric("as.matrix", function(x, ...) standardGeneric("as.matrix"));
 if (is.null(getGeneric("length")))
@@ -40,12 +40,14 @@ if (is.null(getGeneric("intensity")))
 if (is.null(getGeneric("intensity<-")))
     setGeneric("intensity<-", function(object, value) standardGeneric("intensity<-"));
 if (is.null(getGeneric("isEmpty")))
-    setGeneric("isEmpty", function(x, ...) standardGeneric("isEmpty"));
+    setGeneric("isEmpty", function(x) standardGeneric("isEmpty"));
+if (is.null(getGeneric(".isEmptyWarning")))
+    setGeneric(".isEmptyWarning", function(x) standardGeneric(".isEmptyWarning"));
 if (is.null(getGeneric("metaData")))
     setGeneric("metaData", function(object) standardGeneric("metaData"));
 if (is.null(getGeneric("metaData<-")))
     setGeneric("metaData<-", function(object, value) standardGeneric("metaData<-"));
-## end of AbstractMassSpectrumData
+## end of AbstractMassObject
 
 ## MassSpectrum
 if (is.null(getGeneric("detectPeaks")))

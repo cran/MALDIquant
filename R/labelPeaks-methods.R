@@ -1,4 +1,4 @@
-## $Id: labelPeaks-methods.R 583 2011-05-28 18:00:49Z sgibb $
+## $Id: labelPeaks-methods.R 681 2011-07-28 12:28:00Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -20,13 +20,52 @@
 
 setMethod(f="labelPeaks",
     signature=signature(object="MassPeaks"),
-    definition=function(object, index=1:length(object), 
+    definition=function(object, 
+        index,
+        mass, massTolerance=0.001,
         digits=3,
         underline=TRUE, 
         ## verticalOffset ca. 0.5% max
-        verticalOffset=ceiling(max(object@intensity)/200),
+        verticalOffset=max(object@intensity)/200,
         adj=c(0.5, 0), cex=0.7, family="sans",
         ...) {
+
+    if (!missing(mass) && is.numeric(mass)) {
+        massIndex <- unlist(sapply(mass, function(x) {
+            return(.which.nearby(object@mass, x, tolerance=massTolerance));
+        }));
+
+        if (!all(!is.na(massIndex))) {
+            warning("No peak(s) found at mass: ",
+                    paste(mass[is.na(massIndex)], collapse=", "));
+            massIndex <- massIndex[!is.na(massIndex)];
+        }
+
+        if (!missing(index)) {
+            if (is.logical(index)) {
+                warning("Could not handle a logical ", sQuote("index"), 
+                        " and a numeric ", sQuote("mass"), " vector. ",
+                        "Replacing ", sQuote("index"), " by ", sQuote("mass"),
+                        ".");
+                index <- massIndex;
+            } else {
+                index <- c(index, massIndex);
+            }
+        } else {
+            index <- massIndex;
+        }
+        
+        ## remove duplicated indices
+        index <- unique(index);
+    }
+
+    isValidIndex <- length(index) >= 1 && 
+                    length(index) <= length(object@mass) && 
+                    ((min(index) >= 1 && max(index) <= length(object@mass)) ||
+                      is.logical(index));
+    if (!isValidIndex) {
+        stop("No valid ", sQuote("index"), " nor ", sQuote("mass"), " given.");
+    }
 
     x <- object@mass[index];
 

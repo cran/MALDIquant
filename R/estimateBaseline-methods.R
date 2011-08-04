@@ -1,4 +1,4 @@
-## $Id: estimateBaseline-methods.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: estimateBaseline-methods.R 652 2011-07-19 15:16:34Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -25,8 +25,10 @@ setMethod(f="estimateBaseline",
                         method=c("SNIP", "ConvexHull", "Median"),
                         ...) {
         
-    if (isEmpty(object))
-        stop("Spectrum is empty!");
+    ## empty spectrum?
+    if (.isEmptyWarning(object)) {
+        return(NA);
+    }
 
     method=match.arg(method, several.ok=FALSE);
 

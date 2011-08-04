@@ -1,4 +1,4 @@
-## $Id: transformIntensity-methods.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: transformIntensity-methods.R 659 2011-07-20 12:11:47Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,19 +18,21 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractMassSpectrumData 
+## AbstractMassObject 
 setMethod(f="transformIntensity",
-    signature=signature(object="AbstractMassSpectrumData"),
+    signature=signature(object="AbstractMassObject"),
     definition=function(object, fun, na.rm=TRUE, ...) {
 
-    fun <- match.fun(fun);
+    if (!.isEmptyWarning(object)) {
+        fun <- match.fun(fun);
 
-    object@intensity <- fun(object@intensity, ...);
+        object@intensity <- fun(object@intensity, ...);
     
-    if (na.rm) {
-        na <- is.na(object@intensity);
-        object@intensity <- object@intensity[!na]; 
-        object@mass <- object@mass[!na]; 
+        if (na.rm) {
+            na <- is.na(object@intensity);
+            object@intensity <- object@intensity[!na]; 
+            object@mass <- object@mass[!na]; 
+        }
     }
 
     return(object);

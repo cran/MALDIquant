@@ -1,4 +1,4 @@
-## $Id: removeBaseline-methods.R 581 2011-05-28 16:36:54Z sgibb $
+## $Id: removeBaseline-methods.R 652 2011-07-19 15:16:34Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -25,8 +25,9 @@ setMethod(f="removeBaseline",
                         ...) {
 
     ## empty spectrum?
-    if (isEmpty(object))
-        stop("Spectrum is empty!");
+    if (.isEmptyWarning(object)) {
+        return(object);
+    }
 
     ## no baseline argument given => compute baseline
     if (missing(baseline))

@@ -1,4 +1,4 @@
-## $Id: plot-methods.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: plot-methods.R 659 2011-07-20 12:11:47Z sgibb $
 ##
 ## Copyright 2011 Sebastian Gibb
 ## <mail@sebastiangibb.de>
@@ -18,9 +18,9 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## AbstractMassSpectrumData 
+## AbstractMassObject 
 setMethod(f="plot", 
-    signature=signature(x="AbstractMassSpectrumData", y="missing"),
+    signature=signature(x="AbstractMassObject", y="missing"),
     definition=function(x, col="black", xlab="mass", ylab="intensity",
         type=ifelse(is(object=x, class2="MassPeaks"), "h", "l"),
         xlim=c(ifelse(length(x@mass)>0, min(x@mass), 0),
