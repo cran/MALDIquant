@@ -1,6 +1,6 @@
-## $Id: which.nearby-functions.R 681 2011-07-28 12:28:00Z sgibb $
+## $Id: which.nearby-functions.R 834 2012-01-18 08:11:24Z sgibb $
 ##
-## Copyright 2011 Sebastian Gibb
+## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of PACKAGE for R and related languages.

@@ -1,6 +1,6 @@
-## $Id: intensityMatrix-functions.R 699 2011-08-04 15:11:28Z sgibb $
+## $Id: intensityMatrix-functions.R 834 2012-01-18 08:11:24Z sgibb $
 ##
-## Copyright 2011 Sebastian Gibb
+## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of PACKAGE for R and related languages.
@@ -38,23 +38,16 @@ intensityMatrix <- function(l, replaceNaBy=0) {
     }
     
     ## fetch all mass
-    mass <- sort(unlist(lapply(l, function(x)x@mass)));
+    mass <- sort(x=unlist(lapply(l, function(x)x@mass)), method="quick");
     uMass <- unique(mass);
-    nUMass <- length(uMass);
   
-    ## fetch indices
-    idx <- lapply(l, function(x) {
-                  lxm <- length(x@mass);
-                  d <- duplicated(c(x@mass, uMass));
-                  return(d[(lxm+1):(lxm+nUMass)]);
-                });
-  
-    m <- matrix(ncol=nUMass, nrow=length(l),
-                dimnames=list(c(), c(uMass)));
-  
-    for (i in seq(along=idx)) {
-        m[i, idx[[i]]] <- l[[i]]@intensity;
-    }
+    ## build matrix
+    m <- do.call(rbind,
+                 lapply(l, function(x)x@intensity[
+                        match(x=uMass, table=x@mass, nomatch=NA)]));
+
+    ## set column names
+    dimnames(m) <- list(NULL, c(uMass));
   
     if (!is.null(replaceNaBy)) {
         m[is.na(m)] <- replaceNaBy;

@@ -1,6 +1,6 @@
-## $Id: constructor-functions.R 562 2011-05-26 08:56:09Z sgibb $
+## $Id: constructor-functions.R 834 2012-01-18 08:11:24Z sgibb $
 ##
-## Copyright 2011 Sebastian Gibb
+## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.

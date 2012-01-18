@@ -1,6 +1,6 @@
-## $Id: plot-methods.R 659 2011-07-20 12:11:47Z sgibb $
+## $Id: plot-methods.R 834 2012-01-18 08:11:24Z sgibb $
 ##
-## Copyright 2011 Sebastian Gibb
+## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -23,9 +23,10 @@ setMethod(f="plot",
     signature=signature(x="AbstractMassObject", y="missing"),
     definition=function(x, col="black", xlab="mass", ylab="intensity",
         type=ifelse(is(object=x, class2="MassPeaks"), "h", "l"),
-        xlim=c(ifelse(length(x@mass)>0, min(x@mass), 0),
-               ifelse(length(x@mass)>0, max(x@mass), 1)),
-        ylim=c(0, ifelse(length(x@intensity>0), max(x@intensity), 1)),
+        xlim=c(ifelse(length(x@mass)>0, min(x@mass, na.rm=TRUE), 0),
+               ifelse(length(x@mass)>0, max(x@mass, na.rm=TRUE), 1)),
+        ylim=c(0, ifelse(length(x@intensity>0), 
+                         max(x@intensity, na.rm=TRUE), 1)),
         main=x@metaData$name, sub=x@metaData$file, cex.sub=0.75, 
         col.sub="#808080", 
         abline.col="#808080", ...) {

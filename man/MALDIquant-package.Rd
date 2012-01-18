@@ -16,8 +16,8 @@ classification so that MALDIquant is useful for clinical diagnostics.
 \details{
 \tabular{ll}{
 Package: \tab MALDIquant\cr
-Version: \tab 0.4\cr
-Date: \tab 2011-08-04\cr
+Version: \tab 0.5\cr
+Date: \tab 2012-01-18\cr
 License: \tab GPL (>= 3)\cr
 URL: \tab http://strimmerlab.org/software/maldiquant/\cr
 }

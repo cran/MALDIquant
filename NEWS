@@ -1,6 +1,10 @@
 RELEASE HISTORY OF THE "MALDIquant" PACKAGE
 ===========================================
 
+Version 0.5 [2012-01-18]:
+- Add imputeMass method
+- Rewrite intensityMatrix function (little speed improvement)
+
 Version 0.4 [2011-08-04]:
 - Add functions: isMassObjectList, isMassPeaksList, isMassSpectrumList,
   findEmptyMassObjects, removeEmptyMassObjects, intensityMatrix and calibrate
@@ -19,7 +23,7 @@ Version 0.3 [2011-05-28]:
 - Remove fdrtool dependency and rewrite .estimateBaselineConvexHull in C
 - Rename SingleSpectrum class to MassSpectrum
 - Rename SinglePeakList class to MassPeaks
-- Rewerite labelPeaks (some parameter changed)
+- Rewrite labelPeaks (some parameter changed)
 - Move importing functions to the following R-packages: readBrukerFlexData,
   readMzXmlData
 - Bugfix: change .C(..., DUP=F) to .C(..., DUP=T) in .estimateBaselineSnip

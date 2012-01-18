@@ -1,6 +1,6 @@
-## $Id: valid-methods.R 659 2011-07-20 12:11:47Z sgibb $
+## $Id: valid-methods.R 834 2012-01-18 08:11:24Z sgibb $
 ##
-## Copyright 2011 Sebastian Gibb
+## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.

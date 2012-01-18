@@ -1,6 +1,6 @@
-## $Id: estimateBaseline-functions.R 574 2011-05-27 12:52:31Z sgibb $
+## $Id: estimateBaseline-functions.R 834 2012-01-18 08:11:24Z sgibb $
 ##
-## Copyright 2011 Sebastian Gibb
+## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of PACKAGE for R and related languages.
@@ -74,15 +74,9 @@
 
     index <- index[1:(k-1)];
 
-    b <- matrix(c(x, y), nrow=length(x), ncol=2);
-
-    ## build linear function y=mx+c to calculate values between nodes
-    for (i in seq(from=1, to=length(index)-1)) {
-        m=(y[index[i+1]]-y[index[i]])/(x[index[i+1]]-x[index[i]]);
-        c=y[index[i]]-m*x[index[i]];
-
-        b[index[i]:index[i+1] ,2] <- m*x[index[i]:index[i+1]]+c;
-    }
+    b <- matrix(unlist(approx(x=x[index], y=y[index], xout=x, method="linear",
+                              rule=2)),
+                nrow=length(x), ncol=2);
 
     return(b);
 }

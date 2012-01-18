@@ -1,6 +1,6 @@
-## $Id: AllGenerics.R 659 2011-07-20 12:11:47Z sgibb $
+## $Id: AllGenerics.R 834 2012-01-18 08:11:24Z sgibb $
 ##
-## Copyright 2011 Sebastian Gibb
+## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -58,6 +58,8 @@ if (is.null(getGeneric("estimateNoise")))
     setGeneric("estimateNoise", function(object, ...) standardGeneric("estimateNoise"));
 if (is.null(getGeneric("findLocalMaxima")))
     setGeneric("findLocalMaxima", function(object, ...) standardGeneric("findLocalMaxima"));
+if (is.null(getGeneric("imputeMass")))
+    setGeneric("imputeMass", function(object, ...) standardGeneric("imputeMass"));
 if (is.null(getGeneric("removeBaseline")))
     setGeneric("removeBaseline", function(object, ...) standardGeneric("removeBaseline"));
 ## end of MassSpectrum

@@ -1,6 +1,6 @@
-## $Id: findLocalMaxima-methods.R 658 2011-07-20 06:46:34Z sgibb $
+## $Id: findLocalMaxima-methods.R 835 2012-01-18 12:29:27Z sgibb $
 ##
-## Copyright 2011 Sebastian Gibb
+## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -44,6 +44,11 @@ setMethod(f="findLocalMaxima",
                      rep(FALSE, halfWindowSize));
 
     m <- cbind(object@mass, object@intensity)[localMaxima,];
+    
+    if (!is.matrix(m)) {
+        m <- t(as.matrix(m));
+    }
+
     colnames(m) <- c("mass", "intensity");
 
     return(m);

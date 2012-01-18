@@ -1,6 +1,6 @@
-## $Id: show-methods.R 674 2011-07-26 14:14:55Z sgibb $
+## $Id: show-methods.R 834 2012-01-18 08:11:24Z sgibb $
 ##
-## Copyright 2011 Sebastian Gibb
+## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
