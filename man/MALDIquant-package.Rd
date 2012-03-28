@@ -3,21 +3,22 @@
 \alias{MALDIquant}
 \docType{package}
 \title{
-Quantitative analysis of MALDI-TOF MS data
+Quantitative Analysis of Mass Spectrometric Data
 }
 \description{
-This package is intended to provide an easy-to-use framework for quantitative
-analysis of MALDI-TOF mass spectrometry data.
+MALDIquant provides a complete analysis pipeline for MALDI-TOF and other 
+mass spectrometric data. Distinctive features include baseline subtraction 
+using the SNIP algorithm, peak alignment using warping functions, 
+handling of replicated measurements as well as allowing spectra with 
+different resolutions. 
 
-MALDIquant is currently under active development. Features available in future
-versions include peak alignment, quantitative calibration and 
-classification so that MALDIquant is useful for clinical diagnostics.
+For a first overview run \code{demo("MALDIquant")}.
 }
 \details{
 \tabular{ll}{
 Package: \tab MALDIquant\cr
-Version: \tab 0.5\cr
-Date: \tab 2012-01-18\cr
+Version: \tab 1.0\cr
+Date: \tab 2012-03-28\cr
 License: \tab GPL (>= 3)\cr
 URL: \tab http://strimmerlab.org/software/maldiquant/\cr
 }
@@ -35,22 +36,33 @@ Sebastian Gibb
 Maintainer: Sebastian Gibb <mail@sebastiangibb.de>
 }
 \references{
+S. Gibb and K. Strimmer. 2012.  
+\emph{MALDIquant: a versatile R package for the analysis of mass spectrometric data.}
+\url{http://arxiv.org/abs/1203.5885}.
+
 See website: \url{http://strimmerlab.org/software/maldiquant/}
+}
+\seealso{
+\code{\linkS4class{MassPeaks}},
+\code{\linkS4class{MassSpectrum}}
 }
 \examples{
 ## load library
 library("MALDIquant");
 
 ## load example data
-data("sA1", package="MALDIquant");
+data("spectra", package="MALDIquant");
+
+## choose only a subset
+spectra <- spectra[1:2];
 
 ## show some information
-sA1
+spectra
 
 ## running typical workflow
 
 ## transform intensities
-t <- lapply(sA1, transformIntensity, fun=sqrt);
+t <- lapply(spectra, transformIntensity, fun=sqrt);
 
 ## smoothing function
 movingAvg <- function(y) {
@@ -68,17 +80,20 @@ b <- lapply(s, removeBaseline);
 p <- lapply(b, detectPeaks);
 
 ## plot results
-par(mfcol=c(3, length(sA1)));
-for (i in seq(along=sA1)) {
-    plot(sA1[[i]], main="raw spectrum");
+par(mfcol=c(3, length(spectra)));
+for (i in seq(along=spectra)) {
+    plot(spectra[[i]], main="raw spectrum");
     plot(s[[i]], main="transformed (sqrt) and smoothed (ma5)");
     plot(b[[i]], main="baseline removed and peaks detected");
     points(p[[i]], pch=4, col=2);
 }
 par(mfrow=c(1, 1));
+
+## bin peaks
+bp <- binPeaks(p);
+
+## show intensity matrix
+intensityMatrix(bp);
 }
 \keyword{package}
-\seealso{
-\code{\linkS4class{MassPeaks}},
-\code{\linkS4class{MassSpectrum}}
-}
+

@@ -1,7 +1,27 @@
 \name{MALDIquant-internal}
 
+\alias{.binPeaks}
+\alias{.calibrateSingleMassObjects}
+\alias{.doByLabels}
+\alias{.filterPeaks}
+\alias{.grouperRelaxedHighestAtReference}
+\alias{.grouperStrict}
+\alias{.isArgument}
+\alias{.isFunctionList}
+\alias{.lowerConvexHullR}
+\alias{.merge}
+\alias{.mergeMassPeaks}
+\alias{.mergeMassSpectra}
+\alias{.removeArguments}
+\alias{.replaceNonEmptyMassObjects}
+\alias{.snipR}
+\alias{.validAbstractMassObject}
+\alias{.warp}
+\alias{.warpingFunctionCubic}
+\alias{.warpingFunctionLowess}
+\alias{.which.nearby}
+\alias{approxfun}
 \alias{show}
-\alias{.isEmptyWarning,AbstractMassObject-method}
 
 \title{Internal MALDIquant Functions}
 \description{
@@ -12,3 +32,4 @@ These are not to be called by the user (or in some cases are just
 waiting for proper documentation to be written).
 }
 \keyword{internal}
+

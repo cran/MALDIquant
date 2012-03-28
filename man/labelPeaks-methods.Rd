@@ -10,7 +10,7 @@ peaks stored in a \code{\linkS4class{MassPeaks}} object to a plot.
 \usage{
 \S4method{labelPeaks}{MassPeaks}(object, 
     index,
-    mass, massTolerance=0.001,
+    mass, tolerance=0.002,
     digits=3, underline=TRUE, 
     verticalOffset=max(object@intensity)/200, 
     adj=c(0.5, 0), cex=0.7, family="sans", 
@@ -18,16 +18,17 @@ peaks stored in a \code{\linkS4class{MassPeaks}} object to a plot.
 }
 \arguments{
     \item{object}{\code{\linkS4class{MassPeaks}} object.}
-    \item{index}{vector, indices of peaks to label.}
-    \item{mass}{vector, mass of peaks to label.}
-    \item{massTolerance}{double, maximal deviation of a peak position to be
-        considered.} 
-    \item{digits}{integer, number of decimal places.}
+    \item{index}{\code{vector}, indices of peaks to label.}
+    \item{mass}{\code{vector}, mass of peaks to label.}
+    \item{tolerance}{
+        \code{double}, maximal deviation of a peak position (mass) to be
+        considered.}
+    \item{digits}{\code{integer}, number of decimal places.}
     \item{underline}{logical, underline peak values?}
-    \item{verticalOffset}{numeric, move label vertically.}
-    \item{adj}{numeric, adjust text to the left, center, right and top, center, bottom;
-        see \code{\link[graphics]{text}}.}
-    \item{cex}{numeric, font size, see \code{\link[graphics]{par}}.}
+    \item{verticalOffset}{\code{numeric}, move label vertically.}
+    \item{adj}{\code{numeric}, adjust text to the left, center, right and top,
+        center, bottom; see \code{\link[graphics]{text}}.}
+    \item{cex}{\code{numeric}, font size, see \code{\link[graphics]{par}}.}
     \item{family}{name of font family, see \code{\link[graphics]{par}}.}
     \item{...}{arguments to be passed to \code{\link[graphics]{text}}.}
 }
@@ -41,8 +42,8 @@ peaks stored in a \code{\linkS4class{MassPeaks}} object to a plot.
 library("MALDIquant");
 
 ## create a MassPeaks object from scratch
-p <- new("MassPeaks", mass=1:20, intensity=sample(x=100:10000, size=20), 
-         metaData=list(name="unrealistic example"));
+p <- createMassPeaks(mass=1:20, intensity=sample(x=100:10000, size=20), 
+                     metaData=list(name="example"));
 
 ## plot peaks
 plot(p);
@@ -59,3 +60,4 @@ labelPeaks(p, index=top5, col="red");
 }
 \keyword{methods}
 \keyword{Graphics|hplot}
+

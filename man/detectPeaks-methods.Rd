@@ -50,10 +50,10 @@ Sebastian Gibb
 library("MALDIquant");
 
 ## load example data
-data("sA1", package="MALDIquant");
+data("spectra", package="MALDIquant");
 
 ## choose only the first mass spectrum
-s <- sA1[[1]];
+s <- spectra[[1]];
 
 ## transform intensities
 s <- transformIntensity(s, sqrt);
@@ -75,3 +75,4 @@ top10 <- intensity(p) \%in\% sort(intensity(p), decreasing=TRUE)[1:10];
 labelPeaks(p, index=top10);
 }
 \keyword{methods}
+

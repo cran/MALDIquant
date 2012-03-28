@@ -42,18 +42,19 @@ Sebastian Gibb
 library("MALDIquant");
 
 ## load example data
-data("sA1", package="MALDIquant");
+data("spectra", package="MALDIquant");
 
 ## choose only the first mass spectrum
-s <- sA1[[1]];
+s <- spectra[[1]];
 
 ## plot spectrum
 plot(s);
 
 ## subtract baseline 
-ms <- removeBaseline(s);
+b <- removeBaseline(s);
 
 ## draw modified spectrum on the plot
-lines(ms, col="blue");
+lines(b, col="blue");
 }
 \keyword{methods}
+

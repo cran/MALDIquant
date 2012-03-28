@@ -10,7 +10,7 @@ This is an overloaded method to allow plotting of an
 \usage{
 \S4method{plot}{AbstractMassObject,missing}(x, col="black", 
      xlab="mass", ylab="intensity", 
-     type=ifelse(is(object=x, class2="MassPeaks"), "h", "l"),
+     type=ifelse(isMassPeaks(x), "h", "l"),
      xlim=c(ifelse(length(x@mass)>0, min(x@mass, na.rm=TRUE), 0),
             ifelse(length(x@mass)>0, max(x@mass, na.rm=TRUE), 1)),
      ylim=c(0, ifelse(length(x@intensity>0), max(x@intensity, na.rm=TRUE), 1)),
@@ -50,7 +50,7 @@ library("MALDIquant");
 
 ## create a MassSpectrum object by default constructor
 s <- createMassSpectrum(mass=1:100, intensity=rnorm(100)^2,
-    metaData=list(name="unrealistic example"));
+                        metaData=list(name="example"));
 
 ## show some details
 s;
@@ -60,3 +60,4 @@ plot(s);
 }
 \keyword{methods}
 \keyword{Graphics|hplot}
+

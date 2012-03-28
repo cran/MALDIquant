@@ -44,17 +44,17 @@ library("MALDIquant");
 peakList <- list();
 
 ## create two MassPeaks objects and add them to the list
-peakList[[1]] <- createMassPeaks(mass=1:100, intensity=rnorm(100)^2,
-metaData=list(name="unrealistic example 1"));
-peakList[[2]] <- createMassPeaks(mass=1:100, intensity=rnorm(100)^2,
-metaData=list(name="unrealistic example 2"));
+peakList[[1]] <- createMassPeaks(mass=1:100, intensity=1:100,
+                                 metaData=list(name="example 1"));
+peakList[[2]] <- createMassPeaks(mass=1:100, intensity=1:100,
+                                 metaData=list(name="example 2"));
 
 ## find empty objects (there should not be any one)
 findEmptyMassObjects(peakList);
 
 ## add an empty MassPeaks object to the list
 peakList[[3]] <- createMassPeaks(mass=double(), intensity=double(),
-metaData=list(name="empty MassPeaks object"));
+                                 metaData=list(name="empty MassPeaks object"));
 
 ## look for empty objects (isEmptyIdx == 3)
 (isEmptyIdx <- findEmptyMassObjects(peakList));
@@ -65,3 +65,4 @@ peakList <- removeEmptyMassObjects(peakList);
 length(peakList); ## 2; WARNING: all indices could changed
 }
 \keyword{methods}
+

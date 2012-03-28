@@ -1,5 +1,3 @@
-## $Id: detectPeaks-methods.R 834 2012-01-18 08:11:24Z sgibb $
-##
 ## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
@@ -28,8 +26,8 @@ setMethod(f="detectPeaks",
     ## empty spectrum?
     if (.isEmptyWarning(object)) {
         return(createMassPeaks(mass=object@mass,
-                                intensity=object@intensity,
-                                metaData=object@metaData));
+                               intensity=object@intensity,
+                               metaData=object@metaData));
     }
 
     ## save optional arguments
@@ -37,22 +35,24 @@ setMethod(f="detectPeaks",
 
     ## no localMaxima argument given => findLocalMaxima 
     if (missing(localMaxima)) {
-        if ("halfWindowSize" %in% names(optArgs)) {
-            localMaxima <- findLocalMaxima(object=object,
-                halfWindowSize=optArgs$halfWindowSize);
-
-            removedArgs <- na.omit(match(names(optArgs), "halfWindowSize"));
-            optArgs <- optArgs[seq(along=optArgs)[-removedArgs]];
-        } else {
-            localMaxima <- findLocalMaxima(object=object);
+        arguments <- list(object=object);
+        if (.isArgument("halfWindowSize", optArgs)) {
+            arguments$halfWindowSize <- optArgs$halfWindowSize;
+            optArgs <- .removeArguments("halfWindowSize", optArgs);
         }
+        
+        localMaxima <- do.call(findLocalMaxima, arguments);
     }
 
     ## no noise argument given => estimate noise 
     if (missing(noise)) {
-        arguments <- list();
-        arguments$object <- object;
-        arguments <- append(arguments, optArgs);
+        arguments <- list(object=object);
+
+        if (.isArgument("fun", optArgs)) {
+            arguments$fun <- optArgs$fun;
+            optArgs <- .removeArguments("fun", optArgs);
+            arguments <- c(arguments, optArgs);
+        } 
 
         noise <- do.call(estimateNoise, arguments);
     }

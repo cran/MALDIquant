@@ -26,7 +26,7 @@ instead.
 }
 \details{
 The algorithm based on the following equation:
-\deqn{y_i(k) = \min \{ y_i, \frac{(y_{i-k}+y_{i+k})}{2} \}}
+\deqn{y_i(k) = \min \{ y_i, \frac{(y_{i-k}+y_{i+k})}{2} \}}{y_i(k) = min \{ y_i, (y_{i-k}+y_{i+k})/2 \}}
 Where \emph{k} is increase by one until \code{iterations} is reached.
 }
 \references{
@@ -51,10 +51,10 @@ Sebastian Gibb
 library("MALDIquant");
 
 ## load example data
-data("sA1", package="MALDIquant");
+data("spectra", package="MALDIquant");
 
 ## choose only the first mass spectrum
-s <- sA1[[1]];
+s <- spectra[[1]];
 
 ## plot spectrum
 plot(s);
@@ -71,3 +71,5 @@ lines(b2, col=3);
 legend(x="topright", lwd=1, legend=paste("iterations=", c(75, 150), sep=""), 
        col=c(2, 3));
 }
+\keyword{internal}
+

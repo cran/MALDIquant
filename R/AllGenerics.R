@@ -1,5 +1,3 @@
-## $Id: AllGenerics.R 834 2012-01-18 08:11:24Z sgibb $
-##
 ## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
@@ -50,6 +48,9 @@ if (is.null(getGeneric("metaData<-")))
 ## end of AbstractMassObject
 
 ## MassSpectrum
+if (is.null(getGeneric("approxfun")))
+    setGeneric("approxfun", function(x, y=NULL, method="linear", yleft, yright,
+                                     rule=1, f=0, ties=mean) standardGeneric("approxfun"));
 if (is.null(getGeneric("detectPeaks")))
     setGeneric("detectPeaks", function(object, ...) standardGeneric("detectPeaks"));
 if (is.null(getGeneric("estimateBaseline")))

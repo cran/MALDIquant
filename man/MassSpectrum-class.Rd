@@ -6,10 +6,10 @@
 
 \title{Class "MassSpectrum"}
 \description{
-\code{\linkS4class{MassSpectrum}} represents a single spectrum of a MALDI/TOF
-mass spectrometry measurement. It provide an easy framework for doing 
+\code{\linkS4class{MassSpectrum}} represents a single spectrum of a MALDI-TOF
+mass spectrometry measurement. It provides an easy framework for doing 
 some preprocessing steps like peak detection, baseline correction and
-something like that. \cr
+much more. \cr
 }
 \section{Objects from the Class}{
 \code{\link[MALDIquant]{createMassSpectrum}}: Creates a
@@ -40,11 +40,11 @@ Class \code{\linkS4class{AbstractMassObject}}, directly.
         \code{\linkS4class{MassSpectrum}} object.
         See \code{\link[MALDIquant]{findLocalMaxima,MassSpectrum-method}} for 
         details.}
-    \item{imputeMass}{\code{signature(x = "MassSpectrum")}:
-        Impute missing mass values to a
-        \code{\linkS4class{MassSpectrum}} object.
-        See \code{\link[MALDIquant]{imputeMass,MassSpectrum-method}} for 
-        details.}
+%    \item{imputeMass}{\code{signature(x = "MassSpectrum")}:
+%        Impute missing mass values to a
+%        \code{\linkS4class{MassSpectrum}} object.
+%        See \code{\link[MALDIquant]{imputeMass,MassSpectrum-method}} for 
+%        details.}
     \item{removeBaseline}{\code{signature(x = "MassSpectrum")}:
         Estimates and removes the baseline of a
         \code{\linkS4class{MassSpectrum}} object.
@@ -74,7 +74,7 @@ library("MALDIquant");
 
 ## create a MassSpectrum object by default constructor
 s <- createMassSpectrum(mass=1:100, intensity=rnorm(100)^2,
-    metaData=list(name="unrealistic example"));
+                        metaData=list(name="example"));
 
 ## show some details
 s;
@@ -90,3 +90,4 @@ metaData(s) <- list(name="modified example");
 plot(s);
 }
 \keyword{classes}
+

@@ -1,5 +1,3 @@
-## $Id: labelPeaks-methods.R 834 2012-01-18 08:11:24Z sgibb $
-##
 ## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
@@ -22,7 +20,7 @@ setMethod(f="labelPeaks",
     signature=signature(object="MassPeaks"),
     definition=function(object, 
         index,
-        mass, massTolerance=0.001,
+        mass, tolerance=0.002,
         digits=3,
         underline=TRUE, 
         ## verticalOffset ca. 0.5% max
@@ -32,7 +30,7 @@ setMethod(f="labelPeaks",
 
     if (!missing(mass) && is.numeric(mass)) {
         massIndex <- unlist(sapply(mass, function(x) {
-            return(.which.nearby(object@mass, x, tolerance=massTolerance));
+            return(.which.nearby(object@mass, x, tolerance=tolerance));
         }));
 
         if (!all(!is.na(massIndex))) {

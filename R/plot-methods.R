@@ -1,5 +1,3 @@
-## $Id: plot-methods.R 834 2012-01-18 08:11:24Z sgibb $
-##
 ## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
@@ -22,7 +20,7 @@
 setMethod(f="plot", 
     signature=signature(x="AbstractMassObject", y="missing"),
     definition=function(x, col="black", xlab="mass", ylab="intensity",
-        type=ifelse(is(object=x, class2="MassPeaks"), "h", "l"),
+        type=ifelse(isMassPeaks(x), "h", "l"),
         xlim=c(ifelse(length(x@mass)>0, min(x@mass, na.rm=TRUE), 0),
                ifelse(length(x@mass)>0, max(x@mass, na.rm=TRUE), 1)),
         ylim=c(0, ifelse(length(x@intensity>0), 

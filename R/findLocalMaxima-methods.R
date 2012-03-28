@@ -1,5 +1,3 @@
-## $Id: findLocalMaxima-methods.R 835 2012-01-18 12:29:27Z sgibb $
-##
 ## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##

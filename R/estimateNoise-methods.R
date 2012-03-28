@@ -1,5 +1,3 @@
-## $Id: estimateNoise-methods.R 834 2012-01-18 08:11:24Z sgibb $
-##
 ## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##

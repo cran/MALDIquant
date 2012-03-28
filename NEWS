@@ -1,6 +1,18 @@
 RELEASE HISTORY OF THE "MALDIquant" PACKAGE
 ===========================================
 
+Version 1.0 [2012-03-28]:
+- Add demonstration scripts
+- Add functions: binPeaks, determineWarpingFunctions, filterPeaks,
+  isMassObject, isMassPeaks, isMassSpectrum, mergeMassPeaks, mergeMassSpectra,
+  referencePeaks, warpMassPeaks, warpMassSpectra
+- Change NAMESPACE
+- Hide imputeMass method because it fails on Bruker Daltonics' CompassXport
+  32bit output
+- Add \keyword{internal} to estimateBasline*-functions.Rd
+- Rename labelPeaks' argument massTolerance into tolerance
+- Replace dataset sA1/pA1 by spectra/peaks (containing 16 example spectra)
+
 Version 0.5 [2012-01-18]:
 - Add imputeMass method
 - Rewrite intensityMatrix function (little speed improvement)

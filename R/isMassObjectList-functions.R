@@ -1,5 +1,3 @@
-## $Id: isMassObjectList-functions.R 834 2012-01-18 08:11:24Z sgibb $
-##
 ## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
@@ -18,30 +16,37 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-isMassObjectList <- function(l) {
-    isList <- is.list(l);
-    areMassObjects <- length(l) > 0 && all( unlist(sapply(l, function(x) {
-                           return(inherits(x=x,
-                                  what="AbstractMassObject"))})) );
-    return(isList && areMassObjects);
+isMassObjectList <- function(x) {
+    if (!is.list(x)) {
+        return(FALSE);
+    } 
+
+    areMassObjects <- length(x) > 0 &&
+                      all( unlist(sapply(x, function(e) {
+                           return(isMassObject(e))})) );
+
+    return(areMassObjects);
 }
 
-isMassSpectrumList <- function(l) {
-    isList <- is.list(l);
-    areMassSpectrumObjects <- length(l) > 0 &&
-                              all( unlist(sapply(l, function(x) {
-                                   return (is(object=x,
-                                              class2="MassSpectrum"));})) );
+isMassSpectrumList <- function(x) {
+    if (!is.list(x)) {
+        return(FALSE);
+    } 
 
-    return(isList && areMassSpectrumObjects);
+    areMassSpectrumObjects <- length(x) > 0 &&
+                              all( unlist(sapply(x, function(e) {
+                                   return(isMassSpectrum(e))})) );
+    return(areMassSpectrumObjects);
 }
 
-isMassPeaksList <- function(l) {
-    isList <- is.list(l);
-    areMassPeaksObjects <- length(l) > 0 &&
-                           all( unlist(sapply(l, function(x) {
-                                return (is(object=x,
-                                           class2="MassPeaks"));})) );
+isMassPeaksList <- function(x) {
+    if (!is.list(x)) {
+        return(FALSE);
+    } 
 
-    return(isList && areMassPeaksObjects);
+    areMassPeaksObjects <- length(x) > 0 &&
+                           all( unlist(sapply(x, function(e) {
+                                return(isMassPeaks(e))})) );
+
+    return(areMassPeaksObjects);
 }

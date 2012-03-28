@@ -1,6 +1,4 @@
-/* $Id: snip.c 573 2011-05-27 12:21:50Z sgibb $
- * 
- * Copyright 2011 Sebastian Gibb
+/* Copyright 2011 Sebastian Gibb
  * <mail@sebastiangibb.de>
  *
  * This file is part of PACKAGE for R and related languages.

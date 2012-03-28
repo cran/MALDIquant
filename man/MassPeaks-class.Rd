@@ -40,3 +40,4 @@ Sebastian Gibb
 %library("MALDIquant");
 %}
 \keyword{classes}
+

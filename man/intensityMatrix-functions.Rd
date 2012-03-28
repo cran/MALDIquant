@@ -42,14 +42,12 @@ Sebastian Gibb
 library("MALDIquant");
 
 ## create example MassPeaks objects
-p <- list();
-
-p[[1]] <- createMassPeaks(mass=1:4,
+p <- list(createMassPeaks(mass=1:4,
                           intensity=11:14,
-                          metaData=list(name="test mass peaks 1"));
-p[[2]] <- createMassPeaks(mass=2:5,
+                          metaData=list(name="test mass peaks 1")),
+          createMassPeaks(mass=2:5,
                           intensity=22:25,
-                          metaData=list(name="test mass peaks 2"));
+                          metaData=list(name="test mass peaks 2")));
 
 ## converts MassPeaks objects into a matrix 
 intensityMatrix(p);
@@ -57,3 +55,5 @@ intensityMatrix(p);
 ## converts MassPeaks objects into a matrix (preserve NAs)
 intensityMatrix(p, replaceNaBy=NULL);
 }
+\keyword{methods}
+

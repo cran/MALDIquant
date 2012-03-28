@@ -24,7 +24,8 @@
 \title{Class "AbstractMassObject"}
 \description{
 \code{\linkS4class{AbstractMassObject}} is an abstract (means pure virtual)
-class. It is the parent class of \code{\linkS4class{MassSpectrum}}.
+class. It is the parent class of \code{\linkS4class{MassSpectrum}} and
+\code{\linkS4class{MassPeaks}}.
 It shouldn't create or handle by the user because it is for internal use only.
 }
 \section{Derived classes}{
@@ -94,3 +95,4 @@ Sebastian Gibb
 \code{\link[MALDIquant]{transformIntensity,AbstractMassObject-method}}
 }
 \keyword{classes}
+

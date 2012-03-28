@@ -40,10 +40,10 @@ Sebastian Gibb
 library("MALDIquant");
 
 ## load example data
-data("sA1", package="MALDIquant");
+data("spectra", package="MALDIquant");
 
 ## choose only the first mass spectrum
-s <- sA1[[1]];
+s <- spectra[[1]];
 
 ## plot spectrum
 plot(s);
@@ -55,3 +55,4 @@ b <- estimateBaseline(s);
 lines(b, col="red");
 }
 \keyword{methods}
+

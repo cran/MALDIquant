@@ -1,5 +1,3 @@
-## $Id: isEmpty-methods.R 834 2012-01-18 08:11:24Z sgibb $
-##
 ## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
@@ -30,18 +28,20 @@ setMethod(f=".isEmptyWarning",
     signature=signature(x="AbstractMassObject"),
     definition=function(x) {
 
-    isEmpty <- isEmpty(x);
-    
-    if (isEmpty) {
+    if (isEmpty(x)) {
         msg  <- paste(class(x)[1], " object", sep="");
 
         if (!is.null(x@metaData$file)) {
             msg <- paste(msg, " (file: ",
                          x@metaData$file, ")", sep="");
         }
-        warning(paste(msg, " is empty!", sep=""));
+
+        parentCall <- sys.call(sys.nframe()-1L);
+        warning(paste("In ", parentCall, " : ", msg, " is empty!", sep=""), 
+                call.=FALSE);
+        return(TRUE);
     }
 
-    return(isEmpty);
+    return(FALSE);
 });
 

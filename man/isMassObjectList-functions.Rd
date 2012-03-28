@@ -10,19 +10,19 @@ These functions test a \code{\link{list}} whether containing
 \code{\linkS4class{AbstractMassObject}} objects.
 }
 \usage{
-isMassObjectList(l)
+isMassObjectList(x)
 
-isMassSpectrumList(l)
+isMassSpectrumList(x)
 
-isMassPeaksList(l)
+isMassPeaksList(x)
 }
 \arguments{
-    \item{l}{
+    \item{x}{
         \code{list}, object to be tested. 
     }
 }
 \value{
-Returns \code{\link{TRUE}} of \code{\link{FALSE}} depending on whether its
+Returns \code{\link{TRUE}} or \code{\link{FALSE}} depending on whether its
 argument is a \code{\link{list}} of \code{\linkS4class{AbstractMassObject}} objects.
 }
 \references{
@@ -41,18 +41,21 @@ Sebastian Gibb
 library("MALDIquant");
 
 ## create list
-peakList <- list();
+p <- list();
 
 ## test list
-isMassPeaksList(peakList); ## returns FALSE
+isMassPeaksList(p); # returns FALSE
 
 ## create two MassPeaks objects and add them to the list
-peakList[[1]] <- createMassPeaks(mass=1:100, intensity=rnorm(100)^2,
-metaData=list(name="unrealistic example 1"));
-peakList[[2]] <- createMassPeaks(mass=1:100, intensity=rnorm(100)^2,
-metaData=list(name="unrealistic example 2"));
+p <- createMassPeaks(mass=1:100, intensity=1:100,
+                     metaData=list(name="example 1"));
+p <- createMassPeaks(mass=1:100, intensity=1:100,
+                     metaData=list(name="example 2"));
 
 ## test list
-isMassPeaksList(peakList); ## returns TRUE 
+isMassObjectList(p);   # returns TRUE 
+isMassPeaksList(p);    # returns TRUE 
+isMassSpectrumList(p); # returns FALSE
 }
 \keyword{methods}
+

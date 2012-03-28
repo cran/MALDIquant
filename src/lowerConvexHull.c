@@ -1,6 +1,4 @@
-/* $Id: lowerConvexHull.c 574 2011-05-27 12:52:31Z sgibb $
- * 
- * Copyright 2011 Sebastian Gibb
+/* Copyright 2011 Sebastian Gibb
  * <mail@sebastiangibb.de>
  *
  * This file is part of PACKAGE for R and related languages.

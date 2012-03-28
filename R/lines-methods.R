@@ -1,5 +1,3 @@
-## $Id: lines-methods.R 834 2012-01-18 08:11:24Z sgibb $
-##
 ## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
@@ -22,7 +20,7 @@
 setMethod(f="lines", 
     signature=signature(x="AbstractMassObject"),
     definition=function(x, 
-        type=ifelse(is(object=x, class2="MassPeaks"), "h", "l"),
+        type=ifelse(isMassPeaks(x), "h", "l"),
         ...) {
 
     lines(x=x@mass, y=x@intensity, type, ...);

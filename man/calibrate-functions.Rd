@@ -14,7 +14,7 @@ calibrate(l,
     \item{l}{
         \code{list} of \code{\linkS4class{AbstractMassObject}} objects.
     }
-    \item{method}{a calibration method, currently only "TIC" (= total ion
+    \item{method}{a calibration method, currently only \emph{TIC} (total ion
         current) is supported.}
     \item{\dots}{arguments to be passed to \code{method} (useless in the current
         development status).}
@@ -34,16 +34,13 @@ Sebastian Gibb
 library("MALDIquant");
 
 ## load example data
-data("sA1", package="MALDIquant");
-
-## remove baseline
-b <- lapply(sA1, removeBaseline);
+data("spectra", package="MALDIquant");
 
 ## calibrate using TIC
-s <- calibrate(b, method="TIC");
+calSpectra <- calibrate(spectra, method="TIC");
 
 ## show intensity details
-summary(intensity(b[[1]])); ## no calibration
-summary(intensity(s[[1]])); ## TIC calibration
+summary(intensity(spectra[[1]]));    ## no calibration
+summary(intensity(calSpectra[[1]])); ## TIC calibration
 }
 \keyword{methods}

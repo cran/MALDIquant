@@ -7,7 +7,9 @@
     Most preprocessing steps in mass spectrum analysis are based on indices
     (e.g. \code{\link[MALDIquant]{detectPeaks,MassSpectrum-method}}). This
     method assures equal sized or consistent increasing mass steps between each
-    index.
+    index.\cr
+    This is an internal function and hidden by NAMESPACE because it doesn't work
+    on Bruker Daltonics' CompassXport 32bit mzXML output.
 }
 \usage{
 \S4method{imputeMass}{MassSpectrum}(object, verbose=FALSE)
@@ -73,7 +75,7 @@ pF <- detectPeaks(filtered, halfWindowSize=2);
 length(pO) > length(pF);
 
 ## fix it
-imputed <- imputeMass(filtered, verbose=TRUE);
+imputed <- MALDIquant:::imputeMass(filtered, verbose=TRUE);
 
 ## now original and imputed have the same length
 length(original) == length(imputed);
@@ -95,10 +97,12 @@ all.equal(mass(pO), mass(pO));
 
 ## if mass imputation is not needed the spectrum would not changed
 a <- createMassSpectrum(mass=1:10, intensity=rep(1, 10));
-b <- imputeMass(a, verbose=TRUE);
+b <- MALDIquant:::imputeMass(a, verbose=TRUE);
 length(a) == length(b);
 all.equal(intensity(a), intensity(b));
 all.equal(mass(a), mass(b));
 
 }
 \keyword{methods}
+\keyword{internal}
+
