@@ -2,10 +2,10 @@
 \docType{methods}
 \alias{transformIntensity}
 \alias{transformIntensity,AbstractMassObject-method}
-\alias{transformIntensity,MassSpectrum-method}
+\alias{transformIntensity,list-method}
 \title{Transforms Intensities of an AbstractMassObject object.}
 \description{
-This methods performs a transformation (e.g. sqrt-transformation) on the
+This method performs a transformation (e.g. sqrt-transformation) on the
 intensities of an \code{\linkS4class{AbstractMassObject}} object.
 }
 \usage{
@@ -14,7 +14,8 @@ intensities of an \code{\linkS4class{AbstractMassObject}} object.
      \dots)
 }
 \arguments{
-    \item{object}{\code{\linkS4class{MassSpectrum}} object}
+    \item{object}{\code{\linkS4class{AbstractMassObject}} object or a 
+        \code{list} of \code{\linkS4class{AbstractMassObject}} objects.}
     \item{fun}{used transformation function (\code{\link{sqrt}}, 
         \code{\link{log10}}, \code{\link{log}} or something else 
         would be possible)}
@@ -50,10 +51,10 @@ Sebastian Gibb
 library("MALDIquant");
 
 ## load example data
-data("spectra", package="MALDIquant");
+data("fiedler2009subset", package="MALDIquant");
 
 ## choose only the first mass spectrum
-s <- spectra[[1]];
+s <- fiedler2009subset[[1]];
 
 ## transform spectrum
 t <- transformIntensity(s, fun=sqrt);

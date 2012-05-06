@@ -6,7 +6,7 @@
 \alias{intensity}
 \alias{intensity<-}
 \alias{intensity,AbstractMassObject-method}
-\alias{intensity<-,AbstractMassObject-method}
+\alias{intensity<-,AbstractMassObject,numeric-method}
 \alias{isEmpty}
 \alias{isEmpty,AbstractMassObject-method}
 \alias{length,AbstractMassObject-method}
@@ -14,12 +14,16 @@
 \alias{mass}
 \alias{mass<-}
 \alias{mass,AbstractMassObject-method}
-\alias{mass<-,AbstractMassObject-method}
+\alias{mass<-,AbstractMassObject,numeric-method}
 \alias{metaData}
 \alias{metaData<-}
 \alias{metaData,AbstractMassObject-method}
 \alias{metaData<-,AbstractMassObject-method}
 \alias{points,AbstractMassObject-method}
+\alias{totalIonCurrent}
+\alias{totalIonCurrent<-}
+\alias{totalIonCurrent,AbstractMassObject-method}
+\alias{totalIonCurrent<-,AbstractMassObject,numeric-method}
 
 \title{Class "AbstractMassObject"}
 \description{
@@ -34,11 +38,11 @@ It shouldn't create or handle by the user because it is for internal use only.
 }
 \section{Slots}{
 \describe{
-    \item{\code{.cache}:}{\code{"environment"}, internal use only}
-    \item{\code{mass}:}{\code{"vector"}, mass or mass-to-charge ratio}
-    \item{\code{intensity}:}{\code{"vector"}, intensities for measured
+    \item{\code{.cache}:}{\code{environment}, internal use only}
+    \item{\code{mass}:}{\code{vector}, mass or mass-to-charge ratio}
+    \item{\code{intensity}:}{\code{vector}, intensities for measured
         mass-to-charge ratios}
-    \item{\code{metaData}:}{\code{"list"}, some metadata to describe the
+    \item{\code{metaData}:}{\code{list}, some metadata to describe the
         spectrum}
 }
 }
@@ -49,7 +53,8 @@ It shouldn't create or handle by the user because it is for internal use only.
         matrix with 2 columns (\code{mass}, \code{intensity}).}
     \item{intensity}{\code{signature(object = "AbstractMassObject")}:
         Accessor function for slot \code{intensity}.}
-    \item{intensity<-}{\code{signature(object = "AbstractMassObject")}:
+    \item{intensity<-}{\code{signature(object = "AbstractMassObject",
+            value = "numeric")}
         Replacement function for slot \code{intensity}.}
     \item{isEmpty}{\code{signature(object = "AbstractMassObject")}:
         Returns \code{TRUE} if length of \code{intensity} is 0.}
@@ -61,7 +66,8 @@ It shouldn't create or handle by the user because it is for internal use only.
         See \code{\link{lines}} for details.}
     \item{mass}{\code{signature(object = "AbstractMassObject")}:
         Accessor function for slot \code{mass}.}
-    \item{mass<-}{\code{signature(object = "AbstractMassObject")}:
+    \item{mass<-}{\code{signature(object = "AbstractMassObject",
+            value = "numeric")}
         Replacement function for slot \code{mass}.}
     \item{metaData}{\code{signature(object = "AbstractMassObject")}:
         Accessor function for slot \code{metaData}.}
@@ -76,6 +82,11 @@ It shouldn't create or handle by the user because it is for internal use only.
         \code{\linkS4class{AbstractMassObject}} object as points
         to a specific plot.
         See \code{\link{points}} for details.}
+    \item{totalIonCurrent}{\code{signature(object = "AbstractMassObject")}:
+        Accessor function for sum of all intensities (slot \code{intensity}).}
+    \item{totalIonCurrent<-}{\code{signature(object = "AbstractMassObject",
+            value = "numeric")}
+        Set sum of slot \code{intensity} to \code{value}.}
     \item{transformIntensity}{\code{signature(object = "AbstractMassObject")}:
         Transforms the intensities of an \code{AbstractMassObject} object. 
         See \code{\link{transformIntensity,AbstractMassObject-method}} for 

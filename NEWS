@@ -1,6 +1,27 @@
 RELEASE HISTORY OF THE "MALDIquant" PACKAGE
 ===========================================
 
+Version 1.1 [2012-05-06]:
+- detectPeaks: remove localMaxima argument
+- detectPeaks: replace noise argument by fun
+- removeBaseline: replace baseline argument by fun
+- labelPeaks: use par("usr") to calculate default verticalOffset
+- labelPeaks: add absoluteVerticalPos argument
+- plot: change "sub" for merged spectra/peaks
+- intensityMatrix: remove argument replaceByNa
+- determineWarpingFunctions, warpMassSpectra, warpMassPeaks now require
+  lists as arguments and return a list
+- calibrate: works only on matrices now
+- Add totalIonCurrent method (replacement for calibrate function on 
+  MassSpectrum objects)
+- Add methods accepting lists as arguments: transformIntensity, removeBaseline,
+  detectPeaks
+- Replace all lapply calls by new methods in demonstration scripts
+- Allow only numeric values for intensity<- and mass<-
+- Rename findLocalMaxima to .findLocalMaxima and hide by NAMESPACE
+- Rename dataset spectra in fiedler2009subset
+- Remove peaks dataset
+
 Version 1.0 [2012-03-28]:
 - Add demonstration scripts
 - Add functions: binPeaks, determineWarpingFunctions, filterPeaks,
@@ -21,8 +42,8 @@ Version 0.4 [2011-08-04]:
 - Add functions: isMassObjectList, isMassPeaksList, isMassSpectrumList,
   findEmptyMassObjects, removeEmptyMassObjects, intensityMatrix and calibrate
   (only TIC supported up to now)
-- Change default value for verticalOffset parameter in labelPeaks
-- Add mass and massTolerance parameter to labelPeaks
+- Change default value for verticalOffset argument in labelPeaks
+- Add mass and massTolerance argument to labelPeaks
 - Rename AbstractMassSpectrumData to AbstractMassObject
 - Add pA1 dataset
 
@@ -35,7 +56,7 @@ Version 0.3 [2011-05-28]:
 - Remove fdrtool dependency and rewrite .estimateBaselineConvexHull in C
 - Rename SingleSpectrum class to MassSpectrum
 - Rename SinglePeakList class to MassPeaks
-- Rewrite labelPeaks (some parameter changed)
+- Rewrite labelPeaks (some arguments changed)
 - Move importing functions to the following R-packages: readBrukerFlexData,
   readMzXmlData
 - Bugfix: change .C(..., DUP=F) to .C(..., DUP=T) in .estimateBaselineSnip

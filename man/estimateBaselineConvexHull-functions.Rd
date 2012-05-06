@@ -33,10 +33,10 @@ Sebastian Gibb
 library("MALDIquant");
 
 ## load example data
-data("spectra", package="MALDIquant");
+data("fiedler2009subset", package="MALDIquant");
 
 ## choose only the first mass spectrum
-s <- spectra[[1]];
+s <- fiedler2009subset[[1]];
 
 ## plot spectrum
 plot(s);

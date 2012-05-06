@@ -4,7 +4,7 @@
 Creates a reference \code{\linkS4class{MassPeaks}} object. 
 }
 \description{
-These function creates a reference \code{\linkS4class{MassPeaks}} object (also
+This function creates a reference \code{\linkS4class{MassPeaks}} object (also
 called \emph{Anchor Peaks}) from a list of \code{\linkS4class{MassPeaks}} 
 objects.\cr
 Generally it is a combination of \code{\link[MALDIquant]{binPeaks}} and

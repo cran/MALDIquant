@@ -30,12 +30,12 @@
 warpMassSpectra <- function(l, w) {
 
     ## test parameters
-    if (!isMassSpectrumList(l) && !isMassSpectrum(l)) {
+    if (!isMassSpectrumList(l)) {
         stop(sQuote("l"),
              " is no list of MALDIquant::MassSpectrum objects!");
     }
  
-    if (!.isFunctionList(w) && !is.function(w)) {
+    if (!.isFunctionList(w)) {
         stop(sQuote("w"),
              " is no list of functions!");
     }
@@ -57,12 +57,12 @@ warpMassSpectra <- function(l, w) {
 warpMassPeaks <- function(l, w) {
 
     ## test parameters
-    if (!isMassPeaksList(l) && !isMassPeaks(l)) {
+    if (!isMassPeaksList(l)) {
         stop(sQuote("l"),
              " is no list of MALDIquant::MassPeaks objects!");
     }
  
-    if (!.isFunctionList(w) && !is.function(w)) {
+    if (!.isFunctionList(w)) {
         stop(sQuote("w"),
              " is no list of functions!");
     }
@@ -87,13 +87,10 @@ warpMassPeaks <- function(l, w) {
         return(mapply(function(m, wf) {
                      m@mass <- m@mass+wf(m@mass);
                      return(m);
-               }, m=l, wf=w));
-    } else if (isMassObject(l)) {
-        l@mass <- l@mass+w(l@mass);
-        return(l);
+               }, m=l, wf=w, SIMPLIFY=FALSE));
     } else {
-        warning(sQuote("l"), " is neither a MALDIquant::MassObject nor ",
-                "a list of MALDIquant::MassObject objects. Nothing done.");
+        stop(sQuote("l"), 
+                " has to be a list of MALDIquant::MassObject objects.");
         return(l);
     }
 }

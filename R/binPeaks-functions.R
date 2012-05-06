@@ -31,10 +31,9 @@
 ##
 binPeaks <- function(l, tolerance=0.002) {
 
-    if (!isMassPeaksList(l)) {
-        stop(sQuote("l"),
-             " is no list of MALDIquant::MassPeaks objects!");
-    }
+
+    ## test arguments
+    .stopIfNotMassPeaksList(l);
 
     ## fetch all mass
     mass <- unname(unlist(sapply(l, function(x)x@mass)));

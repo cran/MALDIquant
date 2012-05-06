@@ -1,9 +1,12 @@
 \name{MALDIquant-internal}
 
+\alias{approxfun}
+\alias{show}
+
 \alias{.binPeaks}
-\alias{.calibrateSingleMassObjects}
 \alias{.doByLabels}
 \alias{.filterPeaks}
+\alias{.findLocalMaxima}
 \alias{.grouperRelaxedHighestAtReference}
 \alias{.grouperStrict}
 \alias{.isArgument}
@@ -15,13 +18,14 @@
 \alias{.removeArguments}
 \alias{.replaceNonEmptyMassObjects}
 \alias{.snipR}
+\alias{.stopIfNotMassObjectList}
+\alias{.stopIfNotMassPeaksList}
+\alias{.stopIfNotMassSpectrumList}
 \alias{.validAbstractMassObject}
 \alias{.warp}
 \alias{.warpingFunctionCubic}
 \alias{.warpingFunctionLowess}
 \alias{.which.nearby}
-\alias{approxfun}
-\alias{show}
 
 \title{Internal MALDIquant Functions}
 \description{

@@ -1,4 +1,4 @@
-## Copyright 2011 Sebastian Gibb
+## Copyright 2011-2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of PACKAGE for R and related languages.
@@ -30,10 +30,8 @@
 mergeMassPeaks <- function(l, labels, fun=mean, ...) { 
     
     ## test parameters
-    if (!isMassPeaksList(l)) {
-        stop(sQuote("l"), 
-             " is no list of MALDIquant::MassPeaks objects!");
-    }
+    .stopIfNotMassPeaksList(l);
+
     return(.doByLabels(l=l, labels=labels, FUN=.mergeMassPeaks, fun=fun, ...));
 }
 
@@ -51,10 +49,8 @@ mergeMassPeaks <- function(l, labels, fun=mean, ...) {
 mergeMassSpectra <- function(l, labels, fun=mean, ...) { 
     
     ## test parameters
-    if (!isMassSpectrumList(l)) {
-        stop(sQuote("l"), 
-             " is no list of MALDIquant::MassSpectrum objects!");
-    }
+    .stopIfNotMassSpectrumList(l);
+
     return(.doByLabels(l=l, labels=labels, FUN=.mergeMassSpectra, fun=fun, ...));
 }
 
@@ -71,7 +67,7 @@ mergeMassSpectra <- function(l, labels, fun=mean, ...) {
 .mergeMassPeaks <- function(l, fun=mean, na.rm=TRUE, ...) { 
 
     ## create a matrix which could merged
-    m <- intensityMatrix(l, replaceNaBy=NULL);
+    m <- intensityMatrix(l);
 
     mass <- as.double(colnames(m));
 

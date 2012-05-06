@@ -31,7 +31,6 @@ exportMethods("as.matrix",
               "detectPeaks",
               "estimateBaseline",
               "estimateNoise",
-              "findLocalMaxima",
               "intensity",
               "intensity<-",
               "isEmpty",
@@ -45,6 +44,9 @@ exportMethods("as.matrix",
               "plot",
               "points",
               "removeBaseline",
+              "standardizeTotalIonCurrent",
+              "totalIonCurrent",
+              "totalIonCurrent<-",
               "transformIntensity")
 
 useDynLib("MALDIquant")

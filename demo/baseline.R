@@ -24,10 +24,10 @@
 library("MALDIquant");
 
 ## load example spectra
-data("spectra", package="MALDIquant");
+data("fiedler2009subset", package="MALDIquant");
 
 ## choose only spectrum 1
-s <- spectra[[1]];
+s <- fiedler2009subset[[1]];
 
 ## test different baseline estimation methods
 bSnip <- estimateBaseline(s, method="SNIP");

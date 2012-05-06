@@ -2,6 +2,7 @@
 \docType{methods}
 \alias{detectPeaks}
 \alias{detectPeaks,MassSpectrum-method}
+\alias{detectPeaks,list-method}
 \title{Detects peaks in a MassSpectrum object.}
 \description{
 This method looks for peaks in mass spectrometry data
@@ -10,25 +11,50 @@ A peak is a local maximum above a user defined noise threshold.
 }
 \usage{
 \S4method{detectPeaks}{MassSpectrum}(object,
-    localMaxima, noise, SNR=2,
+    halfWindowSize=20, fun, SNR=2,
     \dots)
 }
 \arguments{
-    \item{object}{\code{\linkS4class{MassSpectrum}} object}
-    \item{localMaxima}{a two column matrix with intensities (y-values) as second
-        column. If no \code{localMaxima} argument is given the local maxima
-        would be searched automatically by calling
-        \code{\link[MALDIquant]{findLocalMaxima,MassSpectrum-method}}.}
-    \item{noise}{single numeric value or vector of same size as \code{object}.
-        If no \code{noise} argument is given the noise
-        would be estimated automatically by calling
+    \item{object}{\code{\linkS4class{MassSpectrum}} object or a \code{list} of
+        \code{\linkS4class{MassSpectrum}} objects.}
+    \item{halfWindowSize}{\code{numeric}, half window size. \cr
+        The resulting window reaches from \code{mass[currentIndex-halfWindowSize]}
+        to \code{mass[currentIndex+halfWindowSize]}. A local maximum have to be
+        the highest one in the given window to be recognized as peak.}
+    \item{fun}{\code{function}, noise estimation function. If no \code{fun}
+        argument is given the noise would be estimated automatically by calling
         \code{\link[MALDIquant]{estimateNoise,MassSpectrum-method}}.}
     \item{SNR}{single numeric value. \code{SNR} is an abbreviation for
         \emph{s}ignal-to-\emph{n}oise-\emph{r}atio. A local maximum has to 
         be higher than \code{SNR*noise} to be recognize as peak.}
-    \item{\dots}{arguments to be passed to
-        \code{\link[MALDIquant]{findLocalMaxima,MassSpectrum-method}} or
-        \code{\link[MALDIquant]{estimateNoise,MassSpectrum-method}}}
+    \item{\dots}{arguments to be passed to \code{fun}}
+}
+\details{
+    \code{fun}: A user-defined function to estimate the noise of a
+    \code{\linkS4class{MassSpectrum}} object.\cr
+    At least three arguments are needed:
+    \itemize{
+        \item{\code{x}: \code{double}, the mass of the
+            \code{\linkS4class{MassSpectrum}} object.
+        }
+        \item{\code{y}: \code{double}, the intensity of the
+            \code{\linkS4class{MassSpectrum}} object.
+        }
+        \item{\code{\dots}: further arguments
+        }
+    }
+    A correct noise estimation function has to return a two column matrix
+    with mass (x-values) as first and intensities (y-values) as second column or
+    a single numeric value.
+    \cr
+    \preformatted{
+## e.g. estimate noise using Friedman's 'super smoother'
+estimateNoiseSuperSmoother <- function(x, y, ...) {
+    s <- supsmu(x=x, y=y, ...);
+
+    return(cbind(x, s$y));
+}
+    }
 }
 \value{
     Returns a \code{\linkS4class{MassPeaks}} object.
@@ -43,17 +69,16 @@ Sebastian Gibb
 \code{\linkS4class{MassPeaks}},
 \code{\linkS4class{MassSpectrum}},
 \code{\link[MALDIquant]{estimateNoise,MassSpectrum-method}}
-\code{\link[MALDIquant]{findLocalMaxima,MassSpectrum-method}},
 }
 \examples{
 ## load library
 library("MALDIquant");
 
 ## load example data
-data("spectra", package="MALDIquant");
+data("fiedler2009subset", package="MALDIquant");
 
 ## choose only the first mass spectrum
-s <- spectra[[1]];
+s <- fiedler2009subset[[1]];
 
 ## transform intensities
 s <- transformIntensity(s, sqrt);

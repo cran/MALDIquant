@@ -12,7 +12,8 @@ peaks stored in a \code{\linkS4class{MassPeaks}} object to a plot.
     index,
     mass, tolerance=0.002,
     digits=3, underline=TRUE, 
-    verticalOffset=max(object@intensity)/200, 
+    verticalOffset=abs(diff(par("usr")[3:4]))*0.0125,
+    absoluteVerticalPos,
     adj=c(0.5, 0), cex=0.7, family="sans", 
     \dots)
 }
@@ -25,7 +26,10 @@ peaks stored in a \code{\linkS4class{MassPeaks}} object to a plot.
         considered.}
     \item{digits}{\code{integer}, number of decimal places.}
     \item{underline}{logical, underline peak values?}
-    \item{verticalOffset}{\code{numeric}, move label vertically.}
+    \item{verticalOffset}{\code{numeric}, move label vertically (relative to
+        peak height).}
+    \item{absoluteVerticalPos}{\code{numeric}, absolute \code{y} value for the
+        label. If missing \code{verticalOffset} is used.}
     \item{adj}{\code{numeric}, adjust text to the left, center, right and top,
         center, bottom; see \code{\link[graphics]{text}}.}
     \item{cex}{\code{numeric}, font size, see \code{\link[graphics]{par}}.}

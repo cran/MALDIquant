@@ -27,10 +27,7 @@
 ##
 findEmptyMassObjects <- function(l) {
 
-    if (!isMassObjectList(l)) {
-        stop(sQuote("l"), 
-             " is no list of MALDIquant::AbstractMassObject objects");
-    }
+    .stopIfNotMassObjectList(l);
 
     isEmpty <- sapply(l, isEmpty);
     

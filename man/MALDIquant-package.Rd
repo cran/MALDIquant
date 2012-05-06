@@ -17,8 +17,8 @@ For a first overview run \code{demo("MALDIquant")}.
 \details{
 \tabular{ll}{
 Package: \tab MALDIquant\cr
-Version: \tab 1.0\cr
-Date: \tab 2012-03-28\cr
+Version: \tab 1.1\cr
+Date: \tab 2012-05-06\cr
 License: \tab GPL (>= 3)\cr
 URL: \tab http://strimmerlab.org/software/maldiquant/\cr
 }
@@ -51,10 +51,10 @@ See website: \url{http://strimmerlab.org/software/maldiquant/}
 library("MALDIquant");
 
 ## load example data
-data("spectra", package="MALDIquant");
+data("fiedler2009subset", package="MALDIquant");
 
-## choose only a subset
-spectra <- spectra[1:2];
+## choose only a smaller subset
+spectra <- fiedler2009subset[1:2];
 
 ## show some information
 spectra
@@ -62,7 +62,7 @@ spectra
 ## running typical workflow
 
 ## transform intensities
-t <- lapply(spectra, transformIntensity, fun=sqrt);
+t <- transformIntensity(spectra, fun=sqrt);
 
 ## smoothing function
 movingAvg <- function(y) {
@@ -71,13 +71,13 @@ movingAvg <- function(y) {
 }
 
 ## smooth spectra
-s <- lapply(t, transformIntensity, fun=movingAvg);
+s <- transformIntensity(t, fun=movingAvg);
 
 ## baseline correction
-b <- lapply(s, removeBaseline);
+b <- removeBaseline(s);
 
 ## detect peaks
-p <- lapply(b, detectPeaks);
+p <- detectPeaks(b);
 
 ## plot results
 par(mfcol=c(3, length(spectra)));

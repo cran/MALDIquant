@@ -8,15 +8,11 @@ This function converts a \code{\link{list}} of
 \code{\linkS4class{AbstractMassObject}} objects into a \code{\link{matrix}}.
 }
 \usage{
-intensityMatrix(l, replaceNaBy=0) 
+intensityMatrix(l) 
 }
 \arguments{
     \item{l}{
-        \code{list} of \code{\linkS4class{AbstractMassObject}} objects.
-    }
-    \item{replaceNaBy}{
-       replaces all missing data (\code{NA}) by \code{replaceNaBy} given value.
-       To preserve all \code{NA} choose \code{replaceNaBy=NULL}. 
+        \code{list}, list of \code{\linkS4class{AbstractMassObject}} objects.
     }
 }
 \value{
@@ -51,9 +47,6 @@ p <- list(createMassPeaks(mass=1:4,
 
 ## converts MassPeaks objects into a matrix 
 intensityMatrix(p);
-
-## converts MassPeaks objects into a matrix (preserve NAs)
-intensityMatrix(p, replaceNaBy=NULL);
 }
 \keyword{methods}
 

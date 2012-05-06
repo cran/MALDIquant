@@ -9,17 +9,17 @@ shouldn't called by the user. Try
 \code{\link[MALDIquant]{detectPeaks,MassSpectrum-method}} instead.
 }
 \usage{
-createMassPeaks(mass, intensity, metaData = list())
+createMassPeaks(mass, intensity, metaData=list())
 }
 \arguments{
     \item{mass}{
-        \code{"vector"}, mass or mass-to-charge ratio
+        \code{vector}, mass or mass-to-charge ratio
     }
     \item{intensity}{
-        \code{"vector"}, intensities for measured mass-to-charge ratios
+        \code{vector}, intensities for measured mass-to-charge ratios
     }
     \item{metaData}{
-        \code{"list"}, some metadata to describe the spectrum
+        \code{list}, some metadata to describe the spectrum
     }
 }
 \value{

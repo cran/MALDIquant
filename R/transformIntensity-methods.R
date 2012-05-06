@@ -36,3 +36,13 @@ setMethod(f="transformIntensity",
     return(object);
 });
 
+## list
+setMethod(f="transformIntensity",
+    signature=signature(object="list"),
+    definition=function(object, fun, na.rm=TRUE, ...) {
+
+    ## test arguments
+    .stopIfNotMassObjectList(object);
+
+    return(lapply(object, transformIntensity, fun=fun, na.rm=na.rm, ...));
+});

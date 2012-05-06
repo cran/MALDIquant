@@ -34,8 +34,10 @@ setMethod(f="show",
         values <- c(values,
                     length(object@mass), 
                     paste(round(range(object@mass), digits=3), collapse=" - "),
-                    paste(round(range(object@intensity), digits=3), 
-                          collapse=" - "));
+                    paste(format(min(object@intensity), digits=4, 
+                                 scientific=TRUE), " - ",
+                          format(max(object@intensity), digits=4,
+                                 scientific=TRUE), sep=""));
     }
 
     if (!is.null(object@metaData$name)) {

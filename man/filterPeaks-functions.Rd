@@ -4,7 +4,7 @@
 Removes less frequently peaks.
 }
 \description{
-These function removes infrequently peaks from a list of 
+This function removes infrequently peaks from a list of 
 \code{\linkS4class{MassPeaks}} objects.
 }
 \usage{

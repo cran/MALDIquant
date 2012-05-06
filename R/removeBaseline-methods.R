@@ -19,7 +19,7 @@
 ## MassSpectrum 
 setMethod(f="removeBaseline",
     signature=signature(object="MassSpectrum"),
-    definition=function(object, baseline,
+    definition=function(object, fun,
                         ...) {
 
     ## empty spectrum?
@@ -27,9 +27,13 @@ setMethod(f="removeBaseline",
         return(object);
     }
 
-    ## no baseline argument given => compute baseline
-    if (missing(baseline))
+    ## try to use user-defined baseline estimation function
+    if (!missing(fun)) {
+        fun <- match.fun(fun);
+        baseline <- fun(object@mass, object@intensity, ...);
+    } else {
         baseline <- estimateBaseline(object=object, ...);
+    }
 
     ## wrong baseline argument given?
     isBaselineMatrix <- is.matrix(baseline) &&
@@ -37,12 +41,23 @@ setMethod(f="removeBaseline",
                         ncol(baseline) == 2;
 
     if (!isBaselineMatrix) {
-        stop("The baseline argument is not a valid!");
+        stop("The baseline is not a valid matrix!");
     }
 
     ## substract baseline
     object@intensity <- object@intensity - baseline[,2];
     
     return(object);
+});
+
+## list
+setMethod(f="removeBaseline",
+    signature=signature(object="list"),
+    definition=function(object, ...) {
+
+    ## test arguments
+    .stopIfNotMassSpectrumList(object);
+
+    return(lapply(object, removeBaseline, ...));
 });
 

@@ -19,16 +19,12 @@
 ## MassSpectrum 
 setMethod(f="estimateNoise",
     signature=signature(object="MassSpectrum"),
-    definition=function(object, 
-                        fun=mad,
-                        ...) {
+    definition=function(object) {
         
     if (.isEmptyWarning(object)) {
         return(0);
     }
 
-    fun <- match.fun(fun);
-
-    return(fun(object@intensity, ...));
+    return(mad(object@intensity));
 });
 

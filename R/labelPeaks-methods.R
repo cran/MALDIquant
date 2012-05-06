@@ -23,8 +23,9 @@ setMethod(f="labelPeaks",
         mass, tolerance=0.002,
         digits=3,
         underline=TRUE, 
-        ## verticalOffset ca. 0.5% max
-        verticalOffset=max(object@intensity)/200,
+        ## verticalOffset ca. 0.0125 of plot height
+        verticalOffset=abs(diff(par("usr")[3:4]))*0.0125,
+        absoluteVerticalPos,
         adj=c(0.5, 0), cex=0.7, family="sans",
         ...) {
 
@@ -55,6 +56,8 @@ setMethod(f="labelPeaks",
         
         ## remove duplicated indices
         index <- unique(index);
+    } else if (missing(mass) && missing(index)) {
+        index <- 1:length(object@mass);
     }
 
     isValidIndex <- length(index) >= 1 && 
@@ -67,7 +70,11 @@ setMethod(f="labelPeaks",
 
     x <- object@mass[index];
 
-    y <- object@intensity[index]+verticalOffset;
+    if (missing(absoluteVerticalPos)) {
+        y <- object@intensity[index]+verticalOffset;
+    } else {
+        y <- absoluteVerticalPos;
+    }
 
     peakLabels <- round(x=x, digits=digits);
 

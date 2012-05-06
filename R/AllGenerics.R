@@ -16,17 +16,27 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
+## list
+if (is.null(getGeneric("standardizeTotalIonCurrent")))
+    setGeneric("standardizeTotalIonCurrent", function(object, value=1) standardGeneric("standardizeTotalIonCurrent"));
+## end of list
+
+## matrix
+if (is.null(getGeneric("calibrate")))
+    setGeneric("calibrate", function(x) standardGeneric("calibrate"));
+## end of matrix
+
 ## AbstractMassObject
 if (is.null(getGeneric("as.matrix")))
     setGeneric("as.matrix", function(x, ...) standardGeneric("as.matrix"));
 if (is.null(getGeneric("length")))
-    setGeneric("length", function(x, ...) standardGeneric("length"));
+    setGeneric("length", function(x) standardGeneric("length"));
 if (is.null(getGeneric("lines")))
     setGeneric("lines", function(x, ...) standardGeneric("lines"));
 if (is.null(getGeneric("plot")))
     setGeneric("plot", function(x, y, ...) standardGeneric("plot"));
 if (is.null(getGeneric("transformIntensity")))
-    setGeneric("transformIntensity", function(object, ...) standardGeneric("transformIntensity"));
+    setGeneric("transformIntensity", function(object, fun, na.rm=TRUE, ...) standardGeneric("transformIntensity"));
 
 ## get/set slots
 if (is.null(getGeneric("mass")))
@@ -45,6 +55,10 @@ if (is.null(getGeneric("metaData")))
     setGeneric("metaData", function(object) standardGeneric("metaData"));
 if (is.null(getGeneric("metaData<-")))
     setGeneric("metaData<-", function(object, value) standardGeneric("metaData<-"));
+if (is.null(getGeneric("totalIonCurrent")))
+    setGeneric("totalIonCurrent", function(object) standardGeneric("totalIonCurrent"));
+if (is.null(getGeneric("totalIonCurrent<-")))
+    setGeneric("totalIonCurrent<-", function(object, value) standardGeneric("totalIonCurrent<-"));
 ## end of AbstractMassObject
 
 ## MassSpectrum
@@ -54,20 +68,24 @@ if (is.null(getGeneric("approxfun")))
 if (is.null(getGeneric("detectPeaks")))
     setGeneric("detectPeaks", function(object, ...) standardGeneric("detectPeaks"));
 if (is.null(getGeneric("estimateBaseline")))
-    setGeneric("estimateBaseline", function(object, ...) standardGeneric("estimateBaseline"));
+    setGeneric("estimateBaseline", function(object, method=c("SNIP", "ConvexHull", "Median"), ...) standardGeneric("estimateBaseline"));
 if (is.null(getGeneric("estimateNoise")))
-    setGeneric("estimateNoise", function(object, ...) standardGeneric("estimateNoise"));
-if (is.null(getGeneric("findLocalMaxima")))
-    setGeneric("findLocalMaxima", function(object, ...) standardGeneric("findLocalMaxima"));
+    setGeneric("estimateNoise", function(object) standardGeneric("estimateNoise"));
+if (is.null(getGeneric(".findLocalMaxima")))
+    setGeneric(".findLocalMaxima", function(object, halfWindowSize=20) standardGeneric(".findLocalMaxima"));
 if (is.null(getGeneric("imputeMass")))
-    setGeneric("imputeMass", function(object, ...) standardGeneric("imputeMass"));
+    setGeneric("imputeMass", function(object, verbose=FALSE) standardGeneric("imputeMass"));
 if (is.null(getGeneric("removeBaseline")))
     setGeneric("removeBaseline", function(object, ...) standardGeneric("removeBaseline"));
 ## end of MassSpectrum
 
 ## MassPeaks
 if (is.null(getGeneric("labelPeaks")))
-    setGeneric("labelPeaks", function(object, ...) standardGeneric("labelPeaks"));
+    setGeneric("labelPeaks", function(object, index, mass, tolerance=0.002,
+                                      digits=3, underline=TRUE, 
+                                      verticalOffset=abs(diff(par("usr")[3:4]))*0.0125,
+                                      absoluteVerticalPos,
+                                      adj=c(0.5, 0), cex=0.7, family="sans", ...) standardGeneric("labelPeaks"));
 if (is.null(getGeneric("points")))
     setGeneric("points", function(x, ...) standardGeneric("points"));
 ## end of MassPeaks

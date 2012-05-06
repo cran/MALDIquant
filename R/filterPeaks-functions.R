@@ -30,9 +30,7 @@
 filterPeaks <- function(l, minFrequency, labels) {
 
     ## test parameters
-    if (!isMassPeaksList(l)) {
-        stop(sQuote("l"), " is no list of MALDIquant::MassPeaks objects!");
-    }
+    .stopIfNotMassPeaksList(l);
     
     if (minFrequency > 1) {
         minFrequency <- 1;
@@ -60,7 +58,7 @@ filterPeaks <- function(l, minFrequency, labels) {
 
     ## generate peak matrix
     pm <- intensityMatrix(l);
-    exclude <- unlist(apply(pm, 2, function(x)(sum(x!=0)<minPeakNumber)));
+    exclude <- unlist(apply(pm, 2, function(x)(sum(!is.na(x))<minPeakNumber)));
     exclude <- mass[exclude];
 
     l <- lapply(l, function(x) {

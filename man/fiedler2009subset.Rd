@@ -1,13 +1,13 @@
 \encoding{utf8}
-\name{spectra}
+\name{fiedler2009subset}
 \docType{data}
-\alias{spectra}
+\alias{fiedler2009subset}
 \title{Example Mass Spectra (raw)}
 \description{
 This dataset contains 16 example mass spectra.
 It is used to demonstrate the usage of \code{\link{MALDIquant-package}}.
 }
-\usage{spectra}
+\usage{fiedler2009subset}
 \format{
 A list containing 16 \code{\link[MALDIquant]{MassSpectrum-class}}
 objects.}

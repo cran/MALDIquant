@@ -28,6 +28,17 @@ isMassObjectList <- function(x) {
     return(areMassObjects);
 }
 
+.stopIfNotMassObjectList <- function(x) {
+    if (!isMassObjectList(x)) {
+        parentCall <- sys.call(-1);
+        stop(paste("In ", parentCall, " : ", sQuote("x"), 
+                   " is no list of MALDIquant::AbstractMassObject objects!",
+                   sep=""), call.=FALSE);
+        return(FALSE);
+    }
+    return(TRUE);
+}
+
 isMassSpectrumList <- function(x) {
     if (!is.list(x)) {
         return(FALSE);
@@ -37,6 +48,17 @@ isMassSpectrumList <- function(x) {
                               all( unlist(sapply(x, function(e) {
                                    return(isMassSpectrum(e))})) );
     return(areMassSpectrumObjects);
+}
+
+.stopIfNotMassSpectrumList <- function(x) {
+    if (!isMassSpectrumList(x)) {
+        parentCall <- sys.call(-1);
+        stop(paste("In ", deparse(parentCall), " : ", sQuote("x"), 
+                   " is no list of MALDIquant::MassSpectrum objects!", sep=""),
+             call.=FALSE);
+        return(FALSE);
+    }
+    return(TRUE);
 }
 
 isMassPeaksList <- function(x) {
@@ -50,3 +72,15 @@ isMassPeaksList <- function(x) {
 
     return(areMassPeaksObjects);
 }
+
+.stopIfNotMassPeaksList <- function(x) {
+    if (!isMassPeaksList(x)) {
+        parentCall <- sys.call(-1);
+        stop(paste("In ", deparse(parentCall), " : ", sQuote("x"), 
+                   " is no list of MALDIquant::MassPeaks objects!", sep=""),
+             call.=FALSE);
+        return(FALSE);
+    }
+    return(TRUE);
+}
+

@@ -4,7 +4,7 @@
 Determine warping functions of MassPeaks objects.
 }
 \description{
-These function determines a warping function for a list of
+This function determines a warping function for a list of
 \code{\linkS4class{AbstractMassObject}} objects
 (warping is also known as \emph{phase correction/spectra alignment}).
 }
@@ -15,7 +15,7 @@ determineWarpingFunctions(l, reference, tolerance=0.002,
 }
 \arguments{
     \item{l}{
-        single \code{\linkS4class{MassPeaks}} object or a list of these objects.
+        \code{list}, list of \code{\linkS4class{MassPeaks}} objects.
     }
     \item{reference}{
         \code{\linkS4class{MassPeaks}}, reference object to which the samples
@@ -84,8 +84,7 @@ dev.off();
     }
 }
 \value{
-Returns a single or a \code{\link{list}} of individual warping functions
-(depending on input \code{l}).
+Returns a \code{list} of individual warping functions.
 }
 \references{
 See website: \url{http://strimmerlab.org/software/maldiquant/}
@@ -128,8 +127,32 @@ warpedPeaks <- warpMassPeaks(p, w);
 all(mass(r) == mass(warpedPeaks[[1]])); # TRUE
 all(mass(r) == mass(warpedPeaks[[2]])); # TRUE
 
+
+
 ## realistic example
-data(peaks);
+
+## load example data
+data("fiedler2009subset", package="MALDIquant");
+
+## running typical workflow
+
+## transform intensities
+t<- transformIntensity(fiedler2009subset, fun=sqrt);
+
+## smoothing function
+movingAvg <- function(y) {
+    return(filter(y, rep(1, 5)/5, sides=2));
+}
+
+## smooth spectra
+s <- transformIntensity(t, fun=movingAvg);
+
+## baseline correction
+b <- removeBaseline(s);
+
+## detect peaks
+peaks <- detectPeaks(b);
+
 ## create an interactive device with 2 rows
 par(mfrow=c(2, 1));
 ## calculate warping functions (using lowess based basic function [default])

@@ -24,28 +24,28 @@
 library("MALDIquant");
 
 ## load example spectra
-data("spectra", package="MALDIquant");
+data("fiedler2009subset", package="MALDIquant");
 
 ## use only 4 spectra
-spectra <- spectra[seq(1, 16, by=4)];
+spectra <- fiedler2009subset[seq(1, 16, by=4)];
 
 ## some preprocessing
 
 ## sqrt transform (for variance stabilization)
-spectra <- lapply(spectra, transformIntensity, sqrt);
+spectra <- transformIntensity(spectra, sqrt);
 
 ## simple 5 point moving average for smoothing spectra
 movingAverage <- function(y) {return( filter(y, rep(1, 5)/5, sides=2) );}
-spectra <- lapply(spectra, transformIntensity, movingAverage);
+spectra <- transformIntensity(spectra, movingAverage);
 
 ## remove baseline
-spectra <- lapply(spectra, removeBaseline);
+spectra <- removeBaseline(spectra);
 
 ## calibrate intensity values by "total ion current"
-spectra <- calibrate(spectra, method="TIC");
+spectra <- standardizeTotalIonCurrent(spectra);
 
 ## run peak detection
-peaks <- lapply(spectra, detectPeaks);
+peaks <- detectPeaks(spectra);
 
 ## warping
 par(mfrow=c(2, 2));

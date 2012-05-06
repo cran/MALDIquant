@@ -30,10 +30,7 @@
 .doByLabels <- function(l, labels, FUN, ...) { 
     
     ## test parameters
-    if (!isMassObjectList(l)) {
-        stop(sQuote("l"), 
-             " is no list of MALDIquant::AbstractMassObject objects!");
-    }
+    .stopIfNotMassObjectList(l);
 
     FUN <- match.fun(FUN);
 

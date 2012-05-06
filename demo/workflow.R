@@ -24,20 +24,20 @@
 library("MALDIquant");
 
 ## load example spectra
-data("spectra", package="MALDIquant");
+data("fiedler2009subset", package="MALDIquant");
 
 ## sqrt transform (for variance stabilization)
-spectra <- lapply(spectra, transformIntensity, sqrt);
+spectra <- transformIntensity(fiedler2009subset, sqrt);
 
 ## simple 5 point moving average for smoothing spectra
 movingAverage <- function(y) {return( filter(y, rep(1, 5)/5, sides=2) );}
-spectra <- lapply(spectra, transformIntensity, movingAverage);
+spectra <- transformIntensity(spectra, movingAverage);
 
 ## remove baseline
-spectra <- lapply(spectra, removeBaseline);
+spectra <- removeBaseline(spectra);
 
 ## run peak detection
-peaks <- lapply(spectra, detectPeaks);
+peaks <- detectPeaks(spectra);
 
 ## align spectra by warping
 ## 1. create reference peaks (could be done automatically by
@@ -71,7 +71,7 @@ classes <- as.factor(ifelse(cancer, "cancer", "control"));
 ## 2. filter peaks which occur less across all samples
 peaks <- filterPeaks(peaks, minFrequency=1);
 
-## 3. export MassPeaks object as matrix
+## 3. export MassPeaks objects as matrix
 training <- intensityMatrix(peaks);
 
 ## 'training' and 'classes' could now used by any statistical tool e.g. sda

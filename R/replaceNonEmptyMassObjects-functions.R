@@ -28,15 +28,9 @@
 ##
 .replaceNonEmptyMassObjects <- function(l, replaceByList) {
 
-    if (!isMassObjectList(l)) {
-        stop(sQuote("l"), 
-             " is no list of MALDIquant::AbstractMassObject objects");
-    }
+    .stopIfNotMassObjectList(l);
 
-    if (!isMassObjectList(replaceByList)) {
-        stop(sQuote("replaceByList"), 
-             " is no list of MALDIquant::AbstractMassObject objects");
-    }
+    .stopIfNotMassObjectList(replaceByList);
 
     ## find empty MassPeaks objects
     notEmpty <- !1:length(l) %in% findEmptyMassObjects(l);

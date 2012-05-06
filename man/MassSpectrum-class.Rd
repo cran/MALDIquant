@@ -35,11 +35,6 @@ Class \code{\linkS4class{AbstractMassObject}}, directly.
         \code{\linkS4class{MassSpectrum}} object.
         See \code{\link[MALDIquant]{estimateNoise,MassSpectrum-method}} for 
         details.}
-    \item{findLocalMaxima}{\code{signature(x = "MassSpectrum")}:
-        Look for local maxima in a 
-        \code{\linkS4class{MassSpectrum}} object.
-        See \code{\link[MALDIquant]{findLocalMaxima,MassSpectrum-method}} for 
-        details.}
 %    \item{imputeMass}{\code{signature(x = "MassSpectrum")}:
 %        Impute missing mass values to a
 %        \code{\linkS4class{MassSpectrum}} object.
@@ -63,7 +58,6 @@ Sebastian Gibb
 \code{\link[MALDIquant]{detectPeaks,MassSpectrum-method}},
 \code{\link[MALDIquant]{estimateBaseline,MassSpectrum-method}},
 \code{\link[MALDIquant]{estimateNoise,MassSpectrum-method}},
-\code{\link[MALDIquant]{findLocalMaxima,MassSpectrum-method}},
 \code{\link[MALDIquant]{imputeMass,MassSpectrum-method}},
 \code{\link[MALDIquant]{removeBaseline,MassSpectrum-method}},
 \code{\linkS4class{AbstractMassObject}}

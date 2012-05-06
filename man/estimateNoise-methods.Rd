@@ -4,26 +4,18 @@
 \alias{estimateNoise,MassSpectrum-method}
 \title{Estimates the noise of a MassSpectrum object.}
 \description{
-This methods estimates the noise of mass spectrometry data
-(represented by a \code{\linkS4class{MassSpectrum}} object).\cr
-Default noise estimation uses the median absolute deviation.
+This method estimates the noise of mass spectrometry data
+(represented by a \code{\linkS4class{MassSpectrum}} object) by calculating the
+median absolute deviation.
 }
 \usage{
-\S4method{estimateNoise}{MassSpectrum}(object, 
-    fun=mad,
-    \dots)
+\S4method{estimateNoise}{MassSpectrum}(object)
 }
 \arguments{
     \item{object}{\code{\linkS4class{MassSpectrum}} object}
-    \item{fun}{used noise estimator (default: \code{\link{mad}}; but every
-        function returning a single numeric value or a vector of equal
-        size as \code{object} would be possible).
-    }
-    \item{\dots}{arguments to be passed to \code{fun}}
 }
 \value{
-    Returns a single numeric value or a vector of equal size as \code{object}.
-    It depends on the used noise estimator function \code{fun}.
+    Returns a single numeric value.
 }
 \author{
 Sebastian Gibb
@@ -37,10 +29,10 @@ Sebastian Gibb
 library("MALDIquant");
 
 ## load example data
-data("spectra", package="MALDIquant");
+data("fiedler2009subset", package="MALDIquant");
 
 ## choose only the first mass spectrum
-s <- spectra[[1]];
+s <- fiedler2009subset[[1]];
 
 ## transform intensities
 s <- transformIntensity(s, sqrt);

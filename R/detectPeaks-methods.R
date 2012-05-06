@@ -20,7 +20,7 @@
 setMethod(f="detectPeaks",
     signature=signature(object="MassSpectrum"),
     definition=function(object, 
-                        localMaxima, noise, SNR=2,
+                        halfWindowSize=20, fun,  SNR=2,
                         ...) {
 
     ## empty spectrum?
@@ -30,39 +30,16 @@ setMethod(f="detectPeaks",
                                metaData=object@metaData));
     }
 
-    ## save optional arguments
-    optArgs <- list(...);
-
-    ## no localMaxima argument given => findLocalMaxima 
-    if (missing(localMaxima)) {
-        arguments <- list(object=object);
-        if (.isArgument("halfWindowSize", optArgs)) {
-            arguments$halfWindowSize <- optArgs$halfWindowSize;
-            optArgs <- .removeArguments("halfWindowSize", optArgs);
-        }
-        
-        localMaxima <- do.call(findLocalMaxima, arguments);
+    ## try to use user-defined noise estimation function
+    if (!missing(fun)) {
+        fun <- match.fun(fun);
+        noise <- fun(object@mass, object@intensity, ...);
+    } else {
+        noise <- estimateNoise(object);
     }
 
-    ## no noise argument given => estimate noise 
-    if (missing(noise)) {
-        arguments <- list(object=object);
-
-        if (.isArgument("fun", optArgs)) {
-            arguments$fun <- optArgs$fun;
-            optArgs <- .removeArguments("fun", optArgs);
-            arguments <- c(arguments, optArgs);
-        } 
-
-        noise <- do.call(estimateNoise, arguments);
-    }
-
-    ## wrong localMaxima argument given?
-    isLocalMaximaMatrix <- is.matrix(localMaxima) && ncol(localMaxima) == 2;
-
-    if (!isLocalMaximaMatrix) {
-        stop("The localMaxima argument is not valid.");
-    }
+    localMaxima <- .findLocalMaxima(object=object,
+                                    halfWindowSize=halfWindowSize);
 
     ## wrong noise argument given?
     isCorrectNoise <- (is.matrix(noise) || is.numeric(noise)) &&
@@ -74,10 +51,26 @@ setMethod(f="detectPeaks",
     }
 
     ## include only local maxima which are above the noise
-    peakIndex <- localMaxima[, 2] > (SNR * noise);
+    if (is.matrix(noise)) {
+        noiseIndex <- noise[, 1] %in% localMaxima[, 1];
+        peakIndex <- localMaxima[, 2] > (SNR * noise[noiseIndex, 2]);
+    } else {
+        peakIndex <- localMaxima[, 2] > (SNR * noise);
+    }
     
     return(createMassPeaks(mass=localMaxima[peakIndex, 1],
                                 intensity=localMaxima[peakIndex, 2],
                                 metaData=object@metaData));
+});
+
+## list
+setMethod(f="detectPeaks",
+    signature=signature(object="list"),
+    definition=function(object, ...) {
+
+    ## test arguments
+    .stopIfNotMassSpectrumList(object);
+
+    return(lapply(object, detectPeaks, ...));
 });
 

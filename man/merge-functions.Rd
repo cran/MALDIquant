@@ -6,7 +6,7 @@ Merges \code{\linkS4class{MassPeaks}} or \code{\linkS4class{MassSpectrum}}
 objects.
 }
 \description{
-These function merges \code{\linkS4class{MassPeaks}} or 
+These functions merge \code{\linkS4class{MassPeaks}} or 
 \code{\linkS4class{MassSpectrum}} objects by a user defined function.
 }
 \usage{

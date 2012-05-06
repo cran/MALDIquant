@@ -18,7 +18,7 @@ isMassPeaksList(x)
 }
 \arguments{
     \item{x}{
-        \code{list}, object to be tested. 
+        object to be tested. 
     }
 }
 \value{

@@ -4,7 +4,7 @@
 Align Peaks into discrete bins.
 }
 \description{
-These function looks for similar peaks (mass) across
+This function looks for similar peaks (mass) across
 \code{\linkS4class{MassPeaks}} objects and equalizes their mass.
 }
 \usage{

@@ -21,19 +21,14 @@
 ##
 ## params:
 ##  l: list of AbstractMassObject objects
-##  replaceNaBy: double, replace NA by replaceNaBy (NULL for not replacing any
-##               NA)
 ##
 ## returns:
 ##  a matrix
 ##
-intensityMatrix <- function(l, replaceNaBy=0) {
+intensityMatrix <- function(l) {
 
     ## test parameters
-    if (!isMassObjectList(l)) {
-        stop(sQuote("l"), 
-             " is no list of MALDIquant::AbstractMassObject objects!");
-    }
+    .stopIfNotMassObjectList(l);
     
     ## fetch all mass
     mass <- sort(x=unlist(lapply(l, function(x)x@mass)), method="quick");
@@ -47,10 +42,6 @@ intensityMatrix <- function(l, replaceNaBy=0) {
     ## set column names
     dimnames(m) <- list(NULL, c(uMass));
   
-    if (!is.null(replaceNaBy)) {
-        m[is.na(m)] <- replaceNaBy;
-    }
-
     return(m);
 }
 

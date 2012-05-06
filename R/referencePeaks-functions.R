@@ -30,16 +30,13 @@
 ##
 referencePeaks <- function(l, minFrequency=0.9, tolerance=0.002) {
 
-    if (!isMassPeaksList(l)) {
-        stop(sQuote("l"),
-             " is no list of MALDIquant::MassPeaks objects!");
-    }
+    .stopIfNotMassPeaksList(l);
 
     ## find reference peaks by binning and filtering
     referencePeaks <- filterPeaks(binPeaks(l, tolerance=tolerance),
                                   minFrequency=minFrequency);
 
-    iM <- intensityMatrix(referencePeaks, replaceNaBy=NULL);
+    iM <- intensityMatrix(referencePeaks);
     iM[!is.na(iM)] <- 1;
 
     ## set peak intensity to number of occurrence

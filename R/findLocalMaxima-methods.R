@@ -17,7 +17,7 @@
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
 ## MassSpectrum 
-setMethod(f="findLocalMaxima",
+setMethod(f=".findLocalMaxima",
     signature=signature(object="MassSpectrum"),
     definition=function(object, 
                         halfWindowSize=20) {
