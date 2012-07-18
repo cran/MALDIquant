@@ -54,11 +54,11 @@ filterPeaks <- function(l, minFrequency, labels) {
     minPeakNumber <- floor(minFrequency*length(l));
 
     ## fetch mass
-    mass <- sort(unique(unlist(lapply(l, function(x)x@mass))), method="quick");
+    mass <- sort(unique(.unlist(lapply(l, function(x)x@mass))), method="quick");
 
     ## generate peak matrix
     pm <- intensityMatrix(l);
-    exclude <- unlist(apply(pm, 2, function(x)(sum(!is.na(x))<minPeakNumber)));
+    exclude <- .unlist(apply(pm, 2, function(x)(sum(!is.na(x))<minPeakNumber)));
     exclude <- mass[exclude];
 
     l <- lapply(l, function(x) {

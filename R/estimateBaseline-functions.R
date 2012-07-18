@@ -72,8 +72,8 @@
 
     index <- index[1:(k-1)];
 
-    b <- matrix(unlist(approx(x=x[index], y=y[index], xout=x, method="linear",
-                              rule=2)),
+    b <- matrix(.unlist(approx(x=x[index], y=y[index], xout=x, method="linear",
+                               rule=2)),
                 nrow=length(x), ncol=2);
 
     return(b);

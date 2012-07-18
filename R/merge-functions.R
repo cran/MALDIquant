@@ -75,7 +75,7 @@ mergeMassSpectra <- function(l, labels, fun=mean, ...) {
     intensity <- .merge(m, fun=fun, ...);
 
     metaData <- list();
-    metaData$file <- unlist(sapply(l, function(x)x@metaData$file));
+    metaData$file <- unname(.unlist(lapply(l, function(x)x@metaData$file)));
 
     return(createMassPeaks(mass=mass, intensity=intensity, metaData=metaData));
 }
@@ -96,7 +96,7 @@ mergeMassSpectra <- function(l, labels, fun=mean, ...) {
     simpleScore <- function(x) {return(max(x@intensity)/mean(x@intensity))}
 
     ## use highest scored spectrum as reference
-    maxScore <- which.max(sapply(l, simpleScore));
+    maxScore <- which.max(vapply(l, simpleScore, double(1)));
 
     mass <- l[[maxScore]]@mass;
     
@@ -112,7 +112,7 @@ mergeMassSpectra <- function(l, labels, fun=mean, ...) {
     intensity <- .merge(m, fun=fun, ...);
 
     metaData <- list();
-    metaData$file <- unlist(sapply(l, function(x)x@metaData$file));
+    metaData$file <- unname(.unlist(lapply(l, function(x)x@metaData$file)));
 
     return(createMassSpectrum(mass=mass, intensity=intensity, metaData=metaData));
 }

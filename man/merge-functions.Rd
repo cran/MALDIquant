@@ -66,7 +66,7 @@ intensity(mergedPeaks) # c(4, 8, 9, 8, 5)
 ## only merge MassPeaks objects in a group
 ## (e.g. useful for technical replicates)
 ## (two different labels, returns a list of two new MassPeaks objects)
-groups <- as.factor(c("a", "a", "b", "b"));
+groups <- factor(c("a", "a", "b", "b"), levels=c("a", "b"));
 mergedPeaks <- mergeMassPeaks(p, labels=groups, fun=sum);
 
 ## compare result

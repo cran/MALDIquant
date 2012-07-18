@@ -22,8 +22,8 @@ isMassObjectList <- function(x) {
     } 
 
     areMassObjects <- length(x) > 0 &&
-                      all( unlist(sapply(x, function(e) {
-                           return(isMassObject(e))})) );
+                      all(unname(vapply(x, function(e) {
+                           return(isMassObject(e))}, logical(1))));
 
     return(areMassObjects);
 }
@@ -45,8 +45,8 @@ isMassSpectrumList <- function(x) {
     } 
 
     areMassSpectrumObjects <- length(x) > 0 &&
-                              all( unlist(sapply(x, function(e) {
-                                   return(isMassSpectrum(e))})) );
+                              all(unname(vapply(x, function(e) {
+                                   return(isMassObject(e))}, logical(1))));
     return(areMassSpectrumObjects);
 }
 
@@ -67,8 +67,8 @@ isMassPeaksList <- function(x) {
     } 
 
     areMassPeaksObjects <- length(x) > 0 &&
-                           all( unlist(sapply(x, function(e) {
-                                return(isMassPeaks(e))})) );
+                           all(unname(vapply(x, function(e) {
+                                return(isMassPeaks(e))}, logical(1))));
 
     return(areMassPeaksObjects);
 }

@@ -30,7 +30,7 @@ setMethod(f="labelPeaks",
         ...) {
 
     if (!missing(mass) && is.numeric(mass)) {
-        massIndex <- unlist(sapply(mass, function(x) {
+        massIndex <- .unlist(sapply(mass, function(x) {
             return(.which.nearby(object@mass, x, tolerance=tolerance));
         }));
 

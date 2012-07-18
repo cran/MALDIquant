@@ -1,6 +1,12 @@
 RELEASE HISTORY OF THE "MALDIquant" PACKAGE
 ===========================================
 
+Version 1.2 [2012-07-18]:
+- determineWarpingFunctions: stop with an error if reference MassPeaks
+  object is empty
+- .doByLabel: preserve list order (affects filterPeaks)
+- Replace some sapply calls by lapply
+
 Version 1.1 [2012-05-06]:
 - detectPeaks: remove localMaxima argument
 - detectPeaks: replace noise argument by fun

@@ -40,13 +40,17 @@
                  " there must be a label in ", sQuote("labels"), "!");
         }
 
-        l <- unlist(tapply(X=l, INDEX=as.factor(labels), function(x) {
-                           return(FUN(x, ...));
-        }));
+        ## replace tapply by split to preserve order 
+        tmp <- lapply(split(unlist(l), labels), FUN=FUN, ...);
+
+        k <- unlist(tmp)
+        if (length(k) == length(l)) {
+            k <- unsplit(tmp, labels);
+        }
     } else {
-        l <- FUN(l, ...);
+        k <- FUN(l, ...);
     }
 
-    return(l);
+    return(k);
 }
 

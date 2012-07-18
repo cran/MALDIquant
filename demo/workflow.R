@@ -54,7 +54,9 @@ peaks <- binPeaks(peaks);
 ## merge technical replicates
 ## 1. create factors for correct assignment
 nTechRep <- 2;
-samples <- as.factor(rep(1:(length(peaks)/nTechRep), each=nTechRep));
+nBiologicalSamples <- length(peaks)/nTechRep;
+samples <- factor(rep(1:nBiologicalSamples, each=nTechRep),
+                  levels=1:nBiologicalSamples);
 
 ## 2. filter peaks which occur only in one of the replicates
 peaks <- filterPeaks(peaks, labels=samples, minFrequency=1);
@@ -66,7 +68,8 @@ peaks <- mergeMassPeaks(peaks, labels=samples);
 ## 1. get cancer/control indices
 filenames <- sapply(peaks, function(x)metaData(x)$file[1]);
 cancer <- grepl(pattern="/tumor/", x=filenames);
-classes <- as.factor(ifelse(cancer, "cancer", "control"));
+classes <- factor(ifelse(cancer, "cancer", "control"),
+                  levels=c("cancer", "control"));
 
 ## 2. filter peaks which occur less across all samples
 peaks <- filterPeaks(peaks, minFrequency=1);

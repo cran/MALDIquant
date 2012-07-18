@@ -61,7 +61,7 @@ all(intensities[,2] == 2);        # TRUE
 
 ## only keep peaks which occur in all MassPeaks in a group
 ## (e.g. useful for technical replicates)
-groups <- as.factor(c("a", "a", "b", "b"));
+groups <- factor(c("a", "a", "b", "b"), levels=c("a", "b"));
 filteredPeaks <- filterPeaks(p, minFrequency=1, labels=groups);
 
 ## peaks at mass 3 removed in group "a"

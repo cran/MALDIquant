@@ -31,7 +31,7 @@ intensityMatrix <- function(l) {
     .stopIfNotMassObjectList(l);
     
     ## fetch all mass
-    mass <- sort(x=unlist(lapply(l, function(x)x@mass)), method="quick");
+    mass <- sort(x=.unlist(lapply(l, function(x)x@mass)), method="quick");
     uMass <- unique(mass);
   
     ## build matrix

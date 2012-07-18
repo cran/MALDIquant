@@ -16,14 +16,15 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-.isFunctionList <- function(x) {
-    if (!is.list(x)) {
-        return(FALSE);
-    } 
-
-    areFunctions <- length(x) > 0 &&
-                    all(.unlist(vapply(x, function(e) {
-                                return(is.function(e))}, logical(1))) );
-    return(areFunctions);
+## .unlist
+##  wrapper for unlist
+##
+## params:
+##  x: an R object
+##
+## returns:
+##  see also ?unlist
+##
+.unlist <- function(x) {
+    unlist(x, recursive=FALSE, use.names=FALSE);
 }
-

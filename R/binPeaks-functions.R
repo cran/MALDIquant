@@ -36,13 +36,13 @@ binPeaks <- function(l, tolerance=0.002) {
     .stopIfNotMassPeaksList(l);
 
     ## fetch all mass
-    mass <- unname(unlist(sapply(l, function(x)x@mass)));
+    mass <- unname(.unlist(lapply(l, function(x)x@mass)));
 
     ## fetch all intensities
-    intensities <- unlist(sapply(l, function(x)x@intensity));
+    intensities <- .unlist(lapply(l, function(x)x@intensity));
     
     ## store original mass sample number/id
-    samples <- unlist(sapply(1:length(l), function(x) {
+    samples <- .unlist(lapply(1:length(l), function(x) {
         return(rep(x, length(l[[x]])));
     }));
     

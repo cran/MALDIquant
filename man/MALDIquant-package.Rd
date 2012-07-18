@@ -3,11 +3,11 @@
 \alias{MALDIquant}
 \docType{package}
 \title{
-Quantitative Analysis of Mass Spectrometric Data
+Quantitative Analysis of Mass spectrometry Data
 }
 \description{
 MALDIquant provides a complete analysis pipeline for MALDI-TOF and other 
-mass spectrometric data. Distinctive features include baseline subtraction 
+mass spectrometry data. Distinctive features include baseline subtraction 
 using the SNIP algorithm, peak alignment using warping functions, 
 handling of replicated measurements as well as allowing spectra with 
 different resolutions. 
@@ -17,8 +17,8 @@ For a first overview run \code{demo("MALDIquant")}.
 \details{
 \tabular{ll}{
 Package: \tab MALDIquant\cr
-Version: \tab 1.1\cr
-Date: \tab 2012-05-06\cr
+Version: \tab 1.2\cr
+Date: \tab 2012-07-18\cr
 License: \tab GPL (>= 3)\cr
 URL: \tab http://strimmerlab.org/software/maldiquant/\cr
 }
@@ -37,7 +37,7 @@ Maintainer: Sebastian Gibb <mail@sebastiangibb.de>
 }
 \references{
 S. Gibb and K. Strimmer. 2012.  
-\emph{MALDIquant: a versatile R package for the analysis of mass spectrometric data.}
+\emph{MALDIquant: a versatile R package for the analysis of mass spectrometry data.}
 \url{http://arxiv.org/abs/1203.5885}.
 
 See website: \url{http://strimmerlab.org/software/maldiquant/}

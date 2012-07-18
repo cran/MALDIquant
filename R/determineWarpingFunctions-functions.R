@@ -57,6 +57,10 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
         reference <- do.call(referencePeaks, arguments);
     }
 
+    if (isEmpty(reference)) {
+        stop("Reference MassPeaks Object contains no peaks!");
+    }
+
     ## fetch plot.default arguments (debug plot)
     if (plot) {
         plotNames <- c("xlim", "ylim", "xlab", "ylab", "main", "sub", "lwd");
@@ -76,14 +80,14 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
 
     ## same procedure as in binPeaks
     ## fetch all mass
-    mass <- unname(unlist(sapply(tmpPeakList, function(x)x@mass)));
+    mass <- unname(.unlist(lapply(tmpPeakList, function(x)x@mass)));
 
     ## fetch all intensities
-    intensities <- unlist(sapply(tmpPeakList, function(x)x@intensity));
+    intensities <- .unlist(lapply(tmpPeakList, function(x)x@intensity));
     
     ## store original mass sample number/id
-    samples <- unlist(sapply(1:length(tmpPeakList), function(x) {
-                             return(rep(x, length(tmpPeakList[[x]])));
+    samples <- .unlist(lapply(1:length(tmpPeakList), function(x) {
+                              return(rep(x, length(tmpPeakList[[x]])));
     }));
     
     ## sort values by mass

@@ -17,7 +17,7 @@
 ## along with PACKAGE. If not, see <http://www.gnu.org/licenses/>
 
 ## .isArgument
-##  test wheter a (argument) list contains a special name
+##  test whether a (argument) list contains a special name
 ##
 ## params:
 ##  x: character, single argument name
