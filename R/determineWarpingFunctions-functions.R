@@ -125,6 +125,11 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
         arguments$x <- mass[i][notNA]; ## original mass
         arguments$d <- d[i][notNA];    ## difference to reference
 
+        if (!length(arguments$x)) {
+          stop("Could not match any peak in spectrum ", samples[i[1]]-1,
+               " to a reference peak.")
+        }
+
         w <- do.call(warpingFunction, arguments);
 
         return(w);

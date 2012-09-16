@@ -33,10 +33,18 @@ if (is.null(getGeneric("length")))
     setGeneric("length", function(x) standardGeneric("length"));
 if (is.null(getGeneric("lines")))
     setGeneric("lines", function(x, ...) standardGeneric("lines"));
+if (is.null(getGeneric("ltrim")))
+    setGeneric("ltrim", function(object, minMass) standardGeneric("ltrim"));
 if (is.null(getGeneric("plot")))
     setGeneric("plot", function(x, y, ...) standardGeneric("plot"));
+if (is.null(getGeneric("points")))
+    setGeneric("points", function(x, ...) standardGeneric("points"));
+if (is.null(getGeneric("rtrim")))
+    setGeneric("rtrim", function(object, maxMass) standardGeneric("rtrim"));
 if (is.null(getGeneric("transformIntensity")))
     setGeneric("transformIntensity", function(object, fun, na.rm=TRUE, ...) standardGeneric("transformIntensity"));
+if (is.null(getGeneric("trim")))
+    setGeneric("trim", function(object, minMass, maxMass) standardGeneric("trim"));
 
 ## get/set slots
 if (is.null(getGeneric("mass")))
@@ -85,8 +93,14 @@ if (is.null(getGeneric("labelPeaks")))
                                       digits=3, underline=TRUE, 
                                       verticalOffset=abs(diff(par("usr")[3:4]))*0.0125,
                                       absoluteVerticalPos,
-                                      adj=c(0.5, 0), cex=0.7, family="sans", ...) standardGeneric("labelPeaks"));
-if (is.null(getGeneric("points")))
-    setGeneric("points", function(x, ...) standardGeneric("points"));
+                                      adj=c(0.5, 0), cex=0.7, avoidOverlap=FALSE,
+                                      arrowLength=0, arrowLwd=0.5, arrowCol=1,
+                                      ...) standardGeneric("labelPeaks"));
+if (is.null(getGeneric(".calculateLabelPositions")))
+    setGeneric(".calculateLabelPositions", function(object, ...) standardGeneric(".calculateLabelPositions"));
+if (is.null(getGeneric(".testLabelOverlap")))
+    setGeneric(".testLabelOverlap", function(object, ...) standardGeneric(".testLabelOverlap"));
+if (is.null(getGeneric(".labelOverlap")))
+    setGeneric(".labelOverlap", function(object, ...) standardGeneric(".labelOverlap"));
 ## end of MassPeaks
 

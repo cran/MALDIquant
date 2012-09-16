@@ -17,8 +17,8 @@ For a first overview run \code{demo("MALDIquant")}.
 \details{
 \tabular{ll}{
 Package: \tab MALDIquant\cr
-Version: \tab 1.2\cr
-Date: \tab 2012-07-18\cr
+Version: \tab 1.3\cr
+Date: \tab 2012-09-16\cr
 License: \tab GPL (>= 3)\cr
 URL: \tab http://strimmerlab.org/software/maldiquant/\cr
 }
@@ -36,9 +36,10 @@ Sebastian Gibb
 Maintainer: Sebastian Gibb <mail@sebastiangibb.de>
 }
 \references{
-S. Gibb and K. Strimmer. 2012.  
-\emph{MALDIquant: a versatile R package for the analysis of mass spectrometry data.}
-\url{http://arxiv.org/abs/1203.5885}.
+Gibb, S. and Strimmer, K. (2012),
+\dQuote{MALDIquant: a versatile R package for the analysis of mass spectrometry data.},
+\emph{Bioinformatics} \bold{28}: 2270-2271. \cr
+\url{http://bioinformatics.oxfordjournals.org/content/28/17/2270.abstract} \cr
 
 See website: \url{http://strimmerlab.org/software/maldiquant/}
 }

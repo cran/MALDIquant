@@ -4,6 +4,7 @@
 \alias{show}
 
 \alias{.binPeaks}
+\alias{.calculateLabelPositions}
 \alias{.doByLabels}
 \alias{.filterPeaks}
 \alias{.findLocalMaxima}
@@ -11,6 +12,7 @@
 \alias{.grouperStrict}
 \alias{.isArgument}
 \alias{.isFunctionList}
+\alias{.labelOverlap}
 \alias{.lowerConvexHullR}
 \alias{.merge}
 \alias{.mergeMassPeaks}
@@ -21,6 +23,8 @@
 \alias{.stopIfNotMassObjectList}
 \alias{.stopIfNotMassPeaksList}
 \alias{.stopIfNotMassSpectrumList}
+\alias{.testLabelOverlap}
+\alias{.textLabelRects}
 \alias{.validAbstractMassObject}
 \alias{.warp}
 \alias{.warpingFunctionCubic}

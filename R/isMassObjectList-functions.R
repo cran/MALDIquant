@@ -46,7 +46,7 @@ isMassSpectrumList <- function(x) {
 
     areMassSpectrumObjects <- length(x) > 0 &&
                               all(unname(vapply(x, function(e) {
-                                   return(isMassObject(e))}, logical(1))));
+                                   return(isMassSpectrum(e))}, logical(1))));
     return(areMassSpectrumObjects);
 }
 

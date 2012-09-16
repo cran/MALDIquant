@@ -3,7 +3,7 @@
 \alias{transformIntensity}
 \alias{transformIntensity,AbstractMassObject-method}
 \alias{transformIntensity,list-method}
-\title{Transforms Intensities of an AbstractMassObject object.}
+\title{Transforms intensities of an AbstractMassObject object.}
 \description{
 This method performs a transformation (e.g. sqrt-transformation) on the
 intensities of an \code{\linkS4class{AbstractMassObject}} object.

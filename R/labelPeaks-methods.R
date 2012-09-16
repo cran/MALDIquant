@@ -23,10 +23,12 @@ setMethod(f="labelPeaks",
         mass, tolerance=0.002,
         digits=3,
         underline=TRUE, 
-        ## verticalOffset ca. 0.0125 of plot height
-        verticalOffset=abs(diff(par("usr")[3:4]))*0.0125,
+        ## verticalOffset ca. 0.01 of plot height
+        verticalOffset=abs(diff(par("usr")[3:4]))*0.01,
         absoluteVerticalPos,
-        adj=c(0.5, 0), cex=0.7, family="sans",
+        adj=c(0.5, 0), cex=0.7, 
+        avoidOverlap=FALSE,
+        arrowLength=0, arrowLwd=0.5, arrowCol=1,
         ...) {
 
     if (!missing(mass) && is.numeric(mass)) {
@@ -83,6 +85,19 @@ setMethod(f="labelPeaks",
                 function(x)substitute(underline(a), list(a=x))));
     }
 
-    text(x=x, y=y, labels=peakLabels, cex=cex, adj=adj, ...);
+    if (avoidOverlap) {
+      ## inspired by Ian Fellows' wordcloud::wordlayout
+      p <- .calculateLabelPositions(object, x, y, peakLabels, adj=adj, cex=cex)
+
+      ## create arrows from label to peak
+      arrows(x0=p$x, y0=p$y, x1=x, y1=y, col=arrowCol, length=arrowLength,
+             lwd=arrowLwd)
+      ## no transparent background
+      rect(xleft=p$xleft, ybottom=p$ybottom, xright=p$xright, ytop=p$ytop,
+           col="white", border=NA, density=-1)
+      x <- p$x
+      y <- p$y
+    }
+    text(x=x, y=y, labels=peakLabels, adj=adj, cex=cex,...);
 });
 

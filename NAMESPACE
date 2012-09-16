@@ -37,6 +37,7 @@ exportMethods("as.matrix",
               "labelPeaks",
               "length",
               "lines",
+              "ltrim",
               "mass",
               "mass<-",
               "metaData",
@@ -44,9 +45,11 @@ exportMethods("as.matrix",
               "plot",
               "points",
               "removeBaseline",
+              "rtrim",
               "standardizeTotalIonCurrent",
               "totalIonCurrent",
               "totalIonCurrent<-",
-              "transformIntensity")
+              "transformIntensity",
+              "trim")
 
 useDynLib("MALDIquant")

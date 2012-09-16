@@ -34,6 +34,12 @@ setMethod(f=".findLocalMaxima",
     ## https://stat.ethz.ch/pipermail/r-help/2001-January/010704.html
     windowSize <- 2*halfWindowSize+1;
 
+    if (windowSize >= length(object)) {
+        stop(sQuote("halfWindowSize"), " is too large! ",
+             "(window size (", windowSize, ") >= number of ",
+             " mass/intensity values (", length(object), "))");
+    }
+
     windows <- embed(object@intensity, windowSize);
 
     localMaxima <- max.col(windows, "first") == halfWindowSize+1
