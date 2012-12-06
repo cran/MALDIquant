@@ -16,17 +16,19 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## .removeArguments
-##  removes arguments from argument list
+## movingAverage
+##  runs a simple 2-side moving average.
 ##
 ## params:
-##  x: character, argument names
-##  arguments: list, arguments
+##  y: double, intensity values
+##  halfWindowSize integer, half window size.
 ##
 ## returns:
-##  reduced argument list
+##  double
 ##
-.removeArguments <- function(x, arguments) {
-    keep <- charmatch(x=names(arguments), table=x, nomatch=0) == 0;
-    return(arguments[keep]);
+movingAverage <- function(y, halfWindowSize=2) {
+    windowSize <- halfWindowSize*2+1;
+    y <- filter(x=y, filter=rep(1, windowSize)/windowSize, sides=2);
+    attributes(y) <- NULL;
+    return(y);
 }

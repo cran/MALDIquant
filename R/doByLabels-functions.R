@@ -1,20 +1,20 @@
 ## Copyright 2012 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
-## This file is part of PACKAGE for R and related languages.
+## This file is part of MALDIquant for R and related languages.
 ##
-## PACKAGE is free software: you can redistribute it and/or modify
+## MALDIquant is free software: you can redistribute it and/or modify
 ## it under the terms of the GNU General Public License as published by
 ## the Free Software Foundation, either version 3 of the License, or
 ## (at your option) any later version.
 ##
-## PACKAGE is distributed in the hope that it will be useful,
+## MALDIquant is distributed in the hope that it will be useful,
 ## but WITHOUT ANY WARRANTY; without even the implied warranty of
 ## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ## GNU General Public License for more details.
 ##
 ## You should have received a copy of the GNU General Public License
-## along with PACKAGE. If not, see <http://www.gnu.org/licenses/>
+## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
 ## .doByLabels 
 ##  run a specific function labelwise
@@ -35,6 +35,9 @@
     FUN <- match.fun(FUN);
 
     if (!missing(labels)) {
+        ## drop unused levels and turn argument into factor
+        labels <- factor(labels);
+
         if (length(labels) != length(l)) {
             stop("For each item in ", sQuote("l"), 
                  " there must be a label in ", sQuote("labels"), "!");

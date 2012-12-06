@@ -17,8 +17,8 @@ For a first overview run \code{demo("MALDIquant")}.
 \details{
 \tabular{ll}{
 Package: \tab MALDIquant\cr
-Version: \tab 1.4\cr
-Date: \tab 2012-10-30\cr
+Version: \tab 1.5\cr
+Date: \tab 2012-12-06\cr
 License: \tab GPL (>= 3)\cr
 URL: \tab http://strimmerlab.org/software/maldiquant/\cr
 }
@@ -65,14 +65,7 @@ spectra
 ## transform intensities
 t <- transformIntensity(spectra, fun=sqrt);
 
-## smoothing function
-movingAvg <- function(y) {
-    ma <- rep(1, 5)/5;
-    return(filter(y, ma, sides=2));
-}
-
-## smooth spectra
-s <- transformIntensity(t, fun=movingAvg);
+s <- transformIntensity(t, fun=movingAverage);
 
 ## baseline correction
 b <- removeBaseline(s);
