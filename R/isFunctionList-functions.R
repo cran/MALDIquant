@@ -1,4 +1,4 @@
-## Copyright 2012 Sebastian Gibb
+## Copyright 2012-2013 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -17,13 +17,23 @@
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
 .isFunctionList <- function(x) {
-    if (!is.list(x)) {
-        return(FALSE);
-    } 
+  if (!is.list(x)) {
+    return(FALSE)
+  }
 
-    areFunctions <- length(x) > 0 &&
-                    all(.unlist(vapply(x, function(e) {
-                                return(is.function(e))}, logical(1))) );
-    return(areFunctions);
+  areFunctions <- length(x) &&
+                  all(.unlist(vapply(x, is.function, logical(1))))
+  return(areFunctions)
+}
+
+.stopIfNotIsFunctionList <- function(x) {
+  if (!.isFunctionList(x)) {
+    parentCall <- deparse(sys.call(-1))
+    stop(paste(parentCall, " : ", sQuote(deparse(substitute(x))),
+               " is no list of functions!", sep=""),
+               call.=FALSE)
+    return(FALSE)
+  }
+  return(TRUE)
 }
 

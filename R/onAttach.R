@@ -1,4 +1,4 @@
-## Copyright 2012 Sebastian Gibb
+## Copyright 2013 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -16,17 +16,11 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## .removeArguments
-##  removes arguments from argument list
-##
-## params:
-##  x: character, argument names
-##  arguments: list, arguments
-##
-## returns:
-##  reduced argument list
-##
-.removeArguments <- function(x, arguments) {
-    keep <- charmatch(x=names(arguments), table=x, nomatch=0) == 0;
-    return(arguments[keep]);
+.onAttach <- function(libname, pkgname) {
+  packageStartupMessage(paste("\nThis is MALDIquant version ",
+    utils::packageVersion("MALDIquant"), "\n",
+    "Quantitative Analysis of Mass Spectrometry Data\n",
+    " See ", sQuote("?MALDIquant"),
+    " for more information about this package.\n",
+    sep=""))
 }

@@ -7,13 +7,19 @@
 
 \alias{.binPeaks}
 \alias{.calculateLabelPositions}
+\alias{.dilation}
 \alias{.doByLabels}
+\alias{.erosion}
 \alias{.filterPeaks}
 \alias{.findLocalMaxima}
 \alias{.findLocalMaximaLogical}
 \alias{.grouperRelaxedHighestAtReference}
 \alias{.grouperStrict}
+\alias{.iplot}
+\alias{.iplotSingle}
+\alias{.iplotUsage}
 \alias{.isFunctionList}
+\alias{.lim}
 \alias{.labelOverlap}
 \alias{.localMaxima}
 \alias{.lowerConvexHullR}
@@ -21,22 +27,34 @@
 \alias{.mergeMassPeaks}
 \alias{.mergeMassSpectra}
 \alias{.mergeMetaData}
+\alias{.moveLim}
+\alias{.moveXlim}
+\alias{.openInteractiveDevice}
 \alias{.prepareShow}
 \alias{.prepareShowGroupName}
-\alias{.removeArguments}
 \alias{.replaceNonEmptyMassObjects}
 \alias{.snipR}
+\alias{.stopIfNotIsMassObjectList}
+\alias{.stopIfNotIsMassPeaksList}
+\alias{.stopIfNotIsMassSpectrumList}
+\alias{.stopIfNotIsValidHalfWindowSize}
 \alias{.stopIfNotMassObjectList}
 \alias{.stopIfNotMassPeaksList}
 \alias{.stopIfNotMassSpectrumList}
 \alias{.testLabelOverlap}
 \alias{.textLabelRects}
+\alias{.topHatR}
 \alias{.validAbstractMassObject}
 \alias{.validMassPeaks}
 \alias{.warp}
 \alias{.warpingFunctionCubic}
 \alias{.warpingFunctionLowess}
 \alias{.which.closest}
+\alias{.xlim}
+\alias{.ylim}
+\alias{.zoomLim}
+\alias{.zoomXlim}
+\alias{.zoomYlim}
 
 \title{Internal MALDIquant Functions}
 \description{

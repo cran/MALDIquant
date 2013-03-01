@@ -9,7 +9,7 @@
 \title{Class "MassPeaks"}
 \description{
 \code{\linkS4class{MassPeaks}} represents extracted peaks of a single
-spectrum of a MALDI/TOF mass spectrometry measurement.
+spectrum of a MALDI-TOF mass spectrometry measurement.
 }
 \section{Objects from the Class}{
 \code{\link[MALDIquant]{createMassPeaks}}: Creates a
@@ -20,16 +20,16 @@ Class \code{\linkS4class{AbstractMassObject}}, directly.
 }
 \section{Slots}{
 \describe{
-    \item{\code{snr}:}{\code{vector}, \emph{s}ignal-to-\emph{n}oise
-      \emph{r}atio}
+  \item{\code{snr}:}{\code{vector}, \emph{s}ignal-to-\emph{n}oise
+    \emph{r}atio}
 }
 }
 \section{Methods}{
 \describe{
-    \item{labelPeaks}{\code{signature(x = "MassPeaks")}:
-        Draws peak labels to plot.
-        See \code{\link{labelPeaks,MassPeaks-method}} for 
-        details.}
+  \item{labelPeaks}{\code{signature(x = "MassPeaks")}:
+    Draws peak labels to plot.
+    See \code{\link{labelPeaks,MassPeaks-method}} for
+    details.}
 }
 }
 \references{
@@ -46,7 +46,7 @@ Sebastian Gibb
 }
 %\examples{
 %## load library
-%library("MALDIquant");
+%library("MALDIquant")
 %}
 \keyword{classes}
 

@@ -1,4 +1,4 @@
-## Copyright 2012 Sebastian Gibb
+## Copyright 2012-2013 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -21,26 +21,18 @@
 ##
 ## params:
 ##  l: list of MassSpectrum objects
-##  w: list of warping functions determined by
-##                       determineWarpingFunctions
+##  w: list of warping functions determined by determineWarpingFunctions
 ##
 ## returns:
 ##  a list of warped MassSpectrum objects
 ##
 warpMassSpectra <- function(l, w) {
 
-    ## test parameters
-    if (!isMassSpectrumList(l)) {
-        stop(sQuote("l"),
-             " is no list of MALDIquant::MassSpectrum objects!");
-    }
- 
-    if (!.isFunctionList(w)) {
-        stop(sQuote("w"),
-             " is no list of functions!");
-    }
+  ## test parameters
+  .stopIfNotIsMassSpectrumList(l)
+  .stopIfNotIsFunctionList(w)
 
-    return(.warp(l, w));
+  return(.warp(l, w))
 }
 
 ## warpMassPeaks
@@ -48,26 +40,18 @@ warpMassSpectra <- function(l, w) {
 ##
 ## params:
 ##  l: list of MassPeaks objects
-##  w: list of warping functions determined by
-##                       determineWarpingFunctions
+##  w: list of warping functions determined by determineWarpingFunctions
 ##
 ## returns:
 ##  a list of warped MassPeaks objects
 ##
 warpMassPeaks <- function(l, w) {
 
-    ## test parameters
-    if (!isMassPeaksList(l)) {
-        stop(sQuote("l"),
-             " is no list of MALDIquant::MassPeaks objects!");
-    }
- 
-    if (!.isFunctionList(w)) {
-        stop(sQuote("w"),
-             " is no list of functions!");
-    }
+  ## test parameters
+  .stopIfNotIsMassPeaksList(l)
+  .stopIfNotIsFunctionList(w)
 
-    return(.warp(l, w));
+  return(.warp(l, w))
 }
 
 
@@ -76,21 +60,14 @@ warpMassPeaks <- function(l, w) {
 ##
 ## params:
 ##  l: list of AbstractMassObject objects
-##  w: list of warping functions determined by
-##                       determineWarpingFunctions
+##  w: list of warping functions determined by determineWarpingFunctions
 ##
 ## returns:
 ##  a list of warped AbstractMassObject objects
 ##
 .warp <- function(l, w) {
-    if (isMassObjectList(l)) {
-        return(mapply(function(m, wf) {
-                     m@mass <- m@mass+wf(m@mass);
-                     return(m);
-               }, m=l, wf=w, SIMPLIFY=FALSE));
-    } else {
-        stop(sQuote("l"), 
-                " has to be a list of MALDIquant::MassObject objects.");
-        return(l);
-    }
+  return(mapply(function(m, wf) {
+           m@mass <- m@mass+wf(m@mass)
+           return(m)
+         }, m=l, wf=w, SIMPLIFY=FALSE))
 }

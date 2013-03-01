@@ -1,7 +1,19 @@
-importFrom("graphics", 
-                "lines",
-                "plot",
-                "points")
+importFrom("grDevices",
+              "getGraphicsEvent",
+              "setGraphicsEventHandlers")
+
+importFrom("graphics",
+              "lines",
+              "plot",
+              "points")
+
+importFrom("stats",
+              "mad",
+              "supsmu")
+
+importFrom("utils",
+              "packageVersion")
+
 
 exportClasses("MassPeaks",
               "MassSpectrum")
@@ -34,6 +46,7 @@ exportMethods("as.matrix",
               "estimateNoise",
               "intensity",
               "intensity<-",
+              "iplot",
               "isEmpty",
               "labelPeaks",
               "length",

@@ -1,4 +1,4 @@
-## Copyright 2011-2012 Sebastian Gibb
+## Copyright 2011-2013 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -16,36 +16,39 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## MassSpectrum 
+## MassSpectrum
 setMethod(f="estimateBaseline",
-    signature=signature(object="MassSpectrum"),
-    definition=function(object, 
-                        method=c("SNIP", "ConvexHull", "Median"),
-                        ...) {
-        
-    ## empty spectrum?
-    if (.isEmptyWarning(object)) {
-        return(NA);
-    }
+          signature=signature(object="MassSpectrum"),
+          definition=function(object, method=c("SNIP", "TopHat", "ConvexHull",
+                                               "Median"),
+                              ...) {
 
-    method=match.arg(method, several.ok=FALSE);
+  ## empty spectrum?
+  if (.isEmptyWarning(object)) {
+    return(NA)
+  }
 
-    b <- switch(method,
-                "SNIP" = {
-                    .estimateBaselineSnip(object@mass, object@intensity, ...);
-                },
-                "ConvexHull" = {
-                    .estimateBaselineConvexHull(object@mass, object@intensity);
-                },
-                "Median" = {
-                    .estimateBaselineMedian(object@mass, object@intensity, ...);
-                },
-                {
-                    stop("Unknown ", sQuote("method"), ".");
-                }
-    );
+  method=match.arg(method, several.ok=FALSE)
 
-    colnames(b) <- c("mass", "intensity");
-    return(b);
-});
+  b <- switch(method,
+              "SNIP" = {
+                .estimateBaselineSnip(object@mass, object@intensity, ...)
+              },
+              "TopHat" = {
+                .estimateBaselineTopHat(object@mass, object@intensity, ...)
+              },
+              "ConvexHull" = {
+                .estimateBaselineConvexHull(object@mass, object@intensity)
+              },
+              "Median" = {
+                .estimateBaselineMedian(object@mass, object@intensity, ...)
+              },
+              {
+                stop("Unknown ", sQuote("method"), ".")
+              }
+  )
+
+  colnames(b) <- c("mass", "intensity")
+  return(b)
+})
 
