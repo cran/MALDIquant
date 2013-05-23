@@ -54,6 +54,12 @@ test_that("mergeMassSpectra throws errors", {
                "no list of MALDIquant::MassSpectrum objects")
 })
 
+test_that("mergeMassSpectra works with empty spectra", {
+  e <- createMassSpectrum(mass=double(), intensity=double(),
+                          metaData=list(a=1, b=2))
+  expect_equal(unname(mergeMassSpectra(list(s[[1]], e))), s[[1]])
+  expect_equal(unname(mergeMassSpectra(list(e, e))), e)
+})
 
 test_that(".mergeMassPeaks", {
   expect_equal(MALDIquant:::.mergeMassPeaks(p), meanP)
@@ -70,6 +76,13 @@ test_that(".mergeMetaData", {
             b=list(numbers=1:3, lists=list(a=1, b=2), characters=c("b", "c")))
   r <- list(numbers=1:3, lists=list(a=1, b=2),
             characters=c("a", "b", "b", "c"))
+  expect_identical(MALDIquant:::.mergeMetaData(l), r)
+  l <- list(a=list(numbers=1:2, lists=list(a=1, b=2, d=4),
+                   characters=c("a", "b", "c")),
+            b=list(numbers=1:3, lists=list(a=1, b=2), characters=c("b", "c")))
+  r <- list(numbers=c(1:2, 1:3), lists=list(list(a=1, b=2, d=4),
+                                            list(a=1, b=2)),
+            characters=c("a", "b", "c", "b", "c"))
   expect_identical(MALDIquant:::.mergeMetaData(l), r)
 })
 

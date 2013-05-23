@@ -1,4 +1,4 @@
-## Copyright 2012-2013 Sebastian Gibb
+## Copyright 2013 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -16,19 +16,12 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## movingAverage
-##  runs a simple 2-side moving average.
-##
-## params:
-##  y: double, intensity values
-##  halfWindowSize integer, half window size.
-##
-## returns:
-##  double
-##
-movingAverage <- function(y, halfWindowSize=2) {
-  windowSize <- halfWindowSize*2+1
-  y <- filter(x=y, filter=rep(1, windowSize)/windowSize, sides=2)
-  attributes(y) <- NULL
-  return(y)
-}
+## MassSpectrum
+setMethod(f="isRegular",
+          signature=signature(object="MassSpectrum"),
+          definition=function(object, threshold=1e-3) {
+
+  s <- .irregularScore(object@mass) <= threshold
+  return(!is.na(s) & s)
+})
+

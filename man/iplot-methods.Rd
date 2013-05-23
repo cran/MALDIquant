@@ -41,14 +41,19 @@ more easily.
     \item{\sQuote{g}, \sQuote{Home}:}{Switch to the first spectrum.}
     \item{\sQuote{G}, \sQuote{End}:}{Switch to the last spectrum.}
     \item{\sQuote{s}:}{Toggle spectrum style (\code{c("l", "p", "b", "n")},
-      see \code{\link[graphics]{plot}}: \sQuote{type})}
+      see \code{\link[graphics]{plot}}: \sQuote{type}).}
     \item{\sQuote{d}:}{Toggle peaks style (\code{c("h", "p", "b", "n")},
-      see \code{\link[graphics]{plot}}: \sQuote{type})}
+      see \code{\link[graphics]{plot}}: \sQuote{type}).}
     \item{\sQuote{a}:}{Toggle peaks labels on/off (see
-      \code{\link[MALDIquant]{labelPeaks,MassPeaks-method}})}
+      \code{\link[MALDIquant]{labelPeaks,MassPeaks-method}}).}
     \item{\sQuote{p}:}{Print xlim/ylim.}
     \item{\sQuote{r}:}{Reset xlim/ylim.}
   }
+
+  \code{iplot} could used to measure horizontal distances (e.g. FWHM).
+  The measurement is started by a click with the left mouse button on the plot.
+  A second left click stops the measurement and the distance is printed in
+  the R console.
 }
 \references{
 See website: \url{http://strimmerlab.org/software/maldiquant/}

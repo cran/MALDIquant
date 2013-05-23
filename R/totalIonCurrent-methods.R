@@ -21,7 +21,7 @@ setMethod(f="totalIonCurrent",
           signature=signature(object="AbstractMassObject"),
           definition=function(object) {
 
-  return(as.double(sum(object@intensity, na.rm=TRUE)))
+  return(as.double(sum(as.double(object@intensity), na.rm=TRUE)))
 })
 
 ## AbstractMassObject
@@ -35,6 +35,12 @@ setReplaceMethod(f="totalIonCurrent",
   }
 
   tic <- totalIonCurrent(object)
-  return(transformIntensity(object, function(x)x*value/tic))
+
+  if (tic) {
+    return(transformIntensity(object, function(x)x*value/tic))
+  } else {
+    warning("Total Ion Current is zero! Is spectrum empty?")
+    return(object)
+  }
 })
 

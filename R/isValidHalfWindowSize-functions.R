@@ -1,4 +1,4 @@
-## Copyright 2012-2013 Sebastian Gibb
+## Copyright 2013 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -16,23 +16,31 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-.isFunctionList <- function(x) {
-  if (!is.list(x)) {
-    return(FALSE)
+## .stopIfNotIsValidHalfWindowSize
+##  test for too small/large half window size
+##
+## params:
+##  halfWindowSize: half window size
+##  n: length of data
+##
+## returns:
+##  TRUE if valid
+##
+.stopIfNotIsValidHalfWindowSize <- function(halfWindowSize, n) {
+  parentCall <- deparse(sys.call(-1))
+
+  if (halfWindowSize < 1) {
+    stop(parentCall, " : ", sQuote("halfWindowSize"),
+         " is too small!", call.=FALSE)
   }
 
-  areFunctions <- length(x) &&
-                  all(.unlist(vapply(x, is.function, logical(1))))
-  return(areFunctions)
-}
+  windowSize <- halfWindowSize*2+1
 
-.stopIfNotIsFunctionList <- function(x) {
-  if (!.isFunctionList(x)) {
-    parentCall <- deparse(sys.call(-1))
-    stop(parentCall, " : ", sQuote(deparse(substitute(x))),
-         " is no list of functions!", call.=FALSE)
-    return(FALSE)
+  if (windowSize > n) {
+    stop(parentCall, " : ", sQuote("halfWindowSize"),
+         " is too large!", call.=FALSE)
   }
+
   return(TRUE)
 }
 

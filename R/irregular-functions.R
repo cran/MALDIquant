@@ -16,31 +16,19 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## .stopIfNotIsValidHalfWindowSize
-##  test for too small/large half window size
+## .irregularScore
+##  calculate frequency of irregular data
 ##
 ## params:
-##  halfWindowSize: half window size
-##  n: length of data
+##  x: double
 ##
 ## returns:
-##  TRUE if valid
+##  double, frequency of irregular data
 ##
-.stopIfNotIsValidHalfWindowSize <- function(halfWindowSize, n) {
-  parentCall <- deparse(sys.call(-1))
+.irregularScore <- function(x) {
+  d <- diff(x)
+  d <- d[-1] < head(d, -1)
 
-  if (halfWindowSize < 1) {
-    stop(parentCall, " : ", sQuote("halfWindowSize"),
-         "=", halfWindowSize, " is too small!", call.=FALSE)
-  }
-
-  windowSize <- halfWindowSize*2+1
-
-  if (windowSize > n) {
-    stop(parentCall, " : ", sQuote("halfWindowSize"),
-         " is too large!", call.=FALSE)
-  }
-
-  return(TRUE)
+  return(mean(d))
 }
 

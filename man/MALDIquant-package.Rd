@@ -8,8 +8,8 @@ Quantitative Analysis of Mass Spectrometry Data
 \description{
 MALDIquant provides a complete analysis pipeline for MALDI-TOF and other
 2-dimensional mass spectrometry data. Distinctive features include baseline
-subtraction using the SNIP algorithm, peak alignment using warping functions,
-handling of replicated measurements as well as allowing spectra with
+subtraction methods such as TopHat or SNIP, peak alignment using warping
+functions, handling of replicated measurements as well as allowing spectra with
 different resolutions.
 
 For a first overview run \code{demo("MALDIquant")}.
@@ -17,8 +17,8 @@ For a first overview run \code{demo("MALDIquant")}.
 \details{
 \tabular{ll}{
 Package: \tab MALDIquant\cr
-Version: \tab 1.6\cr
-Date: \tab 2013-03-01\cr
+Version: \tab 1.7\cr
+Date: \tab 2013-05-23\cr
 License: \tab GPL (>= 3)\cr
 URL: \tab http://strimmerlab.org/software/maldiquant/\cr
 }

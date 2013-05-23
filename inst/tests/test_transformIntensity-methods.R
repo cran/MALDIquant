@@ -3,7 +3,7 @@ context("transformIntensity")
 s <- createMassSpectrum(mass=1:10, intensity=(1:10)^2)
 
 test_that("transformIntensity throws errors", {
-  expect_error(transformIntensity(s), "argument .*fun.* is missing")
+  expect_error(transformIntensity(s))
 })
 
 test_that("transformIntensity shows warnings", {
@@ -15,7 +15,9 @@ test_that("transformIntensity shows warnings", {
 test_that("transformIntensity", {
   expect_equal(intensity(transformIntensity(s, sqrt)), 1:10)
   expect_equal(length(transformIntensity(s, movingAverage, halfWindowSize=2)),
-               6)
+               10)
+  expect_equal(length(transformIntensity(s,
+                        function(x)filter(x, rep(1, 5)/5, sides=2))), 6)
 })
 
 test_that("transformIntensity works with list of MassSpectrum objects", {

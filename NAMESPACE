@@ -8,6 +8,7 @@ importFrom("graphics",
               "points")
 
 importFrom("stats",
+              "filter",
               "mad",
               "supsmu")
 
@@ -37,6 +38,7 @@ export("binPeaks",
        "movingAverage",
        "referencePeaks",
        "removeEmptyMassObjects",
+       "savitzkyGolay",
        "warpMassPeaks",
        "warpMassSpectra")
 
@@ -48,6 +50,7 @@ exportMethods("as.matrix",
               "intensity<-",
               "iplot",
               "isEmpty",
+              "isRegular",
               "labelPeaks",
               "length",
               "lines",

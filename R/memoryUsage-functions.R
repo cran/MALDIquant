@@ -1,4 +1,4 @@
-## Copyright 2012-2013 Sebastian Gibb
+## Copyright 2013 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -16,23 +16,21 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-.isFunctionList <- function(x) {
-  if (!is.list(x)) {
-    return(FALSE)
-  }
+## .memoryUsageStr.object_size
+##  pretty string of memory usage
+##
+## params:
+##  x: object_size
+##
+## returns:
+##  character
+##
+.memoryUsageStr <- function(x) {
+  os <- object.size(x)
+  iec <- c("B", "KiB", "MiB", "GiB", "TiB", "PiB", "EiB", "ZiB", "YiB")
+  l <- trunc(log(os)/log(1024L))
+  i <- pmin(l+1, 9)
 
-  areFunctions <- length(x) &&
-                  all(.unlist(vapply(x, is.function, logical(1))))
-  return(areFunctions)
-}
-
-.stopIfNotIsFunctionList <- function(x) {
-  if (!.isFunctionList(x)) {
-    parentCall <- deparse(sys.call(-1))
-    stop(parentCall, " : ", sQuote(deparse(substitute(x))),
-         " is no list of functions!", call.=FALSE)
-    return(FALSE)
-  }
-  return(TRUE)
+  return(paste(round(os/(1024^l), digits=3L), iec[i]))
 }
 

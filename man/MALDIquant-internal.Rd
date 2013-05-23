@@ -11,6 +11,7 @@
 \alias{.doByLabels}
 \alias{.erosion}
 \alias{.filterPeaks}
+\alias{.filter}
 \alias{.findLocalMaxima}
 \alias{.findLocalMaximaLogical}
 \alias{.grouperRelaxedHighestAtReference}
@@ -18,11 +19,13 @@
 \alias{.iplot}
 \alias{.iplotSingle}
 \alias{.iplotUsage}
+\alias{.irregularScore}
 \alias{.isFunctionList}
 \alias{.lim}
 \alias{.labelOverlap}
 \alias{.localMaxima}
 \alias{.lowerConvexHullR}
+\alias{.memoryUsageStr}
 \alias{.merge}
 \alias{.mergeMassPeaks}
 \alias{.mergeMassSpectra}
@@ -33,14 +36,12 @@
 \alias{.prepareShow}
 \alias{.prepareShowGroupName}
 \alias{.replaceNonEmptyMassObjects}
+\alias{.savitzkyGolayCoefficients}
 \alias{.snipR}
 \alias{.stopIfNotIsMassObjectList}
 \alias{.stopIfNotIsMassPeaksList}
 \alias{.stopIfNotIsMassSpectrumList}
 \alias{.stopIfNotIsValidHalfWindowSize}
-\alias{.stopIfNotMassObjectList}
-\alias{.stopIfNotMassPeaksList}
-\alias{.stopIfNotMassSpectrumList}
 \alias{.testLabelOverlap}
 \alias{.textLabelRects}
 \alias{.topHatR}
