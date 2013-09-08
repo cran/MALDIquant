@@ -29,7 +29,7 @@ Sebastian Gibb
 \code{\link[stats]{supsmu}}
 }
 \examples{
-## load library
+## load package
 library("MALDIquant")
 
 ## load example data
@@ -39,7 +39,7 @@ data("fiedler2009subset", package="MALDIquant")
 s <- fiedler2009subset[[1]]
 
 ## transform intensities
-s <- transformIntensity(s, sqrt)
+s <- transformIntensity(s, method="sqrt")
 
 ## remove baseline
 s <- removeBaseline(s)

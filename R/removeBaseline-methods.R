@@ -19,7 +19,11 @@
 ## MassSpectrum
 setMethod(f="removeBaseline",
           signature=signature(object="MassSpectrum"),
-          definition=function(object, fun, ...) {
+          definition=function(object,
+                              method=c("SNIP", "TopHat", "ConvexHull",
+                                       "median"),
+                              fun, ## deprecated
+                              ...) {
 
   ## empty spectrum?
   if (.isEmptyWarning(object)) {
@@ -28,23 +32,25 @@ setMethod(f="removeBaseline",
 
   ## try to use user-defined baseline estimation function
   if (!missing(fun)) {
+    .deprecatedArgument("1.7.12", old="fun", new="method", help="removeBaseline")
     fun <- match.fun(fun)
     baseline <- fun(object@mass, object@intensity, ...)
+
+    ## wrong baseline argument given?
+    isBaselineMatrix <- is.matrix(baseline) &&
+                        nrow(baseline) == length(object) &&
+                        ncol(baseline) == 2
+
+    if (!isBaselineMatrix) {
+      stop("The baseline is not a valid matrix!")
+    }
   } else {
-    baseline <- estimateBaseline(object=object, ...)
-  }
-
-  ## wrong baseline argument given?
-  isBaselineMatrix <- is.matrix(baseline) &&
-                      nrow(baseline) == length(object) &&
-                      ncol(baseline) == 2
-
-  if (!isBaselineMatrix) {
-    stop("The baseline is not a valid matrix!")
+    ## estimate baseline
+    baseline <- estimateBaseline(object=object, method=method, ...)
   }
 
   ## substract baseline
-  object@intensity <- object@intensity - baseline[,2]
+  object@intensity <- object@intensity - baseline[, 2L]
 
   return(object)
 })

@@ -16,22 +16,6 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## list
-if (is.null(getGeneric("iplot"))) {
-  setGeneric("iplot", function(object, ...) standardGeneric("iplot"))
-}
-if (is.null(getGeneric("standardizeTotalIonCurrent"))) {
-  setGeneric("standardizeTotalIonCurrent", function(object, value=1)
-               standardGeneric("standardizeTotalIonCurrent"))
-}
-## end of list
-
-## matrix
-if (is.null(getGeneric("calibrate"))) {
-  setGeneric("calibrate", function(x, ...) standardGeneric("calibrate"))
-}
-## end of matrix
-
 ## AbstractMassObject
 if (is.null(getGeneric("as.matrix"))) {
   setGeneric("as.matrix", function(x, ...) standardGeneric("as.matrix"))
@@ -42,9 +26,6 @@ if (is.null(getGeneric("length"))) {
 if (is.null(getGeneric("lines"))) {
   setGeneric("lines", function(x, ...) standardGeneric("lines"))
 }
-if (is.null(getGeneric("ltrim"))) {
-  setGeneric("ltrim", function(object, minMass) standardGeneric("ltrim"))
-}
 if (is.null(getGeneric("plot"))) {
   setGeneric("plot", function(x, y, ...) standardGeneric("plot"))
 }
@@ -54,17 +35,19 @@ if (is.null(getGeneric("points"))) {
 if (is.null(getGeneric(".prepareShow"))) {
   setGeneric(".prepareShow", function(object) standardGeneric(".prepareShow"))
 }
-if (is.null(getGeneric("rtrim"))) {
-  setGeneric("rtrim", function(object, maxMass) standardGeneric("rtrim"))
-}
 if (is.null(getGeneric("transformIntensity"))) {
   setGeneric("transformIntensity",
-             function(object, fun, na.rm=TRUE, ...)
+             function(object, ...)
                standardGeneric("transformIntensity"))
+}
+if (is.null(getGeneric(".transformIntensity"))) {
+  setGeneric(".transformIntensity",
+             function(object, ...)
+               standardGeneric(".transformIntensity"))
 }
 if (is.null(getGeneric("trim"))) {
   setGeneric("trim",
-             function(object, minMass, maxMass) standardGeneric("trim"))
+             function(object, range) standardGeneric("trim"))
 }
 
 ## get/set slots
@@ -94,14 +77,6 @@ if (is.null(getGeneric("metaData<-"))) {
   setGeneric("metaData<-",
              function(object, value) standardGeneric("metaData<-"))
 }
-if (is.null(getGeneric("totalIonCurrent"))) {
-  setGeneric("totalIonCurrent",
-             function(object) standardGeneric("totalIonCurrent"))
-}
-if (is.null(getGeneric("totalIonCurrent<-"))) {
-  setGeneric("totalIonCurrent<-",
-             function(object, value) standardGeneric("totalIonCurrent<-"))
-}
 ## end of AbstractMassObject
 
 ## MassSpectrum
@@ -110,6 +85,10 @@ if (is.null(getGeneric("approxfun"))) {
              function(x, y=NULL, method="linear", yleft, yright, rule=1, f=0,
                       ties=mean)
                standardGeneric("approxfun"))
+}
+if (is.null(getGeneric("calibrateIntensity"))) {
+  setGeneric("calibrateIntensity",
+             function(object, ...) standardGeneric("calibrateIntensity"))
 }
 if (is.null(getGeneric("detectPeaks"))) {
   setGeneric("detectPeaks",
@@ -126,17 +105,13 @@ if (is.null(getGeneric("estimateNoise"))) {
 }
 if (is.null(getGeneric(".findLocalMaxima"))) {
   setGeneric(".findLocalMaxima",
-             function(object, halfWindowSize=20)
+             function(object, halfWindowSize=20L)
                standardGeneric(".findLocalMaxima"))
 }
 if (is.null(getGeneric(".findLocalMaximaLogical"))) {
   setGeneric(".findLocalMaximaLogical",
-             function(object, halfWindowSize=20)
+             function(object, halfWindowSize=20L)
                standardGeneric(".findLocalMaximaLogical"))
-}
-if (is.null(getGeneric("imputeMass"))) {
-  setGeneric("imputeMass",
-             function(object, verbose=FALSE) standardGeneric("imputeMass"))
 }
 if (is.null(getGeneric("isRegular"))) {
   setGeneric("isRegular",
@@ -146,15 +121,24 @@ if (is.null(getGeneric("removeBaseline"))) {
   setGeneric("removeBaseline",
              function(object, ...) standardGeneric("removeBaseline"))
 }
+if (is.null(getGeneric("smoothIntensity"))) {
+  setGeneric("smoothIntensity",
+             function(object, ...)
+               standardGeneric("smoothIntensity"))
+}
+if (is.null(getGeneric("totalIonCurrent"))) {
+  setGeneric("totalIonCurrent",
+             function(object) standardGeneric("totalIonCurrent"))
+}
 ## end of MassSpectrum
 
 ## MassPeaks
 if (is.null(getGeneric("labelPeaks"))) {
   setGeneric("labelPeaks",
-             function(object, index, mass, labels, digits=3, underline=TRUE,
+             function(object, index, mass, labels, digits=3L, underline=TRUE,
                       verticalOffset=abs(diff(par("usr")[3:4]))*0.0125,
-                      absoluteVerticalPos, adj=c(0.5, 0), cex=0.7,
-                      avoidOverlap=FALSE, arrowLength=0, arrowLwd=0.5,
+                      absoluteVerticalPos, adj=c(0.5, 0L), cex=0.7,
+                      avoidOverlap=FALSE, arrowLength=0L, arrowLwd=0.5,
                       arrowCol=1, ...) standardGeneric("labelPeaks"))
 }
 if (is.null(getGeneric("snr"))) {

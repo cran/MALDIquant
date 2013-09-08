@@ -10,32 +10,15 @@
 ##
 ## MALDIquant is distributed in the hope that it will be useful,
 ## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 ## GNU General Public License for more details.
 ##
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## MassSpectrum
-setMethod("iplot",
-          signature=signature(object="MassSpectrum"),
-          definition=function(object, peaks, ...) {
-  if (!missing(peaks)) {
-    stopifnot(isMassPeaks(peaks))
-    peaks <- list(peaks)
-  }
-  return(invisible(.iplot(spectra=list(object), peaks=peaks, ...)))
-})
-
-## list
-setMethod("iplot",
-          signature=signature(object="list"),
-          definition=function(object, peaks, ...) {
-  .stopIfNotIsMassSpectrumList(object)
-
-  if (!missing(peaks)) {
-    .stopIfNotIsMassPeaksList(peaks)
-  }
-  return(invisible(.iplot(spectra=object, peaks=peaks, ...)))
-})
+.colMedians <- function(x, na.rm=FALSE) {
+  stopifnot(is.matrix(x))
+  stopifnot(is.logical(na.rm))
+  return(.Call("C_colMedians", x, na.rm))
+}
 

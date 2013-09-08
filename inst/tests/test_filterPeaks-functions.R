@@ -19,6 +19,8 @@ test_that("filterPeaks shows warnings", {
                  " < 0 does not make sense! Using 0 instead")
   expect_warning(filterPeaks(l, minFrequency=2/3, minNumber=2),
                  " arguments are given. Choosing the higher one.")
+  expect_warning(filterPeaks(l, minNumber=2, labels=c(1, 2, 2, 2)),
+                 "does not make sense! Using 1 instead")
 })
 
 test_that("filterPeaks", {
@@ -57,5 +59,11 @@ test_that("filterPeaks", {
                                     p[1:2]), minNumber=2,
                                labels=c(rep(1, 3), rep(2, 4))),
                    list(p[1:4], p[1:4], p[1:3], p[1:4], p[1:4], p[1:3], p[1:2]))
+
+  ## test case for #26 (minNumber > n removes all peaks)
+  expect_identical(suppressWarnings(filterPeaks(list(p, p[1:4], p),
+                                                minNumber=2,
+                                                labels=c(1, 2, 2))),
+                   list(p, p[1:4], p[1:4]))
 })
 

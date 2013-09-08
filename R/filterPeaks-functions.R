@@ -36,14 +36,14 @@ filterPeaks <- function(l, minFrequency, minNumber, labels) {
   if (missing(minFrequency)) {
     minFrequency <- NA
   } else {
-    if (minFrequency > 1) {
-      minFrequency <- 1
+    if (minFrequency > 1L) {
+      minFrequency <- 1L
       warning(sQuote("minFrequency"),
               " > 1 does not make sense! Using 1 instead.")
     }
 
-    if (minFrequency < 0) {
-      minFrequency <- 0
+    if (minFrequency < 0L) {
+      minFrequency <- 0L
       warning(sQuote("minFrequency"),
               " < 0 does not make sense! Using 0 instead.")
     }
@@ -52,14 +52,8 @@ filterPeaks <- function(l, minFrequency, minNumber, labels) {
   if (missing(minNumber)) {
     minNumber<- NA
   } else {
-    if (minNumber > length(l)) {
-      minNumber <- length(l)
-      warning(sQuote("minNumber"), " > ", sQuote("length(l)"),
-              " does not make sense! Using ", length(l), " instead.")
-    }
-
-    if (minNumber < 0) {
-      minNumber <- 0
+    if (minNumber < 0L) {
+      minNumber <- 0L
       warning(sQuote("minNumber"), " < 0 does not make sense! Using 0 instead.")
     }
   }
@@ -74,16 +68,24 @@ filterPeaks <- function(l, minFrequency, minNumber, labels) {
 }
 
 .filterPeaks <- function(l, minFrequency, minNumber=NA) {
+  n <- length(l)
+
+  ## minNumber have to be smaller than length(l)
+  if (!is.na(minNumber) && minNumber > n) {
+    minNumber <- n
+    warning(sQuote("minNumber"), " > ", sQuote("length(l)"),
+            " does not make sense! Using ", n, " instead.")
+  }
 
   ## calculate minimal number of peaks
-  minPeakNumber <- max(minFrequency*length(l), minNumber, na.rm=TRUE)
+  minPeakNumber <- max(minFrequency*n, minNumber, na.rm=TRUE)
 
   ## fetch mass
   mass <- sort(unique(.unlist(lapply(l, function(x)x@mass))), method="quick")
 
   ## generate peak matrix
   pm <- intensityMatrix(l)
-  exclude <- .unlist(apply(pm, 2, function(x) {
+  exclude <- .unlist(apply(pm, 2L, function(x) {
     return(sum(!is.na(x)) < minPeakNumber)
   }))
   exclude <- mass[exclude]
@@ -98,3 +100,4 @@ filterPeaks <- function(l, minFrequency, minNumber, labels) {
 
   return(l)
 }
+

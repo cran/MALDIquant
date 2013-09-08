@@ -1,3 +1,5 @@
+import("methods")
+
 importFrom("grDevices",
               "getGraphicsEvent",
               "setGraphicsEventHandlers")
@@ -19,8 +21,8 @@ importFrom("utils",
 exportClasses("MassPeaks",
               "MassSpectrum")
 
-export("binPeaks",
-       "calibrate",
+export("averageMassSpectra",
+       "binPeaks",
        "createMassPeaks",
        "createMassSpectrum",
        "determineWarpingFunctions",
@@ -43,12 +45,13 @@ export("binPeaks",
        "warpMassSpectra")
 
 exportMethods("as.matrix",
+              "calibrate",
+              "calibrateIntensity",
               "detectPeaks",
               "estimateBaseline",
               "estimateNoise",
               "intensity",
               "intensity<-",
-              "iplot",
               "isEmpty",
               "isRegular",
               "labelPeaks",
@@ -63,6 +66,7 @@ exportMethods("as.matrix",
               "points",
               "removeBaseline",
               "rtrim",
+              "smoothIntensity",
               "snr",
               "standardizeTotalIonCurrent",
               "totalIonCurrent",

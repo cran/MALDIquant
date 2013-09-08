@@ -5,7 +5,7 @@
 ## baseline demo
 
 
-## load necessary libraries
+## load necessary packages
 library("MALDIquant")
 
 ## load example spectra
@@ -27,7 +27,7 @@ bConvexHull <- estimateBaseline(s, method="ConvexHull")
 plot(s, main="ConvexHull Baseline")
 lines(bConvexHull, lwd=2, col=2)
 
-bMedian <- estimateBaseline(s, method="Median")
+bMedian <- estimateBaseline(s, method="median")
 plot(s, main="Median Baseline")
 lines(bMedian, lwd=2, col=2)
 

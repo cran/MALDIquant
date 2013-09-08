@@ -27,31 +27,39 @@
 ## returns:
 ##  a new MassPeaks object or a list of new MassPeaks objects
 ##
-mergeMassPeaks <- function(l, labels, fun=mean, ...) {
+mergeMassPeaks  <- function(l, labels, method=c("mean", "median", "sum"),
+                            ignore.na=TRUE,
+                            fun, ... ## deprecated
+                            ) {
 
-  ## test parameters
+  ## test arguments
   .stopIfNotIsMassPeaksList(l)
 
-  return(.doByLabels(l=l, labels=labels, FUN=.mergeMassPeaks, fun=fun, ...))
-}
+  if (!missing(fun)) {
+    .deprecatedArgument("1.7.12", "fun", "method")
+    return(.doByLabels(l=l, labels=labels, FUN=.mergeMassPeaksDeprecated,
+                       fun=fun, ...))
+  }
 
-## mergeMassSpectra
-##  merge MassSpectrum objects
-##
-## params:
-##  l: list of MassSpectrum objects
-##  labels: factor, labels for samples
-##  fun: merge function
-##
-## returns:
-##  a new MassSpectrum object or a list of new MassSpectra objects
-##
-mergeMassSpectra <- function(l, labels, fun=mean, ...) {
+  method <- match.arg(method)
 
-  ## test parameters
-  .stopIfNotIsMassSpectrumList(l)
+  fun <- switch(method,
+              "mean" = {
+                colMeans
+              },
+              "median" = {
+                .colMedians
+              },
+              "sum" = {
+                colSums
+              },
+              {
+                stop("Unknown ", sQuote("method"), ".")
+              }
+  )
 
-  return(.doByLabels(l=l, labels=labels, FUN=.mergeMassSpectra, fun=fun, ...))
+  return(.doByLabels(l=l, labels=labels, FUN=.mergeMassPeaks, fun=fun,
+                     ignore.na=ignore.na))
 }
 
 ## .mergeMassPeaks
@@ -64,7 +72,9 @@ mergeMassSpectra <- function(l, labels, fun=mean, ...) {
 ## returns:
 ##  a new MassPeaks object
 ##
-.mergeMassPeaks <- function(l, fun=mean, na.rm=TRUE, ...) {
+.mergeMassPeaks <- function(l, fun=colMeans, ignore.na=TRUE) {
+
+  fun <- match.fun(fun)
 
   ## create a matrix which could merged
   m <- intensityMatrix(l)
@@ -74,14 +84,19 @@ mergeMassSpectra <- function(l, labels, fun=mean, ...) {
   ## avoid named intensity/snr slot
   colnames(m) <- NULL
 
+  isNA <- is.na(m)
+  if (!ignore.na) {
+    m[isNA] <- 0L
+  }
+
   ## merge intensities
-  intensity <- .merge(m, fun=fun, na.rm=na.rm, ...)
+  intensity <- fun(m, na.rm=TRUE)
 
   ## merge snr
   for (i in seq(along=l)) {
-    m[i, !is.na(m[i, ]) ] <- l[[i]]@snr
+    m[i, !isNA[i, ]] <- l[[i]]@snr
   }
-  snr <- .merge(m, fun=fun, ...)
+  snr <- fun(m, na.rm=TRUE)
 
   ## merge metaData
   metaData <- .mergeMetaData(lapply(l, function(x)x@metaData))
@@ -90,72 +105,6 @@ mergeMassSpectra <- function(l, labels, fun=mean, ...) {
                          metaData=metaData))
 }
 
-## .mergeMassSpectra
-##  merge MassSpectrum objects
-##
-## params:
-##  l: list of MassSpectrum objects
-##  fun: merge function
-##
-## returns:
-##  a new MassSpectrum object
-##
-.mergeMassSpectra <- function(l, fun=mean, na.rm=TRUE, ...) {
-
-  ## very simple score to find the "best" spectrum
-  simpleScore <- function(x) {return(max(x@intensity)/mean(x@intensity))}
-
-  ## merge metaData
-  metaData <- .mergeMetaData(lapply(l, function(x)x@metaData))
-
-  ## look for empty MassSpectrum objects
-  emptyIdx <- findEmptyMassObjects(l)
-  nEmpty <- length(emptyIdx)
-  n <- length(l)
-
-  if (nEmpty) {
-    l <- l[-emptyIdx]
-  }
-
-  ## calculate spectra scores
-  maxScore <- which.max(vapply(l, simpleScore, double(1)))
-
-  if (length(maxScore)) {
-    ## use highest scored spectrum as reference
-    mass <- l[[maxScore]]@mass
-  } else {
-    ## or nothing if all spectra are empty
-    mass <- NA
-  }
-
-  ## interpolate not existing masses
-  approxSpectra <- lapply(l, approxfun)
-
-  ## get intensities
-  if (nEmpty) {
-    intensityList <- vector(mode="list", length=n)
-    intensityList[emptyIdx] <- rep(NA, nEmpty)
-    intensityList[-emptyIdx] <- lapply(approxSpectra, function(x)x(mass))
-  } else {
-    intensityList <- lapply(approxSpectra, function(x)x(mass))
-  }
-
-  ## create a matrix which could merged
-  m <- do.call(rbind, intensityList)
-
-  ## merge intensities
-  intensity <- .merge(m, fun=fun, na.rm=na.rm, ...)
-
-  ## create an empty spectrum if all intensities are NaN
-  if (is.nan(intensity[1])) {
-    intensity <- double()
-    mass <- double()
-  }
-
-  return(createMassSpectrum(mass=mass, intensity=intensity, metaData=metaData))
-}
-
-## .mergeMetaData
 ## merge different metaData by equal list names
 ##
 ## params
@@ -168,10 +117,10 @@ mergeMassSpectra <- function(l, labels, fun=mean, ...) {
 
   .flat <- function(x) {return(unname(unlist(x)))}
 
-  nm <- names(m[[1]])
+  nm <- names(m[[1L]])
   names(nm) <- nm
   m <- lapply(nm, function(n) {
-    cur <- m[[1]][[n]]
+    cur <- m[[1L]][[n]]
     all <- lapply(m, function(x)x[[n]])
     len <- lapply(all, function(x)length(x))
 
@@ -185,41 +134,6 @@ mergeMassSpectra <- function(l, labels, fun=mean, ...) {
       return(cur)
     }
   })
-  return(m)
-}
-
-## .merge
-##  merge matrix columns
-##
-## params:
-##  m: matrix
-##  fun: merge function
-##  na.rm: logical, remove NA's?
-##
-## returns:
-##  a vector (double)
-##
-.merge <- function(m, fun, na.rm=TRUE, ...) {
-
-  fun <- match.fun(fun)
-
-  if (identical(fun, mean)) {
-    m <- colMeans(m, na.rm=na.rm)
-  } else if (identical(fun, sum)) {
-    m <- colSums(m, na.rm=na.rm)
-  } else {
-    ## mean, median, sum etc. have their own na.rm argument but maybe some other
-    ## curious merge function lacks na.rm
-    ## [would cause the error: unused argument(s) (na.rm = T)]
-    ## thats why we have to remove NA's for our own
-    if (na.rm) {
-      m <- apply(X=m, MARGIN=2, FUN=function(x){
-        return(fun(x[!is.na(x)], ...))
-      })
-    } else {
-      m <- apply(X=m, MARGIN=2, FUN=fun, ...)
-    }
-  }
   return(m)
 }
 

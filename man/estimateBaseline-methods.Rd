@@ -9,8 +9,8 @@ This method estimates the baseline of mass spectrometry data
 }
 \usage{
 \S4method{estimateBaseline}{MassSpectrum}(object,
-    method=c("SNIP", "TopHat", "ConvexHull", "Median"),
-    \dots)
+  method=c("SNIP", "TopHat", "ConvexHull", "median"),
+  \dots)
 }
 \arguments{
   \item{object}{\code{\linkS4class{MassSpectrum}} object}
@@ -18,7 +18,7 @@ This method estimates the baseline of mass spectrometry data
     \code{\link[MALDIquant]{.estimateBaselineSnip}},
     \code{\link[MALDIquant]{.estimateBaselineTopHat}},
     \code{\link[MALDIquant]{.estimateBaselineConvexHull}},
-    \code{\link[MALDIquant]{.estimateBaselineMedian}}
+    \code{\link[MALDIquant]{.estimateBaselineMedian}}.
   }
   \item{\dots}{arguments to be passed to \code{method}}
 }
@@ -38,7 +38,7 @@ Sebastian Gibb
 \code{\link[MALDIquant]{removeBaseline,MassSpectrum-method}}
 }
 \examples{
-## load library
+## load package
 library("MALDIquant")
 
 ## load example data

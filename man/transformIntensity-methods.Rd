@@ -10,31 +10,15 @@ intensities of an \code{\linkS4class{AbstractMassObject}} object.
 }
 \usage{
 \S4method{transformIntensity}{AbstractMassObject}(object,
-   fun, na.rm = TRUE,
-   \dots)
+  method=c("sqrt", "log", "log2", "log10"),
+  fun, \dots)
 }
 \arguments{
   \item{object}{\code{\linkS4class{AbstractMassObject}} object or a
     \code{list} of \code{\linkS4class{AbstractMassObject}} objects.}
-  \item{fun}{used transformation function (\code{\link{sqrt}},
-    \code{\link{log10}}, \code{\link{log}} or something else
-    would be possible)}
-  \item{na.rm}{logical, indicating whether \sQuote{NA} values should be
-    removed}
-  \item{\dots}{arguments to be passed to \code{fun}}
-}
-\details{
-\code{\link[MALDIquant]{transformIntensity}} is a shortcut for transforming
-intensities manually. \cr
-\preformatted{
-
-  ## doing things by hand
-  newMassSpectrum <- singleSpectrum1
-  intensity(newMassSpectrum) <- sqrt(intensity(singleSpectrum1))
-
-  ## the code above could replaced by the following line
-  newMassSpectrum <- transformIntensity(singleSpectrum1, fun=sqrt)
-}
+  \item{method}{used transformation method.}
+  \item{fun}{deprecated.}
+  \item{\dots}{deprecated.}
 }
 \references{
 See website: \url{http://strimmerlab.org/software/maldiquant/}
@@ -47,7 +31,7 @@ Sebastian Gibb
 \code{\linkS4class{MassSpectrum}}
 }
 \examples{
-## load library
+## load package
 library("MALDIquant")
 
 ## load example data
@@ -57,7 +41,7 @@ data("fiedler2009subset", package="MALDIquant")
 s <- fiedler2009subset[[1]]
 
 ## transform spectrum
-t <- transformIntensity(s, fun=sqrt)
+t <- transformIntensity(s, method="sqrt")
 
 ## plot spectrum
 par(mfrow=c(2, 1))

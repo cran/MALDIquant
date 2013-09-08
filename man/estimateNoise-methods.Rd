@@ -9,14 +9,14 @@ This method estimates the noise of mass spectrometry data
 }
 \usage{
 \S4method{estimateNoise}{MassSpectrum}(object,
-    method=c("MAD", "SuperSmoother"),
-    \dots)
+  method=c("MAD", "SuperSmoother"),
+  \dots)
 }
 \arguments{
   \item{object}{\code{\linkS4class{MassSpectrum}} object}
   \item{method}{a noise estimation function; see
     \code{\link[MALDIquant]{.estimateNoiseMad}},
-    \code{\link[MALDIquant]{.estimateNoiseSuperSmoother}}
+    \code{\link[MALDIquant]{.estimateNoiseSuperSmoother}}.
   }
   \item{\dots}{arguments to be passed to \code{method}.}
 }
@@ -34,7 +34,7 @@ Sebastian Gibb
 \code{\link[MALDIquant]{removeBaseline,MassSpectrum-method}}
 }
 \examples{
-## load library
+## load package
 library("MALDIquant")
 
 ## load example data
@@ -44,7 +44,7 @@ data("fiedler2009subset", package="MALDIquant")
 s <- fiedler2009subset[[1]]
 
 ## transform intensities
-s <- transformIntensity(s, sqrt)
+s <- transformIntensity(s, method="sqrt")
 
 ## remove baseline
 s <- removeBaseline(s)
