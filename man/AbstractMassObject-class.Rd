@@ -4,6 +4,8 @@
 \alias{AbstractMassObject-class}
 \alias{[,AbstractMassObject,logical,missing-method}
 \alias{[,AbstractMassObject,numeric,missing-method}
+\alias{[,MassPeaks,logical,missing-method}
+\alias{[,MassPeaks,numeric,missing-method}
 \alias{as.matrix,AbstractMassObject-method}
 \alias{intensity}
 \alias{intensity<-}
@@ -36,9 +38,8 @@ It shouldn't create or handle by the user because it is for internal use only.
 }
 \section{Slots}{
 \describe{
-  \item{\code{.cache}:}{\code{environment}, internal use only}
-  \item{\code{mass}:}{\code{vector}, mass or mass-to-charge ratio}
-  \item{\code{intensity}:}{\code{vector}, intensities for measured
+  \item{\code{mass}:}{\code{numeric}, mass or mass-to-charge ratio}
+  \item{\code{intensity}:}{\code{numeric}, intensities for measured
     mass-to-charge ratios}
   \item{\code{metaData}:}{\code{list}, some metadata to describe the
     spectrum}

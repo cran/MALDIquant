@@ -17,30 +17,46 @@
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
 ## intensityMatrix
-##  convert list of AbstractMassObject objects to a matrix
+##  converts a list of MassPeaks into an expression matrix
 ##
 ## params:
-##  l: list of AbstractMassObject objects
+##  peaks: list of MassPeaks objects
+##  spectra: list of MassSpectrum objects
 ##
 ## returns:
 ##  a matrix
 ##
-intensityMatrix <- function(l) {
+intensityMatrix <- function(peaks, spectra) {
 
-  ## test parameters
-  .stopIfNotIsMassObjectList(l)
+  ## deprecated for MassSpectrum objects
+  if (isMassSpectrumList(peaks)) {
+    .deprecated("1.8.4", "\"intensityMatrix\" is deprecated ",
+                "for lists of MassSpectrum objects.")
+    return(.intensityMatrixDeprecated(peaks))
+  }
 
-  ## fetch all mass
-  mass <- sort(x=.unlist(lapply(l, function(x)x@mass)), method="quick")
-  uMass <- unique(mass)
+  ## test arguments
+  .stopIfNotIsMassPeaksList(peaks)
 
-  ## build matrix
-  m <- do.call(rbind, lapply(l, function(x) {
-    return(x@intensity[match(x=uMass, table=x@mass, nomatch=NA)])}))
+  m <- .as.matrix.MassObjectList(peaks)
 
-  ## set column names
-  dimnames(m) <- list(NULL, c(uMass))
+  ## lookup corresponding intensity values in spectra for missing peaks
+  if (!missing(spectra)) {
+    .stopIfNotIsMassSpectrumList(spectra)
+
+    if (length(peaks) != length(spectra)) {
+      stop("Incompatible number of spectra!")
+    }
+
+    isNa <- is.na(m)
+    uniqueMass <- as.double(colnames(m))
+
+    approxSpectra <- lapply(spectra, approxfun, yleft=0L, yright=0L)
+
+    for (i in seq(along=approxSpectra)) {
+      m[i, isNa[i, ]] <- approxSpectra[[i]](uniqueMass[isNa[i, ]])
+    }
+  }
 
   return(m)
 }
-

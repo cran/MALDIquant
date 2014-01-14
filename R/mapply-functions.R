@@ -1,4 +1,4 @@
-## Copyright 2011-2013 Sebastian Gibb
+## Copyright 2013 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -16,21 +16,17 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## basic class for all spectra based information
-setClass("AbstractMassObject",
-         slots=list(mass="numeric", intensity="numeric",
-                    metaData="list"),
-         prototype=list(mass=numeric(), intensity=numeric(),
-                        metaData=list()),
-         contains="VIRTUAL")
-
-## represent a spectrum
-setClass("MassSpectrum",
-         contains="AbstractMassObject")
-
-## represent a peak list from a single spectrum
-setClass("MassPeaks",
-         slots=list(snr="numeric"),
-         prototype=list(snr=numeric()),
-         contains="AbstractMassObject")
+## .mapply
+##  wrapper for mapply with different defaults
+##
+## params:
+##  see ?mapply
+##
+## returns:
+##  see ?mapply
+##
+.mapply <- function(FUN, ..., MoreArgs=NULL, SIMPLIFY=FALSE, USE.NAMES=FALSE) {
+  return(mapply(FUN=FUN, ..., MoreArgs=MoreArgs, SIMPLIFY=SIMPLIFY,
+                USE.NAMES=USE.NAMES))
+}
 
