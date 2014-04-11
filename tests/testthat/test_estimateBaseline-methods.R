@@ -18,10 +18,7 @@ test_that("estimateBaseline shows warnings", {
 
 test_that("estimateBaselineConvexHull", {
   m[, 2] <- c(10:1, rep(1, 10))
-  ## C implementation
   expect_identical(MALDIquant:::.estimateBaselineConvexHull(1:20, i), m)
-  ## obsolete (slow) R implementation
-  expect_identical(MALDIquant:::.lowerConvexHullR(1:20, i), m)
   ## user method
   colnames(m) <- c("mass", "intensity")
   expect_identical(estimateBaseline(s, method="ConvexHull"), m)
@@ -58,15 +55,11 @@ test_that("estimateBaselineSnip", {
   for (j in seq(along=mlist)) {
     d <- names(mlist)[j] == "decreasing"
 
-    ## C implementation
     expect_identical(MALDIquant:::.estimateBaselineSnip(1:20, i, 2,
                                                         decreasing=d),
                      mlist[[j]]$m)
     expect_equal(MALDIquant:::.estimateBaselineSnip(1:20, i, decreasing=d),
                  mlist[[j]]$m100)
-    ## obsolete (slow) R implementation
-    expect_identical(MALDIquant:::.snipR(1:20, i, 2, decreasing=d),
-                     mlist[[j]]$m)
 
     ## user method
     colnames(mlist[[j]]$m100) <- colnames(mlist[[j]]$m) <- c("mass", "intensity")
@@ -82,11 +75,8 @@ test_that("estimateBaselineTopHat", {
   m[, 2] <- c(rep(8, 3), 7:1, rep(6, 5), 5:1)
   m1 <- m
   m1[, 2] <- c(rep(9, 2), 8:1, rep(8, 3), 7:1)
-  ## C implementation
   expect_identical(MALDIquant:::.estimateBaselineTopHat(1:20, i, 1), m1)
   expect_identical(MALDIquant:::.estimateBaselineTopHat(1:20, i, 2), m)
-  ## obsolete (slow) R implementation
-  expect_equal(MALDIquant:::.topHatR(1:20, i, 2), m)
 
   ## user method
   colnames(m) <- c("mass", "intensity")

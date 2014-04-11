@@ -1,4 +1,4 @@
-## Copyright 2011-2013 Sebastian Gibb
+## Copyright 2011-2014 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -31,43 +31,8 @@
 ##  a matrix of the estimate baseline (col1: mass; col2: intensity)
 ##
 
-## C version
 .estimateBaselineConvexHull <- function(x, y) {
   return(cbind(x=x, y=.Call("C_lowerConvexHull", x, y)))
-}
-
-## R only: obsolete because too slow
-.lowerConvexHullR <- function(x, y) {
-
-  ## .left()
-  ## build cross product of 2 vectors and compare to zero
-  ## returns true for >= P2(x2, y2) left/on the line of P0->P1
-  .left <- function(x0, y0, x1, y1, x2, y2) {
-    return(((x1-x0)*(y2-y0) - (x2-x0)*(y1-y0)) > 0)
-  }
-
-  # typically x values have to been sorted
-  # our x values are already sorted
-  index <- double(length(x))
-  k <- 1L
-
-  for (i in seq(along=x)) {
-    while (k > 2L && !.left(x[index[k-2L]], y[index[k-2L]],
-                            x[index[k-1L]], y[index[k-1L]],
-                            x[i], y[i])) {
-      ## remove last point
-      k <- k-1L
-    }
-    index[k] <- i
-    k <- k+1L
-  }
-
-  index <- index[1L:(k-1L)]
-
-  b <- matrix(.unlist(approx(x=x[index], y=y[index], xout=x, method="linear",
-                             rule=2L)), nrow=length(x), ncol=2L,
-              dimnames=list(list(), list("x", "y")))
-  return(b)
 }
 
 ## estimateBaselineMedian
@@ -119,32 +84,8 @@
 ## returns:
 ##  a matrix of the estimate baseline (col1: mass; col2: intensity)
 
-## C version
 .estimateBaselineSnip <- function(x, y, iterations=100L, decreasing=TRUE) {
   return(cbind(x=x, y=.Call("C_snip", y, iterations, decreasing)))
-}
-
-## R only: obsolete because too slow
-.snipR <- function(x, y, iterations=100L, decreasing=TRUE) {
-  n <- length(y)
-
-  if (decreasing) {
-    s <- seq(from=iterations, to=1L)
-  } else {
-    s <- seq(from=1L, to=iterations)
-  }
-
-  for (i in s) {
-    j <- (i+1L):(n-i)
-    jl <- j-i
-    ju <- j+i
-    m <- (y[jl]+y[ju])/2L
-    ## too slow
-    #y[j] <- ifelse(y[j] > m, m, y[j])
-    ml <- y[j]>m
-    y[j][ml] <- m[ml]
-  }
-  return(cbind(x, y))
 }
 
 ## estimateBaselineTopHat
@@ -165,22 +106,6 @@
   e <- .erosion(y, halfWindowSize=halfWindowSize)
   y <- .dilation(e, halfWindowSize=halfWindowSize)
 
-  return(cbind(x, y))
-}
-
-## R only: obsolete because too slow
-.topHatR <- function(x, y, halfWindowSize=100L) {
-
-  .stopIfNotIsValidHalfWindowSize(halfWindowSize=halfWindowSize, n=length(x))
-
-  windowSize <- 2L*halfWindowSize+1L
-
-  windows <- embed(c(rep(y[1L], halfWindowSize), y,
-                     rep(tail(y, 1L), halfWindowSize)), windowSize)
-  e <- apply(windows, 1L, min)
-  windows <- embed(c(rep(e[1L], halfWindowSize), e,
-                     rep(tail(e, 1L), halfWindowSize)), windowSize)
-  y <- apply(windows, 1L, max)
   return(cbind(x, y))
 }
 

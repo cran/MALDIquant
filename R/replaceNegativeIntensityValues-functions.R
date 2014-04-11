@@ -1,4 +1,4 @@
-## Copyright 2011-2013 Sebastian Gibb
+## Copyright 2014 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -16,30 +16,22 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## .which.closest
-##  a relaxed version of which (returns the nearest index)
+## .replaceNegativeIntensityValues
+##  replace negative intensity valus by zeros
 ##
 ## params:
-##  x: numeric key value to look for
-##  vec: numeric, has to be sorted
+##  object AbstractMass Object
+##  warn: throw a warning?
 ##
 ## returns:
-##  a vector of indices
+##  a AbstractMass object
 ##
-.which.closest <- function(x, vec) {
-
-  ## find left interval
-  lIdx <- findInterval(x, vec, rightmost.closed=FALSE, all.inside=TRUE)
-  rIdx <- lIdx+1L
-
-  ## respect limits
-  lIdx[which(lIdx < 1L)] <- 1L
-  rIdx[which(rIdx > length(vec))] <- length(vec)
-
-  ## calculate differences for left and right
-  lDiff <- abs(vec[lIdx]-x)
-  rDiff <- abs(vec[rIdx]-x)
-
-  return(ifelse(rDiff == pmin.int(lDiff, rDiff), rIdx, lIdx))
+.replaceNegativeIntensityValues <- function(object, warn=TRUE) {
+  if (!isEmpty(object) && any(object@intensity < 0L)) {
+    if (warn) {
+      warning("Negative intensity values are replaced by zeros.")
+    }
+    object@intensity[which(object@intensity < 0L)] <- 0L
+  }
+  return(object)
 }
-

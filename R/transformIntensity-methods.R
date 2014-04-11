@@ -1,4 +1,4 @@
-## Copyright 2011-2013 Sebastian Gibb
+## Copyright 2011-2014 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -20,18 +20,11 @@
 setMethod(f="transformIntensity",
           signature=signature(object="AbstractMassObject"),
           definition=function(object,
-                              method=c("sqrt", "log", "log2", "log10"),
-                              fun, ... ## deprecated
-                              ) {
+                              method=c("sqrt", "log", "log2", "log10")) {
 
   ## empty spectrum?
   if (.isEmptyWarning(object)) {
     return(object)
-  }
-
-  if (!missing(fun)) {
-    .deprecatedArgument("1.7.12", "fun", "method", help="transformIntensity")
-    return(.transformIntensity(object, fun=fun, ...))
   }
 
   method <- match.arg(method)
@@ -67,10 +60,17 @@ setMethod(f=".transformIntensity",
 
     object@intensity <- fun(object@intensity, ...)
 
+    belowZeroIdx <- which(object@intensity < 0L)
+
+    if (length(belowZeroIdx)) {
+      warning("Negative intensities generated. Replaced by zeros.")
+      object <- .replaceNegativeIntensityValues(object, warn=FALSE)
+    }
+
     if (na.rm) {
-      na <- is.na(object@intensity)
-      object@intensity <- object@intensity[!na]
-      object@mass <- object@mass[!na]
+      naIdx <- which(!is.na(object@intensity))
+      object@intensity <- object@intensity[naIdx]
+      object@mass <- object@mass[naIdx]
     }
   }
 
