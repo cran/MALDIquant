@@ -1,9 +1,5 @@
 import("methods")
 
-importFrom("grDevices",
-              "getGraphicsEvent",
-              "setGraphicsEventHandlers")
-
 importFrom("graphics",
               "lines",
               "plot",
@@ -35,6 +31,7 @@ export("alignSpectra",
        "isMassSpectrum",
        "isMassSpectrumList",
        "mergeMassPeaks",
+       "plotImsSlice",
        "referencePeaks",
        "removeEmptyMassObjects",
        "warpMassPeaks",
