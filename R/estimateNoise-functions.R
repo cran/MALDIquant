@@ -1,4 +1,4 @@
-## Copyright 2011-2014 Sebastian Gibb
+## Copyright 2011-2015 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -16,7 +16,7 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
-## estimateNoise
+## .estimateNoise
 ##  estimating the noise of a spectrum
 ##
 ## params:
@@ -26,26 +26,20 @@
 ##  ...: further arguments passed to "method"
 ##
 ## returns:
-##  a matrix of the estimate noise (col1: mass; col2: intensity)
+##  numeric, estimated noise (y)
 ##
 .estimateNoise <- function(x, y, method=c("MAD", "SuperSmoother"), ...) {
 
   method <- match.arg(method)
 
-  n <- switch(method,
-              "MAD" = {
-                .estimateNoiseMad(x, y)
-              },
-              "SuperSmoother" = {
-                .estimateNoiseSuperSmoother(x, y, ...)
-              },
-              {
-                stop("Unknown ", sQuote("method"), ".")
-              }
+  switch(method,
+         "MAD" = {
+           .estimateNoiseMad(x, y)
+         },
+         "SuperSmoother" = {
+           .estimateNoiseSuperSmoother(x, y, ...)
+         }
   )
-
-  colnames(n) <- c("mass", "intensity")
-  return(n)
 }
 
 ## estimateNoiseMad
@@ -56,10 +50,10 @@
 ##  y: vector of y values
 ##
 ## returns:
-##  a matrix of the estimate noise (col1: mass; col2: intensity)
+##  numeric, estimated noise (y)
 ##
 .estimateNoiseMad <- function(x, y) {
-  return(cbind(x, rep(stats::mad(y), times=length(x))))
+  rep.int(stats::mad(y), length(x))
 }
 
 ## estimateNoiseSuperSmoother
@@ -71,9 +65,8 @@
 ##  ...: further arguments to passed to supsmu
 ##
 ## returns:
-##  a matrix of the estimate noise (col1: mass; col2: intensity)
+##  numeric, estimated noise (y)
 ##
 .estimateNoiseSuperSmoother <- function(x, y, ...) {
-  return(cbind(x, stats::supsmu(x=x, y=y, ...)$y))
+  stats::supsmu(x=x, y=y, ...)$y
 }
-

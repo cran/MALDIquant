@@ -28,7 +28,7 @@ setMethod(f="labelPeaks",
 
   ## index
   if (missing(index) && missing(mass)) {
-    index <- 1L:length(object@mass)
+    index <- seq_along(object@mass)
   } else if (!missing(index) && is.logical(index)) {
     index <- which(index)
   }
@@ -70,7 +70,7 @@ setMethod(f="labelPeaks",
   }
 
   if (missing(absoluteVerticalPos)) {
-    y <- object@intensity[index]+verticalOffset
+    y <- object@intensity[index] + verticalOffset
   } else {
     y <- absoluteVerticalPos
   }
@@ -90,4 +90,3 @@ setMethod(f="labelPeaks",
   }
   text(x=x, y=y, labels=labels, adj=adj, cex=cex, ...)
 })
-

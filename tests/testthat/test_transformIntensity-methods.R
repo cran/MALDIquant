@@ -11,6 +11,9 @@ test_that("transformIntensity shows warnings", {
 test_that("transformIntensity", {
   expect_equal(intensity(transformIntensity(s, method="sqrt")), 1:10)
   expect_equal(intensity(transformIntensity(s, method="log")), log((1:10)^2))
+  expect_equal(intensity(transformIntensity(s, method="log2")), log2((1:10)^2))
+  expect_equal(intensity(transformIntensity(s, method="log10")),
+               log10((1:10)^2))
 })
 
 test_that("transformIntensity works with list of MassSpectrum objects", {
@@ -28,7 +31,7 @@ test_that(".transformIntensity throws errors", {
 
 test_that(".transformIntensity shows warnings", {
   expect_warning(.transformIntensity(s, fun=function(x)return(-x)),
-                 "Negative intensities generated")
+                 "Negative intensity values are replaced by zeros.")
 })
 
 test_that(".transformIntensity", {
@@ -51,4 +54,3 @@ test_that(".transformIntensity works with list of AbstractMassObject objects", {
   r <- createMassSpectrum(mass=1:10, intensity=1:10)
   expect_equal(.transformIntensity(list(s, s), fun=sqrt), list(r, r))
 })
-

@@ -21,6 +21,5 @@ setMethod(f="snr",
           signature=signature(object="MassPeaks"),
           definition=function(object) {
 
-  return(object@snr)
+  object@snr
 })
-

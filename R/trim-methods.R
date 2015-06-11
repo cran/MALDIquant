@@ -1,4 +1,4 @@
-## Copyright 2012-2013 Sebastian Gibb
+## Copyright 2012-2015 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -26,32 +26,31 @@ setMethod("trim",
 
   range <- .reorderRange(range)
 
-  sel <- which(range[1L] <= object@mass & object@mass <= range[2L])
+  sel <- which(findInterval(object@mass, range, rightmost.closed=TRUE) == 1L)
 
   if (!length(sel)) {
     warning("The mass range (", paste0(range, collapse=":"),
             ") is outside of the stored mass values. No data points left.")
   }
 
-  return(object[sel])
+  object[sel]
 })
 
 ## list
 setMethod("trim",
           signature=signature(object="list", range="numeric"),
-          definition=function(object, range) {
-  return(lapply(X=object, FUN=trim, range=range))
+          definition=function(object, range, ...) {
+  .lapply(X=object, FUN=trim, range=range, ...)
 })
 
 setMethod("trim",
           signature=signature(object="list", range="missing"),
-          definition=function(object) {
+          definition=function(object, ...) {
   range <- .overlap(object)
 
   if (all(range == 0L)) {
     stop("No overlap found!")
   }
 
-  return(lapply(X=object, FUN=trim, range=range))
+  .lapply(X=object, FUN=trim, range=range, ...)
 })
-

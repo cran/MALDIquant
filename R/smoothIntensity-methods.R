@@ -29,26 +29,22 @@ setMethod(f="smoothIntensity",
 
   method <- match.arg(method)
 
-  switch(method,
-         "SavitzkyGolay" = {
-           fun <- .savitzkyGolay
-           if (missing(halfWindowSize)) {
-             halfWindowSize <- 10L
-           }
-         },
-         "MovingAverage" = {
-           fun <- .movingAverage
-           if (missing(halfWindowSize)) {
-             halfWindowSize <- 2L
-           }
-         },
-         {
-           stop("Unknown ", sQuote("method"), ".")
-         }
+  fun <- switch(method,
+                "SavitzkyGolay" = {
+                  if (missing(halfWindowSize)) {
+                    halfWindowSize <- 10L
+                  }
+                  .savitzkyGolay
+                },
+                "MovingAverage" = {
+                  if (missing(halfWindowSize)) {
+                    halfWindowSize <- 2L
+                  }
+                  .movingAverage
+                }
   )
 
-  return(.transformIntensity(object, fun=fun,
-                             halfWindowSize=halfWindowSize, ...))
+  .transformIntensity(object, fun=fun, halfWindowSize=halfWindowSize, ...)
 })
 
 ## list
@@ -59,6 +55,5 @@ setMethod(f="smoothIntensity",
   ## test arguments
   .stopIfNotIsMassSpectrumList(object)
 
-  return(.mapply(smoothIntensity, object, ...))
+  .mapply(smoothIntensity, object, ...)
 })
-

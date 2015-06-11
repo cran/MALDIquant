@@ -1,4 +1,4 @@
-## Copyright 2012-2013 Sebastian Gibb
+## Copyright 2012-2015 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -42,11 +42,11 @@
   meanMass <- mean(mass)
 
   ## all peaks in range?
-  if (any(abs(mass-meanMass)/meanMass > tolerance)) {
+  if (any(abs(mass - meanMass) / meanMass > tolerance)) {
     return(NA)
   }
 
-  return(meanMass)
+  meanMass
 }
 
 ## .grouperRelaxed
@@ -69,13 +69,14 @@
   meanMass <- mean(mass)
 
   ## all peaks in range?
-  if (any(abs(mass-meanMass)/meanMass > tolerance)) {
+  if (any(abs(mass - meanMass) / meanMass > tolerance)) {
     return(NA)
   }
 
   ## choose highest peak in duplicates
   if (anyDuplicated(samples)) {
-    s <- sort(intensities, method="quick", decreasing=TRUE, index.return=TRUE)
+    s <- sort.int(intensities, method="quick", decreasing=TRUE,
+                  index.return=TRUE)
     samples <- samples[s$ix]
 
     noDup <- !duplicated(samples)
@@ -86,9 +87,9 @@
     mass[noDup] <- mean(mass[noDup])
 
     return(mass)
-  } else {
-    return(meanMass)
   }
+
+  meanMass
 }
 
 ## .grouperRelaxedHighestAtReference
@@ -123,13 +124,14 @@
   meanMass <- mass[ref]
 
   ## all peaks in range?
-  if (any(abs(mass-meanMass)/meanMass > tolerance)) {
+  if (any(abs(mass - meanMass) / meanMass > tolerance)) {
     return(NA)
   }
 
   ## choose highest peak in duplicates
   if (anyDuplicated(samples)) {
-    s <- sort(intensities, method="quick", decreasing=TRUE, index.return=TRUE)
+    s <- sort.int(intensities, method="quick", decreasing=TRUE,
+                  index.return=TRUE)
     sSamples <- samples[s$ix]
 
     noDup <- !duplicated(sSamples)
@@ -138,8 +140,7 @@
     mass[s$ix] <- sMass
 
     return(mass)
-  } else {
-    return(meanMass)
   }
-}
 
+  meanMass
+}

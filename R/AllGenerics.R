@@ -1,4 +1,4 @@
-## Copyright 2011-2013 Sebastian Gibb
+## Copyright 2011-2015 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -29,6 +29,9 @@ if (is.null(getGeneric("lines"))) {
 if (is.null(getGeneric("plot"))) {
   setGeneric("plot", function(x, y, ...) standardGeneric("plot"))
 }
+if (is.null(getGeneric("plotMsiSlice"))) {
+  setGeneric("plotMsiSlice", function(x, ...) standardGeneric("plotMsiSlice"))
+}
 if (is.null(getGeneric("points"))) {
   setGeneric("points", function(x, ...) standardGeneric("points"))
 }
@@ -37,28 +40,25 @@ if (is.null(getGeneric(".prepareShow"))) {
 }
 if (is.null(getGeneric("transformIntensity"))) {
   setGeneric("transformIntensity",
-             function(object, ...)
-               standardGeneric("transformIntensity"))
+             function(object, ...) standardGeneric("transformIntensity"))
 }
 if (is.null(getGeneric(".transformIntensity"))) {
   setGeneric(".transformIntensity",
-             function(object, ...)
-               standardGeneric(".transformIntensity"))
+             function(object, ...) standardGeneric(".transformIntensity"))
 }
 if (is.null(getGeneric("trim"))) {
-  setGeneric("trim",
-             function(object, range) standardGeneric("trim"))
+  setGeneric("trim", function(object, range, ...) standardGeneric("trim"))
 }
 
 ## get/set slots
 if (is.null(getGeneric("mass"))) {
-  setGeneric("mass", function(object) standardGeneric("mass"))
+  setGeneric("mass", function(object, ...) standardGeneric("mass"))
 }
 if (is.null(getGeneric("mass<-"))) {
   setGeneric("mass<-", function(object, value) standardGeneric("mass<-"))
 }
 if (is.null(getGeneric("intensity"))) {
-  setGeneric("intensity", function(object) standardGeneric("intensity"))
+  setGeneric("intensity", function(object, ...) standardGeneric("intensity"))
 }
 if (is.null(getGeneric("intensity<-"))) {
   setGeneric("intensity<-",
@@ -77,6 +77,15 @@ if (is.null(getGeneric("metaData<-"))) {
   setGeneric("metaData<-",
              function(object, value) standardGeneric("metaData<-"))
 }
+if (is.null(getGeneric("coordinates"))) {
+  setGeneric("coordinates",
+             function(object, ...) standardGeneric("coordinates"))
+}
+if (is.null(getGeneric("coordinates<-"))) {
+  setGeneric("coordinates<-",
+             function(object, value) standardGeneric("coordinates<-"))
+}
+
 ## end of AbstractMassObject
 
 ## MassSpectrum
@@ -136,7 +145,7 @@ if (is.null(getGeneric("totalIonCurrent"))) {
 if (is.null(getGeneric("labelPeaks"))) {
   setGeneric("labelPeaks",
              function(object, index, mass, labels, digits=3L, underline=TRUE,
-                      verticalOffset=abs(diff(par("usr")[3:4]))*0.0125,
+                      verticalOffset=abs(diff(par("usr")[3:4])) * 0.0125,
                       absoluteVerticalPos, adj=c(0.5, 0L), cex=0.7,
                       avoidOverlap=FALSE, arrowLength=0L, arrowLwd=0.5,
                       arrowCol=1, ...) standardGeneric("labelPeaks"))
@@ -157,4 +166,3 @@ if (is.null(getGeneric(".labelOverlap"))) {
              function(object, ...) standardGeneric(".labelOverlap"))
 }
 ## end of MassPeaks
-

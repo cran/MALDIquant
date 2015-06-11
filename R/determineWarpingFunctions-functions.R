@@ -55,9 +55,6 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
     },
     "cubic" = {
       .warpingFunctionCubic
-    },
-    {
-      stop("Unknown ", sQuote("method"), ".")
     }
   )
 
@@ -78,7 +75,7 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
     stop("Reference MassPeaks object contains no peaks!")
   }
 
-  if (length(reference) < 10) {
+  if (length(reference) < 10L) {
     warning("Reference MassPeaks object contains very few peaks (n == ",
             length(reference), "). The warping could be instable. ",
             "Consider to reduce ", sQuote("minFrequency"),
@@ -105,12 +102,11 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
   intensities <- .unlist(lapply(tmpPeakList, function(x)x@intensity))
 
   ## store original mass sample number/id
-  samples <- .unlist(lapply(1L:length(tmpPeakList), function(x) {
-                return(rep(x, length(tmpPeakList[[x]])))
-  }))
+  samples <- rep.int(seq_along(tmpPeakList),
+                     .unlist(lapply(tmpPeakList, length)))
 
   ## sort values by mass
-  s <- sort(mass, method="quick", index.return=TRUE)
+  s <- sort.int(mass, method="quick", index.return=TRUE)
 
   mass <- s$x
   intensities <- intensities[s$ix]
@@ -123,13 +119,11 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
                           grouper=.grouperRelaxedHighestAtReference)
 
   ## group mass/intensities by sample ids
-  lIdx <- tapply(X=1L:length(binnedMass), INDEX=samples, FUN=function(x) {
-      return(x)
-  })
+  lIdx <- split(seq_along(binnedMass), samples)
 
   ## calculate differences
   binnedMass[binnedMass == 0L] <- NA
-  d <- binnedMass-mass
+  d <- binnedMass - mass
 
   ## each function which determines a warping function uses these 3 arguments
   arguments <- list(x=NULL, d=NULL)
@@ -146,13 +140,11 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
     arguments$d <- d[i][notNA]  ## difference to reference
 
     if (!length(arguments$x)) {
-      stop("Could not match any peak in spectrum ", samples[i[1L]]-1L,
+      stop("Could not match any peak in spectrum ", samples[i[1L]] - 1L,
            " to a reference peak.")
     }
 
-    w <- do.call(warpingFunction, arguments)
-
-    return(w)
+    do.call(warpingFunction, arguments)
   })
 
   ## clean misleading names (names == idx+1 because reference is idx == 1)
@@ -168,7 +160,7 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
               " but no non-interactive devices is available. ",
               "Using pdf() to create a default one.")
       pdf(paper="a4r", width=12)
-    } else if (dev.cur() == 1 && plotInteractive) {
+    } else if (dev.cur() == 1L && plotInteractive) {
       warning(sQuote("plot"), " is ", sQuote("TRUE"),
               " but no interactive devices is available. ",
               "Using dev.new() to create a default one.")
@@ -198,9 +190,9 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
       l <- list(l)
     }
 
-    for (i in seq(along=l)) {
+    for (i in seq_along(l)) {
       ## fetch changed mass == aligned peaks
-      notNA <- !is.na(binnedMass[lIdx[[i+1L]]])
+      notNA <- !is.na(binnedMass[lIdx[[i + 1L]]])
 
       if (is.null(givenPlotArgs$main)) {
         plotArgs$main <- paste0("sample ", i, " vs reference\n",
@@ -214,7 +206,7 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
 
       ## plot reference vs sample
       plotArgs$x <- l[[i]]@mass[notNA]
-      plotArgs$y <- d[lIdx[[i+1L]]][notNA]
+      plotArgs$y <- d[lIdx[[i + 1L]]][notNA]
       do.call(plot.default, plotArgs)
 
       ## draw warping function
@@ -226,6 +218,5 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
     }
   }
 
-  return(warpingFunctions)
+  warpingFunctions
 }
-

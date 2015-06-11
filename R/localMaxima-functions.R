@@ -29,9 +29,7 @@
 ##
 
 .localMaxima <- function(y, halfWindowSize=1L) {
-  y <- c(rep(0L, halfWindowSize), y, rep(0L, halfWindowSize))
-  n <- length(y)
-  i <- (halfWindowSize+1L):(n-halfWindowSize)
-  return(.Call("C_localMaxima", y, halfWindowSize)[i])
+  y <- c(rep.int(0L, halfWindowSize), y, rep.int(0L, halfWindowSize))
+  i <- (halfWindowSize + 1L):(length(y) - halfWindowSize)
+  .Call("C_localMaxima", y, halfWindowSize)[i]
 }
-

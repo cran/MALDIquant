@@ -1,4 +1,4 @@
-## Copyright 2011-2013 Sebastian Gibb
+## Copyright 2011-2015 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -21,11 +21,11 @@ setMethod(f="estimateNoise",
           signature=signature(object="MassSpectrum"),
           definition=function(object, method=c("MAD", "SuperSmoother"),
                               ...) {
-
   if (.isEmptyWarning(object)) {
     return(0L)
   }
 
-  return(.estimateNoise(x=object@mass, y=object@intensity, method=method, ...))
+  cbind(mass=object@mass,
+        intensity=.estimateNoise(x=object@mass, y=object@intensity,
+                                 method=method, ...))
 })
-

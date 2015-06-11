@@ -21,6 +21,5 @@ setMethod(f="length",
           signature=signature(x="AbstractMassObject"),
           definition=function(x) {
 
-  return(length(x@intensity))
+  length(x@intensity)
 })
-

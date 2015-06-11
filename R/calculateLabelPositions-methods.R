@@ -34,22 +34,23 @@ setMethod(f=".calculateLabelPositions",
   signature=signature(object="MassPeaks"),
   definition=function(object, x, y, peakLabels, adj, cex, maxSteps=100L) {
   ## start with smallest peak
-  i <- sort(y, index.return=TRUE, method="quick")$ix
+  i <- sort.int(y, index.return=TRUE, method="quick")$ix
 
   ## calculate label rectangles
   rects <- .textLabelRects(x[i], y[i], peakLabels[i], adj=adj, cex=cex)
 
   ## move rectangles around to avoid collisons
-  for (j in seq(along=x)) {
-    rects[j, ] <- .testLabelOverlap(object, rects, currentIndex=j, maxSteps=maxSteps)
+  for (j in seq_along(x)) {
+    rects[j, ] <- .testLabelOverlap(object, rects, currentIndex=j,
+                                    maxSteps=maxSteps)
   }
 
   ## undo sorting
   rects[i, ] <- rects
 
-  return(list(x=rects[, "x"], y=rects[, "y"],
-              xleft=rects[, "x0"], ybottom=rects[, "y0"],
-              xright=rects[, "x1"], ytop=rects[, "y1"]))
+  list(x=rects[, "x"], y=rects[, "y"],
+       xleft=rects[, "x0"], ybottom=rects[, "y0"],
+       xright=rects[, "x1"], ytop=rects[, "y1"])
 })
 
 ## .testLabelOverlap
@@ -67,23 +68,26 @@ setMethod(f=".testLabelOverlap",
   signature=signature(object="MassPeaks"),
   definition=function(object, rects, currentIndex, maxSteps) {
 
-  r <- pi/180L*c(90, as.vector(rbind(seq(80L, 40L, by=-10L),
-                                     seq(100L, 140L, by=10L))))
+  r <- pi / 180L * c(90, as.vector(rbind(seq(80L, 40L, by=-10L),
+                                         seq(100L, 140L, by=10L))))
 
   for (k in 0L:maxSteps) {
     ## move up
     cur <- rects[currentIndex, ]
     cur[c("y0", "y1", "y")] <- cur[c("y0", "y1", "y")] + k * cur[c("h")]
-    isOverlapped <- .labelOverlap(object, cur, rects[1L:(currentIndex-1L), ])
+    isOverlapped <- .labelOverlap(object, cur,
+                                  rects[seq_len(currentIndex - 1L), ])
 
     if (isOverlapped) {
       for (l in r) {
         ## move in curve
         oldcur <- cur
-        cur[c("y0", "y1", "y")] <- cur[c("y0", "y1", "y")] + sin(l) * cur[c("h")]
-        cur[c("x0", "x1", "x")] <- cur[c("x0", "x1", "x")] + cos(l) * cur[c("w")]
-        isOverlapped <- .labelOverlap(object, cur, rects[1L:(currentIndex-1L), ])
-
+        cur[c("y0", "y1", "y")] <- cur[c("y0", "y1", "y")] +
+                                   sin(l) * cur[c("h")]
+        cur[c("x0", "x1", "x")] <- cur[c("x0", "x1", "x")] +
+                                   cos(l) * cur[c("w")]
+        isOverlapped <- .labelOverlap(object, cur,
+                                      rects[seq_len(currentIndex - 1L), ])
         if (!isOverlapped) {
           ## success
           return(cur)
@@ -96,7 +100,7 @@ setMethod(f=".testLabelOverlap",
     }
   }
   ## no success, return original pos
-  return(rects[currentIndex, ])
+  rects[currentIndex, ]
 })
 
 ## .labelOverlap
@@ -134,6 +138,5 @@ setMethod(f=".labelOverlap",
                       (y[2L] > rects[, 2L] & y[2L] < rects[, 4L]) |
                       (y[1L] < rects[, 2L] & y[2L] > rects[, 4L])))
 
-  return(textOverlap)
+  textOverlap
 })
-

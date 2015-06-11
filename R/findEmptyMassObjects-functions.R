@@ -31,6 +31,5 @@ findEmptyMassObjects <- function(l) {
 
   isEmpty <- vapply(l, isEmpty, logical(1L))
 
-  return(which(isEmpty))
+  which(isEmpty)
 }
-

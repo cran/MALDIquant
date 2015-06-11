@@ -12,7 +12,9 @@ subtraction methods such as TopHat or SNIP, peak alignment using warping
 functions, handling of replicated measurements as well as allowing spectra with
 different resolutions.
 
-For a first overview run \code{demo("MALDIquant")}.
+For a first overview see
+\code{vignette("MALDIquant-intro", package="MALDIquant")} and/or run
+\code{demo("MALDIquant")}.
 }
 \details{
 \tabular{ll}{
@@ -47,9 +49,12 @@ Website: \url{http://strimmerlab.org/software/maldiquant/}
 }
 \seealso{
   \itemize{
-    \item Introduction: \code{vignette("MALDIquant", package="MALDIquant")}.
+    \item Introduction:
+      \code{vignette("MALDIquant-intro", package="MALDIquant")}.
     \item Run demo files: \code{demo("MALDIquant")}.
     \item List all available manual pages: \code{library(help="MALDIquant")}.
     \item MALDIquant website: \url{http://strimmerlab.org/software/maldiquant/}.
+    \item more MALDIquant examples and complete analyses:
+    \url{https://github.com/sgibb/MALDIquantExamples/}.
   }
 }

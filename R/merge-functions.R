@@ -1,4 +1,4 @@
-## Copyright 2011-2014 Sebastian Gibb
+## Copyright 2011-2015 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -27,8 +27,8 @@
 ## returns:
 ##  a new MassPeaks object or a list of new MassPeaks objects
 ##
-mergeMassPeaks  <- function(l, labels, method=c("mean", "median", "sum"),
-                            ignore.na=TRUE) {
+mergeMassPeaks <- function(l, labels, method=c("mean", "median", "sum"),
+                           ignore.na=TRUE, ...) {
 
   ## test arguments
   .stopIfNotIsMassPeaksList(l)
@@ -44,14 +44,11 @@ mergeMassPeaks  <- function(l, labels, method=c("mean", "median", "sum"),
               },
               "sum" = {
                 colSums
-              },
-              {
-                stop("Unknown ", sQuote("method"), ".")
               }
   )
 
-  return(.doByLabels(l=l, labels=labels, FUN=.mergeMassPeaks, fun=fun,
-                     ignore.na=ignore.na))
+  .doByLabels(l=l, labels=labels, FUN=.mergeMassPeaks, fun=fun,
+              ignore.na=ignore.na, ...)
 }
 
 ## .mergeMassPeaks
@@ -71,7 +68,7 @@ mergeMassPeaks  <- function(l, labels, method=c("mean", "median", "sum"),
   ## create a matrix which could merged
   m <- .as.matrix.MassObjectList(l)
 
-  mass <- as.double(colnames(m))
+  mass <- attr(m, "mass")
 
   ## avoid named intensity/snr slot
   colnames(m) <- NULL
@@ -85,7 +82,7 @@ mergeMassPeaks  <- function(l, labels, method=c("mean", "median", "sum"),
   intensity <- fun(m, na.rm=TRUE)
 
   ## merge snr
-  for (i in seq(along=l)) {
+  for (i in seq_along(l)) {
     m[i, !isNA[i, ]] <- l[[i]]@snr
   }
   snr <- fun(m, na.rm=TRUE)
@@ -93,8 +90,7 @@ mergeMassPeaks  <- function(l, labels, method=c("mean", "median", "sum"),
   ## merge metaData
   metaData <- .mergeMetaData(lapply(l, function(x)x@metaData))
 
-  return(createMassPeaks(mass=mass, intensity=intensity, snr=snr,
-                         metaData=metaData))
+  createMassPeaks(mass=mass, intensity=intensity, snr=snr, metaData=metaData)
 }
 
 ## merge different metaData by equal list names
@@ -107,11 +103,11 @@ mergeMassPeaks  <- function(l, labels, method=c("mean", "median", "sum"),
 ##
 .mergeMetaData <- function(m) {
 
-  .flat <- function(x) {return(unname(unlist(x)))}
+  .flat <- function(x)unname(unlist(x))
 
   nm <- names(m[[1L]])
   names(nm) <- nm
-  m <- lapply(nm, function(n) {
+  lapply(nm, function(n) {
     cur <- m[[1L]][[n]]
     all <- lapply(m, function(x)x[[n]])
     len <- lapply(all, function(x)length(x))
@@ -126,6 +122,4 @@ mergeMassPeaks  <- function(l, labels, method=c("mean", "median", "sum"),
       return(cur)
     }
   })
-  return(m)
 }
-

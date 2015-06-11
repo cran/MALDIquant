@@ -21,9 +21,7 @@
     return(FALSE)
   }
 
-  areMassObjects <- length(x) &&
-                    all(unname(vapply(x, .isMassObject, logical(1L))))
-  return(areMassObjects)
+  length(x) && all(unname(vapply(x, .isMassObject, logical(1L))))
 }
 
 .stopIfNotIsMassObjectList <- function(x) {
@@ -31,9 +29,8 @@
     parentCall <- deparse(sys.call(-1L))
     stop(parentCall, " : ", sQuote(deparse(substitute(x))),
          " is no list of MALDIquant::AbstractMassObject objects!", call.=FALSE)
-    return(FALSE)
   }
-  return(TRUE)
+  TRUE
 }
 
 isMassSpectrumList <- function(x) {
@@ -41,9 +38,7 @@ isMassSpectrumList <- function(x) {
     return(FALSE)
   }
 
-  areMassSpectrumObjects <- length(x) &&
-                            all(unname(vapply(x, isMassSpectrum, logical(1L))))
-  return(areMassSpectrumObjects)
+  length(x) && all(unname(vapply(x, isMassSpectrum, logical(1L))))
 }
 
 .stopIfNotIsMassSpectrumList <- function(x) {
@@ -51,9 +46,8 @@ isMassSpectrumList <- function(x) {
     parentCall <- deparse(sys.call(-1L))
     stop(parentCall, " : ", sQuote(deparse(substitute(x))),
          " is no list of MALDIquant::MassSpectrum objects!", call.=FALSE)
-    return(FALSE)
   }
-  return(TRUE)
+  TRUE
 }
 
 isMassPeaksList <- function(x) {
@@ -61,9 +55,7 @@ isMassPeaksList <- function(x) {
     return(FALSE)
   }
 
-  areMassPeaksObjects <- length(x) &&
-                         all(unname(vapply(x, isMassPeaks, logical(1L))))
-  return(areMassPeaksObjects)
+  length(x) && all(unname(vapply(x, isMassPeaks, logical(1L))))
 }
 
 .stopIfNotIsMassPeaksList <- function(x) {
@@ -71,8 +63,6 @@ isMassPeaksList <- function(x) {
     parentCall <- deparse(sys.call(-1L))
     stop(parentCall, " : ", sQuote(deparse(substitute(x))),
          " is no list of MALDIquant::MassPeaks objects!", call.=FALSE)
-    return(FALSE)
   }
-  return(TRUE)
+  TRUE
 }
-

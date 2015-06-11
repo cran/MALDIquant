@@ -29,21 +29,21 @@ setMethod(f="detectPeaks",
   }
 
   ## estimate noise
-  noise <- estimateNoise(object, method=method, ...)
+  noise <- .estimateNoise(x=object@mass, y=object@intensity, method=method, ...)
 
   ## find local maxima
   isLocalMaxima <- .findLocalMaximaLogical(object,
                                            halfWindowSize=halfWindowSize)
 
   ## include only local maxima which are above the noise
-  isAboveNoise <- object@intensity > (SNR * noise[, 2L])
+  isAboveNoise <- object@intensity > (SNR * noise)
 
   peakIdx <- which(isAboveNoise & isLocalMaxima)
 
-  return(createMassPeaks(mass=object@mass[peakIdx],
-                         intensity=object@intensity[peakIdx],
-                         snr=object@intensity[peakIdx]/noise[peakIdx, 2L],
-                         metaData=object@metaData))
+  createMassPeaks(mass=object@mass[peakIdx],
+                  intensity=object@intensity[peakIdx],
+                  snr=object@intensity[peakIdx] / noise[peakIdx],
+                  metaData=object@metaData)
 })
 
 ## list
@@ -54,6 +54,5 @@ setMethod(f="detectPeaks",
   ## test arguments
   .stopIfNotIsMassSpectrumList(object)
 
-  return(.mapply(detectPeaks, object, ...))
+  .mapply(detectPeaks, object, ...)
 })
-

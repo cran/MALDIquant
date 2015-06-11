@@ -1,4 +1,4 @@
-## Copyright 2011-2013 Sebastian Gibb
+## Copyright 2011-2014 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -28,13 +28,6 @@
 ##
 intensityMatrix <- function(peaks, spectra) {
 
-  ## deprecated for MassSpectrum objects
-  if (isMassSpectrumList(peaks)) {
-    .deprecated("1.8.4", "\"intensityMatrix\" is deprecated ",
-                "for lists of MassSpectrum objects.")
-    return(.intensityMatrixDeprecated(peaks))
-  }
-
   ## test arguments
   .stopIfNotIsMassPeaksList(peaks)
 
@@ -53,10 +46,10 @@ intensityMatrix <- function(peaks, spectra) {
 
     approxSpectra <- lapply(spectra, approxfun, yleft=0L, yright=0L)
 
-    for (i in seq(along=approxSpectra)) {
+    for (i in seq_along(approxSpectra)) {
       m[i, isNa[i, ]] <- approxSpectra[[i]](uniqueMass[isNa[i, ]])
     }
   }
 
-  return(m)
+  m
 }

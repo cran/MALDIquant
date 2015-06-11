@@ -1,4 +1,4 @@
-## Copyright 2011-2014 Sebastian Gibb
+## Copyright 2011-2015 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -16,6 +16,38 @@
 ## You should have received a copy of the GNU General Public License
 ## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
 
+## .estimateBaseline
+##  estimating the baseline of a spectrum
+##
+## params:
+##  x: vector of x values (mass)
+##  y: vector of y values (intensity)
+##  method: method to use
+##  ...: further arguments passed to "method"
+##
+## returns:
+##  numeric, estimated baseline (y)
+##
+.estimateBaseline <- function(x, y, method=c("SNIP", "TopHat", "ConvexHull",
+                                             "median"), ...) {
+  method <- match.arg(method)
+
+  switch(method,
+         "SNIP" = {
+           .estimateBaselineSnip(x, y, ...)
+         },
+         "TopHat" = {
+           .estimateBaselineTopHat(x, y, ...)
+         },
+         "ConvexHull" = {
+           .estimateBaselineConvexHull(x, y, ...)
+         },
+         "median" = {
+           .estimateBaselineMedian(x, y, ...)
+         }
+  )
+}
+
 ## estimateBaselineConvexHull
 ##  estimate baseline by creating a convex hull
 ##
@@ -28,11 +60,10 @@
 ##  y: vector of y values
 ##
 ## returns:
-##  a matrix of the estimate baseline (col1: mass; col2: intensity)
+##  numeric, estimated baseline (y)
 ##
-
 .estimateBaselineConvexHull <- function(x, y) {
-  return(cbind(x=x, y=.Call("C_lowerConvexHull", x, y)))
+  .Call("C_lowerConvexHull", x, y)
 }
 
 ## estimateBaselineMedian
@@ -44,14 +75,12 @@
 ##  halfWindowSize: size of local window
 ##
 ## returns:
-##  a matrix of the estimate baseline (col1: mass; col2: intensity)
+##  numeric, estimated baseline (y)
 ##
 .estimateBaselineMedian <- function(x, y, halfWindowSize=100L) {
   .stopIfNotIsValidHalfWindowSize(halfWindowSize=halfWindowSize, n=length(x))
 
-  y <- runmed(y, k=2L*halfWindowSize+1L)
-
-  return(cbind(x, y))
+  as.vector(runmed(y, k=2L * halfWindowSize + 1L))
 }
 
 ## estimateBaselineSnip
@@ -82,10 +111,10 @@
 ##  decreasing: use a decreasing clipping window
 ##
 ## returns:
-##  a matrix of the estimate baseline (col1: mass; col2: intensity)
-
+##  numeric, estimated baseline (y)
+##
 .estimateBaselineSnip <- function(x, y, iterations=100L, decreasing=TRUE) {
-  return(cbind(x=x, y=.Call("C_snip", y, iterations, decreasing)))
+  .Call("C_snip", y, iterations, decreasing)
 }
 
 ## estimateBaselineTopHat
@@ -97,15 +126,11 @@
 ##  halfWindowSize: size of local window
 ##
 ## returns:
-##  a matrix of the estimate baseline (col1: mass; col2: intensity)
+##  numeric, estimated baseline (y)
 ##
 .estimateBaselineTopHat <- function(x, y, halfWindowSize=100L) {
-
   .stopIfNotIsValidHalfWindowSize(halfWindowSize=halfWindowSize, n=length(x))
 
-  e <- .erosion(y, halfWindowSize=halfWindowSize)
-  y <- .dilation(e, halfWindowSize=halfWindowSize)
-
-  return(cbind(x, y))
+  .dilation(.erosion(y, halfWindowSize=halfWindowSize),
+            halfWindowSize=halfWindowSize)
 }
-

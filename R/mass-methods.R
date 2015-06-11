@@ -19,9 +19,9 @@
 ## AbstractMassObject
 setMethod(f="mass",
           signature=signature(object="AbstractMassObject"),
-          definition=function(object) {
+          definition=function(object, ...) {
 
-  return(object@mass)
+  object@mass
 })
 
 ## AbstractMassObject
@@ -35,6 +35,5 @@ setReplaceMethod(f="mass",
     stop("Lengths of mass (", length(object@mass), ") and value (",
          length(value), ") have to be equal.")
   }
-  return(object)
+  object
 })
-

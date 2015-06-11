@@ -1,4 +1,4 @@
-## Copyright 2013 Sebastian Gibb
+## Copyright 2013-2015 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -27,7 +27,8 @@
 ## returns:
 ##  a new MassSpectrum object or a list of new MassSpectra objects
 ##
-averageMassSpectra <- function(l, labels, method=c("mean", "median", "sum")) {
+averageMassSpectra <- function(l, labels, method=c("mean", "median", "sum"),
+                               ...) {
 
   ## test parameters
   .stopIfNotIsMassSpectrumList(l)
@@ -43,13 +44,10 @@ averageMassSpectra <- function(l, labels, method=c("mean", "median", "sum")) {
               },
               "sum" = {
                 colSums
-              },
-              {
-                stop("Unknown ", sQuote("method"), ".")
               }
   )
 
-  return(.doByLabels(l=l, labels=labels, FUN=.averageMassSpectra, fun=fun))
+  .doByLabels(l=l, labels=labels, FUN=.averageMassSpectra, fun=fun, ...)
 }
 
 ## .averageMassSpectra
@@ -100,6 +98,5 @@ averageMassSpectra <- function(l, labels, method=c("mean", "median", "sum")) {
     mass <- double()
   }
 
-  return(createMassSpectrum(mass=mass, intensity=intensity, metaData=metaData))
+  createMassSpectrum(mass=mass, intensity=intensity, metaData=metaData)
 }
-

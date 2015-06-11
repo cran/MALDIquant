@@ -41,13 +41,10 @@ setMethod(f="transformIntensity",
          },
          "log10" = {
            log10
-         },
-         {
-           stop("Unknown ", sQuote("method"), ".")
          }
   )
 
-  return(.transformIntensity(object, fun=fun))
+  .transformIntensity(object, fun=fun)
 })
 
 ## AbstractMassObject
@@ -60,21 +57,16 @@ setMethod(f=".transformIntensity",
 
     object@intensity <- fun(object@intensity, ...)
 
-    belowZeroIdx <- which(object@intensity < 0L)
-
-    if (length(belowZeroIdx)) {
-      warning("Negative intensities generated. Replaced by zeros.")
-      object <- .replaceNegativeIntensityValues(object, warn=FALSE)
-    }
-
     if (na.rm) {
       naIdx <- which(!is.na(object@intensity))
       object@intensity <- object@intensity[naIdx]
       object@mass <- object@mass[naIdx]
     }
+
+    object <- .replaceNegativeIntensityValues(object)
   }
 
-  return(object)
+  object
 })
 
 ## list
@@ -86,7 +78,7 @@ setMethod(f="transformIntensity",
   ## test arguments
   .stopIfNotIsMassObjectList(object)
 
-  return(lapply(object, transformIntensity, ...))
+  .lapply(object, transformIntensity, ...)
 })
 
 ## list
@@ -97,6 +89,5 @@ setMethod(f=".transformIntensity",
   ## test arguments
   .stopIfNotIsMassObjectList(object)
 
-  return(lapply(object, .transformIntensity, ...))
+  .lapply(object, .transformIntensity, ...)
 })
-

@@ -31,15 +31,16 @@
 ##  a matrix of coordinates
 ##
 .textLabelRects <- function(x, y, text, adj, cex, offset=c(0.0, 0.2)) {
-  return(t(mapply(function(xc, yc, t) {
+  t(mapply(function(xc, yc, t) {
     w <- strwidth(t, cex=cex)
     h <- strheight(t, cex=cex)
     ## extra calculation of offsets to be independend of adj
-    woffset <- w*offset[1L]
-    hoffset <- h*offset[2L]
-    return(c(x0=xc-w*adj[1L]-woffset, y0=yc-h*adj[2L]-hoffset,
-             x1=xc+w*(1L-adj[1L])+woffset, y1=yc+h*(1L-adj[2L])+hoffset,
+    woffset <- w * offset[1L]
+    hoffset <- h * offset[2L]
+    return(c(x0=xc - w * adj[1L] - woffset,
+             y0=yc - h * adj[2L] - hoffset,
+             x1=xc + w * (1L - adj[1L]) + woffset,
+             y1=yc + h * (1L - adj[2L]) + hoffset,
              x=xc, y=yc, w=w, h=h))
-  }, xc=x, yc=y, t=text)))
+  }, xc=x, yc=y, t=text))
 }
-

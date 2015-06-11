@@ -1,4 +1,4 @@
-## Copyright 2012-2014 Sebastian Gibb
+## Copyright 2012-2015 Sebastian Gibb
 ## <mail@sebastiangibb.de>
 ##
 ## This file is part of MALDIquant for R and related languages.
@@ -48,12 +48,10 @@ binPeaks <- function(l, method=c("strict", "relaxed"), tolerance=0.002) {
   snr <- .unlist(lapply(l, function(x)x@snr))
 
   ## store original mass sample number/id
-  samples <- .unlist(lapply(1L:length(l), function(x) {
-    return(rep(x, length(l[[x]])))
-  }))
+  samples <- rep.int(seq_along(l), .unlist(lapply(l, length)))
 
   ## sort values by mass
-  s <- sort(mass, method="quick", index.return=TRUE)
+  s <- sort.int(mass, method="quick", index.return=TRUE)
 
   mass <- s$x
   intensities <- intensities[s$ix]
@@ -67,9 +65,6 @@ binPeaks <- function(l, method=c("strict", "relaxed"), tolerance=0.002) {
             },
             "relaxed" = {
               .grouperRelaxed
-            },
-            {
-              stop("Unknown ", sQuote("method"), ".")
             }
   )
 
@@ -79,7 +74,7 @@ binPeaks <- function(l, method=c("strict", "relaxed"), tolerance=0.002) {
 
   ## resort mass (order could change if "relaxed" is used)
   if (method == "relaxed") {
-    s <- sort(mass, method="quick", index.return=TRUE)
+    s <- sort.int(mass, method="quick", index.return=TRUE)
     mass <- s$x
     intensities <- intensities[s$ix]
     snr <- snr[s$ix]
@@ -87,19 +82,17 @@ binPeaks <- function(l, method=c("strict", "relaxed"), tolerance=0.002) {
   }
 
   ## group mass/intensities/snr by sample ids
-  lIdx <- tapply(X=1L:length(mass), INDEX=samples, FUN=function(x) {
-    return(x)
-  })
+  lIdx <- split(seq_along(mass), samples)
 
   ## create adjusted peak list
   l <- .mapply(FUN=function(p, i) {
     p@mass <- mass[i]
     p@intensity <- intensities[i]
     p@snr <- snr[i]
-    return(p)
+    p
   }, p=l, i=lIdx)
 
-  return(l)
+  l
 }
 
 ## .binPeaks
@@ -133,7 +126,7 @@ binPeaks <- function(l, method=c("strict", "relaxed"), tolerance=0.002) {
   ## it is a lot of faster than recursion
 
   ## store boundaries in a stack
-  nBoundaries <- max(20L, floor(3L*log(n)))
+  nBoundaries <- max(20L, floor(3L * log(n)))
   boundary <- list(left=double(nBoundaries), right=double(nBoundaries))
 
   currentBoundary <- 1L
@@ -145,10 +138,10 @@ binPeaks <- function(l, method=c("strict", "relaxed"), tolerance=0.002) {
     ## find largest gap
     left <- boundary$left[currentBoundary]
     right <- boundary$right[currentBoundary]
-    currentBoundary <- currentBoundary-1L
-    gaps <- d[left:(right-1L)]
+    currentBoundary <- currentBoundary - 1L
+    gaps <- d[left:(right - 1L)]
 
-    gapIdx <- which.max(gaps)+left-1L
+    gapIdx <- which.max(gaps) + left - 1L
 
     ## left side
     l <- grouper(mass=mass[left:gapIdx],
@@ -157,7 +150,7 @@ binPeaks <- function(l, method=c("strict", "relaxed"), tolerance=0.002) {
                  tolerance=tolerance, ...)
     ## further splitting needed?
     if (is.na(l[1L])) {
-      currentBoundary <- currentBoundary+1L
+      currentBoundary <- currentBoundary + 1L
       boundary$left[currentBoundary] <- left
       boundary$right[currentBoundary] <- gapIdx
     } else {
@@ -165,29 +158,28 @@ binPeaks <- function(l, method=c("strict", "relaxed"), tolerance=0.002) {
     }
 
     ## right side
-    r <- grouper(mass=mass[(gapIdx+1L):right],
-                 intensities=intensities[(gapIdx+1L):right],
-                 samples=samples[(gapIdx+1L):right],
+    r <- grouper(mass=mass[(gapIdx + 1L):right],
+                 intensities=intensities[(gapIdx + 1L):right],
+                 samples=samples[(gapIdx + 1L):right],
                  tolerance=tolerance, ...)
     ## further splitting needed?
     if (is.na(r[1L])) {
-      currentBoundary <- currentBoundary+1L
-      boundary$left[currentBoundary] <- gapIdx+1L
+      currentBoundary <- currentBoundary + 1L
+      boundary$left[currentBoundary] <- gapIdx + 1L
       boundary$right[currentBoundary] <- right
     } else {
-      mass[(gapIdx+1L):right] <- r
+      mass[(gapIdx + 1L):right] <- r
     }
 
     ## stack size have to be increased?
     ## (should rarely happen because recursion deep is mostly < 20)
     if (currentBoundary == nBoundaries) {
-      nBoundaries <- floor(nBoundaries*1.5)
+      nBoundaries <- floor(nBoundaries * 1.5)
       boundary$left <- c(boundary$left,
-                         double(nBoundaries-currentBoundary))
+                         double(nBoundaries - currentBoundary))
       boundary$right <- c(boundary$right,
-                          double(nBoundaries-currentBoundary))
+                          double(nBoundaries - currentBoundary))
     }
   }
-  return(mass)
+  mass
 }
-

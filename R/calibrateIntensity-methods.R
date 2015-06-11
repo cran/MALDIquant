@@ -24,10 +24,17 @@ setMethod(f="calibrateIntensity",
 
   method <- match.arg(method)
 
-  object <- switch(method,
+  switch(method,
     "TIC" = {
-      .transformIntensity(object, fun=.calibrateIntensitySimple,
-                          offset=0L, scaling=totalIonCurrent(object))
+      optArgs <- list(...)
+
+      if (!is.null(optArgs$range)) {
+        tic <- totalIonCurrent(trim(object, range=optArgs$range))
+      } else {
+        tic <- totalIonCurrent(object)
+      }
+      .transformIntensity(object, fun=.calibrateIntensitySimple, offset=0L,
+                          scaling=tic)
     },
     "PQN" = {
       stop(dQuote("PQN"),
@@ -35,14 +42,9 @@ setMethod(f="calibrateIntensity",
     },
     "median" = {
       .transformIntensity(object, fun=.calibrateIntensitySimple,
-                          offset=0L, scaling=median)
-    },
-    {
-      stop("Unknown ", sQuote("method"), ".")
+                          offset=0L, scaling=median(object@intensity))
     }
   )
-
-  return(object)
 })
 
 ## list
@@ -56,18 +58,13 @@ setMethod(f="calibrateIntensity",
 
   method <- match.arg(method)
 
-  object <- switch(method,
+  switch(method,
     "TIC" = ,
     "median" = {
       lapply(object, calibrateIntensity, method=method, ...)
     },
     "PQN" = {
       .calibrateProbabilisticQuotientNormalization(object)
-    },
-    {
-      stop("Unknown ", sQuote("method"), ".")
     }
   )
-  return(object)
 })
-

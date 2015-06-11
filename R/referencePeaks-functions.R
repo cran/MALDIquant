@@ -45,6 +45,5 @@ referencePeaks <- function(l, method=c("strict", "relaxed"), minFrequency=0.9,
   ## set peak intensity to number of occurrence
   intensity <- unname(colMeans(m))
 
-  return(createMassPeaks(mass=as.double(colnames(m)), intensity=intensity))
+  createMassPeaks(mass=attr(m, "mass"), intensity=intensity)
 }
-

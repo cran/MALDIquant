@@ -33,7 +33,7 @@
       any(object@intensity < 0L)) {
     warning("Negative intensity values found.")
   }
-  return(TRUE)
+  TRUE
 }
 
 setValidity("AbstractMassObject", method=.validAbstractMassObject)
@@ -41,11 +41,10 @@ setValidity("AbstractMassObject", method=.validAbstractMassObject)
 .validMassPeaks <- function(object) {
   if (length(object@intensity) != length(object@snr)) {
     return(paste0("Lengths of intensity (", length(object@intensity),
-                  ") and snr(", length(object@snr),
+                  ") and snr (", length(object@snr),
                   ") have to be equal."))
   }
-  return(.validAbstractMassObject(object))
+  .validAbstractMassObject(object)
 }
 
 setValidity("MassPeaks", method=.validMassPeaks)
-
