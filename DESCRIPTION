@@ -1,11 +1,11 @@
 Package: MALDIquant
-Version: 1.13
-Date: 2015-09-16
+Version: 1.14
+Date: 2015-11-18
 Title: Quantitative Analysis of Mass Spectrometry Data
 Authors@R: c(person("Sebastian", "Gibb", role=c("aut", "cre"),
         email="mail@sebastiangibb.de"), person("Korbinian", "Strimmer",
         role="ths"))
-Depends: R (>= 3.0.0), methods
+Depends: R (>= 3.2.0), methods
 Imports: parallel
 Suggests: knitr, testthat (>= 0.8)
 Description: A complete analysis pipeline for matrix-assisted laser
@@ -25,9 +25,9 @@ BugReports: https://github.com/sgibb/MALDIquant/issues/
 LazyLoad: yes
 VignetteBuilder: knitr
 NeedsCompilation: yes
-Packaged: 2015-09-16 09:09:43 UTC; sebastian
+Packaged: 2015-11-18 12:54:58 UTC; sebastian
 Author: Sebastian Gibb [aut, cre],
   Korbinian Strimmer [ths]
 Maintainer: Sebastian Gibb <mail@sebastiangibb.de>
 Repository: CRAN
-Date/Publication: 2015-09-16 12:47:05
+Date/Publication: 2015-11-18 15:48:39
