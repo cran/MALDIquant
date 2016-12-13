@@ -1,21 +1,3 @@
-## Copyright 2016 Sebastian Gibb
-## <mail@sebastiangibb.de>
-##
-## This file is part of MALDIquant for R and related languages.
-##
-## MALDIquant is free software: you can redistribute it and/or modify
-## it under the terms of the GNU General Public License as published by
-## the Free Software Foundation, either version 3 of the License, or
-## (at your option) any later version.
-##
-## MALDIquant is distributed in the hope that it will be useful,
-## but WITHOUT ANY WARRANTY; without even the implied warranty of
-## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-## GNU General Public License for more details.
-##
-## You should have received a copy of the GNU General Public License
-## along with MALDIquant. If not, see <http://www.gnu.org/licenses/>
-
 #' .pseudoCluster
 #'
 #' Find possible isotopic cluster in mass/mz data.
@@ -41,11 +23,10 @@
   mm <- matrix(x, nrow=size, ncol=length(x) * length(distance), byrow=TRUE)
   ms <- mm + (rep(distance, each=size) * 0L:(size - 1L))
 
-  i <- .which.closest(ms, x)
-  m <- x[i]
-  dim(m) <- dim(i)
+  i <- match.closest(ms, x, tolerance=mm * tolerance)
+  dim(i) <- dim(ms)
 
-  i[, colSums(abs(ms - m) / mm < tolerance) == size, drop=FALSE]
+  i[, !is.na(colSums(i)), drop=FALSE]
 }
 
 #' .F
@@ -127,7 +108,7 @@
   cr <- .colCors(y, p)
   pc <- pc[, cr > minCor, drop=FALSE]
   pc[duplicated(as.vector(pc))] <- NA_real_
-  pc[, colSums(is.na(pc)) == 0L, drop=FALSE]
+  pc[, !is.na(colSums(pc)), drop=FALSE]
 }
 
 #' .monoisotopic
@@ -149,7 +130,7 @@
     upattern[duplicated(upattern)] <- NA_real_
     upattern <- relist(upattern, pattern)
     sort.int(.unlist(lapply(upattern,
-                            function(p)p[1L, colSums(is.na(p)) == 0L])))
+                            function(p)p[1L, !is.na(colSums(p))])))
   } else {
     double()
   }
