@@ -1,6 +1,6 @@
-0180cbfa4f0d4c0a1c8a6f06cf0802d8 *DESCRIPTION
+5f16d39a6aeab393c1d3146044ca6e46 *DESCRIPTION
 39031b84fd8062dc24c697e9a0a61304 *NAMESPACE
-df56d9d36b5e6fd1e95c48f67a7eaa29 *NEWS
+3aa3b0fe314576d6098c7da053ff47ff *NEWS
 2d718254fdc4b0015d8b6afbd5b1ef1c *R/AllClasses.R
 ba4f6a809a95050798837ffe25c3884a *R/AllGenerics.R
 339a94899120936b51b692058b568e3b *R/Deprecated.R
@@ -45,7 +45,7 @@ d813e5cc45bfa88a09a6df84d81a31da *R/length-methods.R
 3cd216c8076dd929e262791c75405025 *R/localMaxima-functions.R
 7a2c61ddf4d6eaf0aae1c09131501ea8 *R/mapply-functions.R
 09234c4655a45dce3e77ebee7c4daeb7 *R/mass-methods.R
-a9a1ed3ee85ffcbc8dd3b23f11466774 *R/match.closest-functions.R
+840a8d10d188a4966eb43ccb71e40445 *R/match.closest-functions.R
 2ddd078c28342238880b24777aac4f06 *R/memoryUsage-functions.R
 dddb705965cf74d9c70adf0c364d783c *R/merge-functions.R
 6dbbe512dbebcc8271abdcb813ff1751 *R/metaData-methods.R
@@ -88,7 +88,7 @@ c9360cb1fb38da8fc547d5ad59422b5b *demo/workflow.R
 45e944c7928cff18a5275b4dc5ff1288 *inst/CITATION
 5bcd1c7abae66e68fe9dc628e5e7324b *inst/doc/MALDIquant-intro.R
 1e51473c26e4202ac6b4f6123caba9e1 *inst/doc/MALDIquant-intro.Rnw
-7a5e631f27bd67f8ade59b9b2bb782fe *inst/doc/MALDIquant-intro.pdf
+8c4f48f15ed8ed5aa4db44924221429e *inst/doc/MALDIquant-intro.pdf
 5e14a19e63c962dd102a51577928ec17 *man/AbstractMassObject-class.Rd
 c1713d2d9b7cf6f8f2d9b6fb60594e41 *man/MALDIquant-defunct.Rd
 bfcc36bbb605f08d9d49ee40c5ffa7ca *man/MALDIquant-deprecated.Rd
@@ -167,7 +167,7 @@ d3da7be2d02d75e4d71d8e78690b4815 *tests/testthat/test_length-methods.R
 73ddd27b5828b3527b180fbd996e5da8 *tests/testthat/test_localMaxima-functions.R
 9bd02e48066c5b7fcdf2c0d2a2d037b9 *tests/testthat/test_mapply-functions.R
 7af4eff6b2653619b6d0207e4b632bb5 *tests/testthat/test_mass-methods.R
-29e694f60202ed178f47dc4925ef224b *tests/testthat/test_match.closest-functions.R
+42113be6a7643d1763a9e6c1a9e900d8 *tests/testthat/test_match.closest-functions.R
 316f6eec9709cd9af17af7663017b612 *tests/testthat/test_merge-functions.R
 2482b2ef93732be18165854c43e5a465 *tests/testthat/test_metaData-methods.R
 9ee9d982b83469a6d177bc9928dd9d14 *tests/testthat/test_monoisotopic-functions.R
