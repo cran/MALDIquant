@@ -1,6 +1,6 @@
-5f16d39a6aeab393c1d3146044ca6e46 *DESCRIPTION
+df351d2b98cef39bd4abccf781d0261e *DESCRIPTION
 39031b84fd8062dc24c697e9a0a61304 *NAMESPACE
-3aa3b0fe314576d6098c7da053ff47ff *NEWS
+b3b170be7a739471367b560789cbf614 *NEWS
 2d718254fdc4b0015d8b6afbd5b1ef1c *R/AllClasses.R
 ba4f6a809a95050798837ffe25c3884a *R/AllGenerics.R
 339a94899120936b51b692058b568e3b *R/Deprecated.R
@@ -77,7 +77,7 @@ e5a957e3665317ec1e6f1aa7631d2cc7 *R/unlist-functions.R
 10bcf86669f7347774b75f8bb88dfdc2 *R/valid-methods.R
 00cc9d4f258880643f8fab590ef49800 *R/warp-functions.R
 6cfb13e8b0858cd2981bc9b84ebc1bb6 *R/warpingFunction-functions.R
-241ee90c14bc2e7d9d24f3ff7e19948d *build/vignette.rds
+1365b140e98d59eac1a5d9b075d7a1d4 *build/vignette.rds
 325598b0f8bcbe241bf33882d83b6f85 *data/fiedler2009subset.RData
 b1d4b3db5f8a9d68fc4692e30026986e *demo/00Index
 cd6a6ad12205a639b80a67a1a5080723 *demo/MALDIquant.R
@@ -88,7 +88,7 @@ c9360cb1fb38da8fc547d5ad59422b5b *demo/workflow.R
 45e944c7928cff18a5275b4dc5ff1288 *inst/CITATION
 5bcd1c7abae66e68fe9dc628e5e7324b *inst/doc/MALDIquant-intro.R
 1e51473c26e4202ac6b4f6123caba9e1 *inst/doc/MALDIquant-intro.Rnw
-8c4f48f15ed8ed5aa4db44924221429e *inst/doc/MALDIquant-intro.pdf
+d05917ded5d0872a60281cfb51d621be *inst/doc/MALDIquant-intro.pdf
 5e14a19e63c962dd102a51577928ec17 *man/AbstractMassObject-class.Rd
 c1713d2d9b7cf6f8f2d9b6fb60594e41 *man/MALDIquant-defunct.Rd
 bfcc36bbb605f08d9d49ee40c5ffa7ca *man/MALDIquant-deprecated.Rd
@@ -127,7 +127,7 @@ f18ff018fa638fbffc409ac7ccafab02 *man/transformIntensity-methods.Rd
 3335acf9348d90477fd2e6bcbdefad27 *man/warp-functions.Rd
 38415d834917f303276bbfc4ae7af2c6 *src/MALDIquant.h
 60981e9053676a37966435e95997ab2b *src/colMedians.c
-72d97a74c07cead73cba6e9f6f105d9c *src/init.c
+7e79decc63a6cc375710d9045502d201 *src/init.c
 84bbe5fae4c01cf58bf6849828eb1775 *src/localMaxima.c
 d7dc99ca5017916b68b3a71a37927789 *src/lowerConvexHull.c
 6fad5941d2d7d8188cc07e2ae7391583 *src/morphologicalFilters.c
