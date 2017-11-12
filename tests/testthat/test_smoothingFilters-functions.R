@@ -3,9 +3,20 @@ context("smoothingFilters")
 test_that(".movingAverage", {
   values <- c(rep(3, 3), 4:7, rep(8, 3))
   expect_equal(MALDIquant:::.movingAverage(1:10, halfWindowSize=2), values)
+  expect_equal(MALDIquant:::.movingAverage(1:10, halfWindowSize=2,
+                weighted=TRUE), values)
 
   values <- c(rep(4, 4), 5:6, rep(7, 4))
   expect_equal(MALDIquant:::.movingAverage(1:10, 3), values)
+  expect_equal(MALDIquant:::.movingAverage(1:10, 3, weighted=TRUE), values)
+
+  values <- c(rep(1, 4), 6, 20, 6, rep(1, 4))
+  result <- c(rep(c(2, 5.8, 6.8, 5.8, 2), c(3, 1, 3, 1, 3)))
+  resultWeighted <- c(rep(1.5, 3), 3.9, 7.3, 10.6, 7.3, 3.9, rep(1.5, 3))
+  expect_equal(MALDIquant:::.movingAverage(values, halfWindowSize=2,
+               weighted=FALSE), result)
+  expect_equal(MALDIquant:::.movingAverage(values, halfWindowSize=2,
+               weighted=TRUE), resultWeighted)
 })
 
 test_that(".movingAverage throws errors", {

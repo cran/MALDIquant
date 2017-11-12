@@ -1,6 +1,6 @@
 Package: MALDIquant
-Version: 1.16.4
-Date: 2017-08-27
+Version: 1.17
+Date: 2017-11-12
 Title: Quantitative Analysis of Mass Spectrometry Data
 Authors@R: c(person("Sebastian", "Gibb", role=c("aut", "cre"),
         email="mail@sebastiangibb.de"), person("Korbinian", "Strimmer",
@@ -26,9 +26,9 @@ LazyLoad: yes
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
 NeedsCompilation: yes
-Packaged: 2017-08-31 19:16:31 UTC; sebastian
+Packaged: 2017-11-12 21:35:20 UTC; sebastian
 Author: Sebastian Gibb [aut, cre],
   Korbinian Strimmer [ths]
 Maintainer: Sebastian Gibb <mail@sebastiangibb.de>
 Repository: CRAN
-Date/Publication: 2017-09-01 09:48:06 UTC
+Date/Publication: 2017-11-13 00:02:58 UTC

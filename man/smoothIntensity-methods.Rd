@@ -22,11 +22,15 @@ This method smoothes the intensity values of a
     window reaches from \code{mass[currentIndex-halfWindowSize]} to
     \code{mass[currentIndex+halfWindowSize]} (window size is
     \code{2*halfWindowSize+1}).
-    The best size differs depending on the
-    selected \code{method}.}
+    The best size differs depending on the selected \code{method}.}
   \item{\dots}{arguments to be passed to \code{method}. \code{SavitzkyGolay} has
     an additional \code{polynomialOrder} argument (default: \code{3}) to control
-    the order of the filter. Unused for \code{MovingAverage}}
+    the order of the filter.
+    \code{MovingAverage} has an additional \code{weighted} argument (default:
+    \code{FALSE}) to indicate if the average should be equal weight (default) or
+    if it should have weights depending on the distance from the center as
+    calculated as \code{1/2^abs(-halfWindowSize:halfWindowSize)} with the sum
+    of all weigths normalized to 1.}
 }
 \details{
   \code{halfWindowSize}: Depends on the selected \code{method}.
@@ -38,6 +42,8 @@ This method smoothes the intensity values of a
 }
 \author{
 Sebastian Gibb \email{mail@sebastiangibb.de}
+
+Weighted moving average: Sigurdur Smarason
 }
 \references{
 A. Savitzky and M. J. Golay. 1964.
@@ -63,6 +69,9 @@ data("fiedler2009subset", package="MALDIquant")
 ## smooth spectra
 s <- smoothIntensity(fiedler2009subset, method="MovingAverage",
                      halfWindowSize=2)
+## or
+s <- smoothIntensity(fiedler2009subset, method="MovingAverage",
+                     halfWindowSize=2, weighted=TRUE)
 ## or
 s <- smoothIntensity(fiedler2009subset, method="SavitzkyGolay",
                      halfWindowSize=10)

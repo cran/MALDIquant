@@ -1,6 +1,6 @@
-2f9c9d350e5b29bd6d4a0c66ab838f79 *DESCRIPTION
+f59a351f277e33718c839559c97ce945 *DESCRIPTION
 39031b84fd8062dc24c697e9a0a61304 *NAMESPACE
-2e7002bbd92d04b111f454b3939e86e9 *NEWS
+b33056d9e5ec1ccb0b180153e03fa9bb *NEWS
 2d718254fdc4b0015d8b6afbd5b1ef1c *R/AllClasses.R
 ba4f6a809a95050798837ffe25c3884a *R/AllGenerics.R
 339a94899120936b51b692058b568e3b *R/Deprecated.R
@@ -68,7 +68,7 @@ f9ba77c6c6a9c67f91533ff1fbda3103 *R/reorder-functions.R
 25975073b46d346f6c4617230eadc59a *R/show-functions.R
 882bd513a892fb565c706b980203d2fd *R/show-methods.R
 ed9f33211f56b6a4b21015aeb5afa989 *R/smoothIntensity-methods.R
-acb45d367981fea1dae45b094ecdba0c *R/smoothingFilters-functions.R
+714e3905718ce372699e70e9ff8d5681 *R/smoothingFilters-functions.R
 514a95a735d12a62855b4687136a8d97 *R/snr-methods.R
 0b72803222d46ec27578e16d8664a794 *R/subset-methods.R
 372edec5ccedb2cf61dcd821e8bda450 *R/totalIonCurrent-methods.R
@@ -89,7 +89,7 @@ c9360cb1fb38da8fc547d5ad59422b5b *demo/workflow.R
 45e944c7928cff18a5275b4dc5ff1288 *inst/CITATION
 5bcd1c7abae66e68fe9dc628e5e7324b *inst/doc/MALDIquant-intro.R
 1e51473c26e4202ac6b4f6123caba9e1 *inst/doc/MALDIquant-intro.Rnw
-ef0c5b5815e549793798b834d1ba5135 *inst/doc/MALDIquant-intro.pdf
+454281046216bdbea2c827fb35e57e04 *inst/doc/MALDIquant-intro.pdf
 5e14a19e63c962dd102a51577928ec17 *man/AbstractMassObject-class.Rd
 c1713d2d9b7cf6f8f2d9b6fb60594e41 *man/MALDIquant-defunct.Rd
 bfcc36bbb605f08d9d49ee40c5ffa7ca *man/MALDIquant-deprecated.Rd
@@ -122,7 +122,7 @@ f71932d026a6053597b707a0463ae833 *man/msiSlices-functions.Rd
 3355021c9ac7ae7709266ad37e16841b *man/plotMsiSlice-methods.Rd
 5545564540f3b140f6a255f1c91b8574 *man/referencePeaks-functions.Rd
 9ca8f5f6f2b094a3258a64ec9ac50a5b *man/removeBaseline-methods.Rd
-1a265fd746eddd3bb6d6427fea26baa0 *man/smoothIntensity-methods.Rd
+8ef9226a8c6afba7bcb5659e40894df8 *man/smoothIntensity-methods.Rd
 f18ff018fa638fbffc409ac7ccafab02 *man/transformIntensity-methods.Rd
 9617d37f692191380be29af53438adad *man/trim-methods.Rd
 3335acf9348d90477fd2e6bcbdefad27 *man/warp-functions.Rd
@@ -185,8 +185,8 @@ d612615fbbaed6489f9d4bbb19f63288 *tests/testthat/test_plotMsiSlice-functions.R
 98c87f1a8dbd355fcb9aeb03017d6c7f *tests/testthat/test_reorder.R
 399cb71acb1570fcdc4d42104f3de431 *tests/testthat/test_replaceNegativeIntensityValues.R
 494cf7199210056664cec5ed98ce6c5f *tests/testthat/test_show-methods.R
-cabcb37aaa9ac7b8529e042a97e8d6a9 *tests/testthat/test_smoothIntensity-methods.R
-8263dfa7e0052cc419ab3f1421b7c9fe *tests/testthat/test_smoothingFilters-functions.R
+0eb0cabcd3296438327e43317c414c0e *tests/testthat/test_smoothIntensity-methods.R
+d52835362955a6b06623a6f224f7e119 *tests/testthat/test_smoothingFilters-functions.R
 07d474fe08b42562cbc63ed383c48e8f *tests/testthat/test_snr-methods.R
 baba5299f469d4cfc0b02f88031d5d95 *tests/testthat/test_subset-methods.R
 63a2139834341232083d42588ef952f4 *tests/testthat/test_totalIonCurrent-methods.R
