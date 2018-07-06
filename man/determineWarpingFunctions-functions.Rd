@@ -11,6 +11,7 @@ This function determines a warping function for a list of
 \usage{
 determineWarpingFunctions(l, reference, tolerance=0.002,
                           method=c("lowess", "linear", "quadratic", "cubic"),
+                          allowNoMatches=FALSE,
                           plot=FALSE, plotInteractive=FALSE, \dots)
 }
 \arguments{
@@ -24,10 +25,15 @@ determineWarpingFunctions(l, reference, tolerance=0.002,
   }
   \item{tolerance}{
     \code{double}, maximal relative deviation of a peak position (mass) to be
-    considered as identical.
+    considered as identical. Must be multiplied by \code{10^-6} for ppm,
+    e.g. use \code{tolerance=5e-6} for 5 ppm.
   }
   \item{method}{
     used basic warping function.
+  }
+  \item{allowNoMatches}{
+    \code{logical}, don't throw an error if an \code{\linkS4class{MassPeaks}}
+    object could not match to the \code{reference}.
   }
   \item{plot}{
     \code{logical}, if \code{TRUE} a warping plot is drawn for each sample.
@@ -46,6 +52,10 @@ determineWarpingFunctions(l, reference, tolerance=0.002,
   the current sample. To calculate the differences each reference peak would
   match with the highest sample peak in the nearer neighborhood
   (defined by \code{mass of reference peak*tolerance}). \cr
+  \code{allowNoMatches}: If \code{allowNoMatches} is \code{TRUE} a warning instead
+  of an error is thrown if an \code{\linkS4class{MassPeaks}}
+  object could not match to the \code{reference}. The returned list of warping
+  functions will contain \code{NA} for this object (same index in the list).
   \code{plotInteractive}: If \code{plot} is \code{TRUE} a lot of output is
   created (each sample in \code{l} gets its own plot).
   That's why an non-interactive devices is recommended:
@@ -148,7 +158,5 @@ par(mfrow=c(4, 1))
 w <- determineWarpingFunctions(peaks, reference=refPeaks, method="quadratic",
                                plot=TRUE, plotInteractive=TRUE)
 par(mfrow=c(1, 1))
-
 }
 \keyword{methods}
-

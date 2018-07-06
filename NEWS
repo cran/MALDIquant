@@ -1,6 +1,37 @@
 RELEASE HISTORY OF THE "MALDIquant" PACKAGE
 ===========================================
 
+CHANGES IN MALDIquant VERSION 1.18 [2018-07-06]:
+------------------------------------------------
+
+IMPROVEMENTS
+
+* `determineWarpingFunctions` gains an `allowNoMatches` argument. If
+  `allowNoMatches` is `TRUE` a warning is thrown instead of an error and the
+  resulting list of warping functions will contain `NA` at the specific index;
+  see #57.
+  Suggested by Melanie Föll (@foellmelanie).
+* `warpMassPeaks`/`warpMassSpectra` gain an `emptyNoMatches` argument. If
+  `emptyNoMatches` is `TRUE` the intensity values of
+  `MassPeaks`/`MassSpectra` objects with missing warping functions are set to
+  zero; see #57 for details.
+  Suggested by Melanie Föll (@foellmelanie).
+* `alignSpectra` gain two new arguments: `allowNoMatches` and
+  `emptyNoMatches`; see #57 for details.
+  Suggested by Melanie Föll (@foellmelanie).
+* The manual pages of `alingSpectra`, `binPeaks`, `determineWarpingFunctions`
+  and `referencePeaks` gain a sentence for use of the "tolerance" argument in
+  ppm; see issue #56 for details;
+  Suggested by Jimmy Lawrence <jimmymisc@gmail.com>.
+
+REMOVED ARGUMENT
+
+* `plot` now doesn't draw a horizontal line at `y == 0` anymore. The argument
+  "abline.col" was removed as well. To get the old behaviour call
+  `plot(spectrum); abline(h=0, col="#808080")`;
+  Suggested by Jimmy Lawrence <jimmymisc@gmail.com>.
+
+
 CHANGES IN MALDIquant VERSION 1.17 [2017-11-12]:
 ------------------------------------------------
 
@@ -8,7 +39,7 @@ NEW FEATURES
 
 * `smoothIntensity` gains a new argument "weighted" (default: `FALSE`) for
   `method="MovingAverage"`. If `TRUE` a weighted moving average is applied.
-  Added Sigurdur Smarason.
+  Added by Sigurdur Smarason.
 
 
 CHANGES IN MALDIquant VERSION 1.16.4 [2017-08-27]:
