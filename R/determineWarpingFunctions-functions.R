@@ -34,8 +34,6 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
       nomatchReporter <- stop
   }
 
-  minPeaks <- 2L
-
   warpingFunction <- switch(method,
     "lowess" = {
       .warpingFunctionLowess
@@ -44,13 +42,18 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
       .warpingFunctionLinear
     },
     "quadratic" = {
-      minPeaks <- 3L
       .warpingFunctionQuadratic
     },
     "cubic" = {
-      minPeaks <- 4L
       .warpingFunctionCubic
     }
+  )
+
+  minPeaks <- switch(method,
+    "lowess" = 2L,
+    "linear" = 2L,
+    "quadratic" = 3L,
+    "cubic" = 4L
   )
 
   optArgs <- list(...)
@@ -150,6 +153,13 @@ determineWarpingFunctions <- function(l, reference, tolerance=0.002,
 
   ## clean misleading names (names == idx+1 because reference is idx == 1)
   names(warpingFunctions) <- NULL
+
+  ## number of matched peaks
+  nmatch <-  vapply(split(d, samples)[-1L], function(dd) {
+      sum(!is.na(dd), na.rm=TRUE)
+  }, NA_real_, USE.NAMES=FALSE)
+  names(nmatch) <- names(l)
+  attr(warpingFunctions, "nmatch") <- nmatch
 
   ## debug plot
   if (plot) {

@@ -1,6 +1,45 @@
 RELEASE HISTORY OF THE "MALDIquant" PACKAGE
 ===========================================
 
+
+CHANGES IN MALDIquant VERSION 1.19.2 [2019-03-13]:
+--------------------------------------------------
+
+BUGFIXES
+
+* `binPeaks` propagated values to empty MassPeaks objects; see #61.
+  Thanks to Chase Clark (@chasemc) for reporting.
+
+
+CHANGES IN MALDIquant VERSION 1.19.1 [2019-03-03]:
+--------------------------------------------------
+
+BUGFIXES
+
+* `calibratyIntensity` ignored the `mc.cores` argument.
+  Thanks to @dsammour for reporting.
+
+
+CHANGES IN MALDIquant VERSION 1.19 [2018-11-26]:
+------------------------------------------------
+
+IMPROVEMENTS:
+
+* `determineWarpingFunctions`'s return value gains a new argument `nmatch`
+  storing the number of matches of the given peaks against the reference; see
+  #59.
+  Suggested by Melanie Föll (@foellmelanie).
+
+
+CHANGES IN MALDIquant VERSION 1.18.1 [2018-10-04]:
+--------------------------------------------------
+
+INTERNAL CHANGES
+
+* `determineWarpingFunctions`, change handling of minimal necessary peaks for
+  each warping method.
+
+
 CHANGES IN MALDIquant VERSION 1.18 [2018-07-06]:
 ------------------------------------------------
 

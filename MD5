@@ -1,6 +1,6 @@
-8e3edc38de87958729b7c15bb378fc1b *DESCRIPTION
+c706b051c66d5ccb4fd9510edb856366 *DESCRIPTION
 39031b84fd8062dc24c697e9a0a61304 *NAMESPACE
-3b1ff2294783ccb40fbd21fed33e26a8 *NEWS
+632fe82dce35013ca962d143ad36b2c9 *NEWS
 2d718254fdc4b0015d8b6afbd5b1ef1c *R/AllClasses.R
 ba4f6a809a95050798837ffe25c3884a *R/AllGenerics.R
 339a94899120936b51b692058b568e3b *R/Deprecated.R
@@ -10,16 +10,16 @@ c97fcb1d020bd6a28f5e4d05c84f8bc5 *R/alignSpectra-functions.R
 c9fd6af49b4e369d9952c58bc8e6281f *R/as.matrix-functions.R
 5e8740cbbfe2ed6dd01866d0fb66b3e0 *R/as.matrix-methods.R
 3bfcf3b137218748198b55f6988be989 *R/averageMassSpectra-functions.R
-4d406ff1e7c5ceab509b7272a37a33b1 *R/binPeaks-functions.R
+b10789a7cb1815784fe972d6ffda7729 *R/binPeaks-functions.R
 e3e59f5908c6862234b76cf33ae8873e *R/calculateLabelPositions-functions.R
 e1484e422d1bd8b6456ff9a07bab9b5b *R/calibrateIntensity-functions.R
-87c60269270f9eff5bad4905e7523d51 *R/calibrateIntensity-methods.R
+0a011b244f72ab39478fe170b223cd8c *R/calibrateIntensity-methods.R
 71ff2cddb13a79d4b47f62c3698979fb *R/colMedians-functions.R
 3643b8346119c55c42668acfc409d1d7 *R/constructor-functions.R
 365f71ca6890fc8812e5058dd42560d8 *R/coordinates-methods.R
 0a12a58641b937a488debd2c310fd68f *R/deprecated-functions.R
 eafa4318646d3084a93d185852bbc5cd *R/detectPeaks-methods.R
-7194c05ab12c62ceb66f29c5eeebedee *R/determineWarpingFunctions-functions.R
+9ae7c4290a8678c987b77f2fb45813e6 *R/determineWarpingFunctions-functions.R
 57d54099884e47e5302099d892df3d01 *R/doByLabels-functions.R
 2fdf7431b55c6ec4735c790c3300701e *R/estimateBaseline-functions.R
 3fcfde8fc894579f40eb18c973ac169a *R/estimateBaseline-methods.R
@@ -89,7 +89,7 @@ c9360cb1fb38da8fc547d5ad59422b5b *demo/workflow.R
 45e944c7928cff18a5275b4dc5ff1288 *inst/CITATION
 5bcd1c7abae66e68fe9dc628e5e7324b *inst/doc/MALDIquant-intro.R
 1e51473c26e4202ac6b4f6123caba9e1 *inst/doc/MALDIquant-intro.Rnw
-84d47cd59aeea6cd7b55182761e3b103 *inst/doc/MALDIquant-intro.pdf
+64edffdeb9b2a0f16df6de76b9a8edfb *inst/doc/MALDIquant-intro.pdf
 5e14a19e63c962dd102a51577928ec17 *man/AbstractMassObject-class.Rd
 c1713d2d9b7cf6f8f2d9b6fb60594e41 *man/MALDIquant-defunct.Rd
 bfcc36bbb605f08d9d49ee40c5ffa7ca *man/MALDIquant-deprecated.Rd
@@ -104,7 +104,7 @@ b69e1b1078d85e372ffb060ca9f7ed21 *man/calibrateIntensity-methods.Rd
 acedda01a5c43805f5869759bf1d8a3a *man/createMassPeaks-functions.Rd
 30c86bc22623778724e87f2367a98205 *man/createMassSpectrum-functions.Rd
 fa021d2215691899b7f441a35cdcfad3 *man/detectPeaks-methods.Rd
-f6b48f967c44223bb8bed9a06cb1382f *man/determineWarpingFunctions-functions.Rd
+c8e902802ba82c97d56cae1bcc99bc39 *man/determineWarpingFunctions-functions.Rd
 0dda81c2d55eaa76af65fe919fca1c9d *man/estimateBaseline-methods.Rd
 ba15ac52b921d707033bfdfb6eb5c641 *man/estimateNoise-methods.Rd
 e0ba47d418a460fe74d3cb5075bf9466 *man/fiedler2009subset.Rd
@@ -140,7 +140,7 @@ d7dc99ca5017916b68b3a71a37927789 *src/lowerConvexHull.c
 8e701cc8a2da430957729275bf9e855d *tests/testthat/test_as.matrix-functions.R
 6190f4bc3eba28a0bc2a1deef66ad37f *tests/testthat/test_as.matrix-methods.R
 f0c6d6810ac4af4e7e14af64ff0c0c90 *tests/testthat/test_averageMassSpectra-functions.R
-d513f8c0a0167cf60386efcafd6138e1 *tests/testthat/test_binPeaks-functions.R
+8f1e4bf6575436c46beb79d0277d0f4e *tests/testthat/test_binPeaks-functions.R
 a98a6fd8a8a621ad46a3e0fc5c100bf0 *tests/testthat/test_calculateLabelPositions-functions.R
 485ab564461621a410af15e00f405859 *tests/testthat/test_calibrateIntensity-methods.R
 3afe885fa30e5a67fccd44a1e657f30d *tests/testthat/test_colMedians-functions.R
@@ -148,7 +148,7 @@ a98a6fd8a8a621ad46a3e0fc5c100bf0 *tests/testthat/test_calculateLabelPositions-fu
 6d40c0bae99eff350b71995c3d70a31d *tests/testthat/test_coordinates-methods.R
 4697bcf0bf73a2b7df6b756217c18098 *tests/testthat/test_deprecated-functions.R
 255d018afbadf2a359bf0bbcfb940426 *tests/testthat/test_detectPeaks-methods.R
-0c998c6e6cbde044277df5cf918e4fa1 *tests/testthat/test_determineWarpingFunctions-functions.R
+d66ddd43f9bc8422e701d706b72f0c90 *tests/testthat/test_determineWarpingFunctions-functions.R
 7f7afb275f167ad815b6452ccf96ffc3 *tests/testthat/test_doByLabel-functions.R
 e199e579e823e1c6948c4cbd1b1b4901 *tests/testthat/test_estimateBaseline-methods.R
 0f42dd3217c3f6f4bfba6fc4841809ea *tests/testthat/test_estimateNoise-methods.R
