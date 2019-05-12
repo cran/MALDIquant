@@ -1,8 +1,8 @@
-c706b051c66d5ccb4fd9510edb856366 *DESCRIPTION
-39031b84fd8062dc24c697e9a0a61304 *NAMESPACE
-632fe82dce35013ca962d143ad36b2c9 *NEWS
+702bd494fbe7b577b3d1dff1e02cab87 *DESCRIPTION
+dde090790b0c449acd7a6bbb20f3f49e *NAMESPACE
+12ab973c1f94e6776d0c35e5b63fbd1b *NEWS
 2d718254fdc4b0015d8b6afbd5b1ef1c *R/AllClasses.R
-ba4f6a809a95050798837ffe25c3884a *R/AllGenerics.R
+4eb6f49b08858814130a5f6ee112d291 *R/AllGenerics.R
 339a94899120936b51b692058b568e3b *R/Deprecated.R
 c97fcb1d020bd6a28f5e4d05c84f8bc5 *R/alignSpectra-functions.R
 13883e11409f9ff0b487b9421add1f79 *R/approxfun-methods.R
@@ -78,7 +78,7 @@ e5a957e3665317ec1e6f1aa7631d2cc7 *R/unlist-functions.R
 8626c8afb82f7ee5559c3954536dc476 *R/valid-methods.R
 02465762be6507f6376ca0d0b63bdef4 *R/warp-functions.R
 6cfb13e8b0858cd2981bc9b84ebc1bb6 *R/warpingFunction-functions.R
-315179d7a63fdf8369a93b69f2bfe58d *build/vignette.rds
+959fe64c1e0a0acb7331485cc213f382 *build/vignette.rds
 325598b0f8bcbe241bf33882d83b6f85 *data/fiedler2009subset.RData
 b1d4b3db5f8a9d68fc4692e30026986e *demo/00Index
 cd6a6ad12205a639b80a67a1a5080723 *demo/MALDIquant.R
@@ -89,7 +89,7 @@ c9360cb1fb38da8fc547d5ad59422b5b *demo/workflow.R
 45e944c7928cff18a5275b4dc5ff1288 *inst/CITATION
 5bcd1c7abae66e68fe9dc628e5e7324b *inst/doc/MALDIquant-intro.R
 1e51473c26e4202ac6b4f6123caba9e1 *inst/doc/MALDIquant-intro.Rnw
-64edffdeb9b2a0f16df6de76b9a8edfb *inst/doc/MALDIquant-intro.pdf
+09a22adb436a232e8f771d866c86ace9 *inst/doc/MALDIquant-intro.pdf
 5e14a19e63c962dd102a51577928ec17 *man/AbstractMassObject-class.Rd
 c1713d2d9b7cf6f8f2d9b6fb60594e41 *man/MALDIquant-defunct.Rd
 bfcc36bbb605f08d9d49ee40c5ffa7ca *man/MALDIquant-deprecated.Rd
@@ -114,7 +114,7 @@ dd2a0fb36bb864a09b79a294e5f1f1d5 *man/intensityMatrix-functions.Rd
 a0ad3cf98d26953dd93aa84eb4bf8298 *man/isMassObject-functions.Rd
 c11136206258d7b34948bca285f7e927 *man/isMassObjectList-functions.Rd
 8f8bb09592b1a47e25daa155c2c28c06 *man/labelPeaks-methods.Rd
-a4d81f8bc95929b1791e63e7114b18e7 *man/match.closest.Rd
+ca65218266ae56155d1d6f7b23c34773 *man/match.closest.Rd
 fa8b97f3c7c798f0d54959c5a291ec51 *man/mergeMassPeaks-functions.Rd
 ce3530daa7b7b398a6e60c333fad3615 *man/monoisotopicPeaks-methods.Rd
 f71932d026a6053597b707a0463ae833 *man/msiSlices-functions.Rd
