@@ -7,7 +7,7 @@
 This dataset contains 16 example mass spectra.
 It is used to demonstrate the usage of \code{\link{MALDIquant-package}}.
 }
-\usage{fiedler2009subset}
+\usage{data(fiedler2009subset)}
 \format{
 A list containing 16 \code{\link[MALDIquant]{MassSpectrum-class}}
 objects.}
@@ -44,11 +44,11 @@ and J. Thiery
 Discriminating Peptide Associated with Pancreatic Cancer} \cr
 Clinical Cancer Research, 11(15): 3812-3819, 2009 \cr
 ISSN 1557-3265; doi:10.1158/1078-0432.CCR-08-2701 \cr
-\url{http://clincancerres.aacrjournals.org/content/15/11/3812}
+\url{https://clincancerres.aacrjournals.org/content/15/11/3812}
 }
 \seealso{
 \code{\link[MALDIquant]{MassSpectrum-class}}
 
-Website: \url{http://strimmerlab.org/software/maldiquant/}
+Website: \url{https://www.strimmerlab.org/software/maldiquant/}
 }
 \keyword{datasets}
