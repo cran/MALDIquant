@@ -1,6 +1,6 @@
-a9d67e0bcedf6fd6b2eefdfa8197f3b8 *DESCRIPTION
+adf6c67922b245d61179b4611346eea5 *DESCRIPTION
 28b02ef8db94e440d25e3835f3d9d652 *NAMESPACE
-1529d143e81264a9fd415789d9a4fd9b *NEWS
+ccbf291b7d4a197755d451585348c021 *NEWS
 2d718254fdc4b0015d8b6afbd5b1ef1c *R/AllClasses.R
 09c9128c16a5072e190ce3fd8b814e30 *R/AllGenerics.R
 339a94899120936b51b692058b568e3b *R/Deprecated.R
@@ -48,7 +48,7 @@ d813e5cc45bfa88a09a6df84d81a31da *R/length-methods.R
 09234c4655a45dce3e77ebee7c4daeb7 *R/mass-methods.R
 840a8d10d188a4966eb43ccb71e40445 *R/match.closest-functions.R
 2ddd078c28342238880b24777aac4f06 *R/memoryUsage-functions.R
-dddb705965cf74d9c70adf0c364d783c *R/merge-functions.R
+fec8406bb793f288a71c08e4b00b0c7e *R/merge-functions.R
 6dbbe512dbebcc8271abdcb813ff1751 *R/metaData-methods.R
 419863fffd61d9a36079af74c899b47e *R/monoisotopic-functions.R
 17df8ea5914d3234d610088653225901 *R/monoisotopicPeaks-methods.R
@@ -79,7 +79,8 @@ e5a957e3665317ec1e6f1aa7631d2cc7 *R/unlist-functions.R
 8626c8afb82f7ee5559c3954536dc476 *R/valid-methods.R
 02465762be6507f6376ca0d0b63bdef4 *R/warp-functions.R
 6cfb13e8b0858cd2981bc9b84ebc1bb6 *R/warpingFunction-functions.R
-5a65723e2104c40e5d69dd5704f4d26a *build/vignette.rds
+ea124a494ad7922985532ad3b308e4d5 *build/partial.rdb
+d2aef533b141cfe64b8305613f6ffbd4 *build/vignette.rds
 325598b0f8bcbe241bf33882d83b6f85 *data/fiedler2009subset.RData
 b1d4b3db5f8a9d68fc4692e30026986e *demo/00Index
 cd6a6ad12205a639b80a67a1a5080723 *demo/MALDIquant.R
@@ -90,7 +91,7 @@ c9360cb1fb38da8fc547d5ad59422b5b *demo/workflow.R
 5e12cef49db57ed9a9b5df7c2755d135 *inst/CITATION
 ddc49331fc65ae8449e0929cf4ad29cc *inst/doc/MALDIquant-intro.R
 4b3e8e194487f141112bddefb2cca81e *inst/doc/MALDIquant-intro.Rnw
-03f05162b08f97e03c37dae3b8619dcd *inst/doc/MALDIquant-intro.pdf
+24290bb62b4ed5f558010c266af951b9 *inst/doc/MALDIquant-intro.pdf
 51c34f13482569c43b11c191e627c496 *man/AbstractMassObject-class.Rd
 c1713d2d9b7cf6f8f2d9b6fb60594e41 *man/MALDIquant-defunct.Rd
 bfcc36bbb605f08d9d49ee40c5ffa7ca *man/MALDIquant-deprecated.Rd
@@ -108,7 +109,7 @@ cae8ffe055eb6032619a9d492dc3a36f *man/detectPeaks-methods.Rd
 ff2f2bb09583fb48a54ce1823f5f6964 *man/determineWarpingFunctions-functions.Rd
 f74806aa03e54853712502f813323cfc *man/estimateBaseline-methods.Rd
 3b18f3da427a6e412d4e740f514cf0e3 *man/estimateNoise-methods.Rd
-554a2b0eb5d452d2e536a09b02e5b86f *man/fiedler2009subset.Rd
+47a77a1f4780c7e833b7e57ad458cfaa *man/fiedler2009subset.Rd
 10fafa6d95a14b0b73e7df4b7c1bd723 *man/filterPeaks-functions.Rd
 055ae87f133c796dbbd1004c773d2405 *man/findEmptyMassObjects-functions.Rd
 be212c2d2278c08b98b718ce5a635345 *man/intensityMatrix-functions.Rd
@@ -118,7 +119,7 @@ e9e3746658f1bdff39dbc9af6929351e *man/labelPeaks-methods.Rd
 ca65218266ae56155d1d6f7b23c34773 *man/match.closest.Rd
 3e534a0cc724926beb101a9581ee1cd5 *man/mergeMassPeaks-functions.Rd
 01ecb339c07411a96d9d73053acf9be1 *man/monoisotopicPeaks-methods.Rd
-8938b7018d84a959097f42ed9f54ca33 *man/msiSlices-functions.Rd
+f573926c3dfd8ad2ed793052b0ad49ef *man/msiSlices-functions.Rd
 96be9a2a6c94b90fed77247c485d7519 *man/plot-methods.Rd
 43358e2d472f5b115c4763ffebcd8232 *man/plotMsiSlice-methods.Rd
 a67b70b846e1bbe403196024c6072424 *man/referencePeaks-functions.Rd
@@ -141,7 +142,7 @@ d7dc99ca5017916b68b3a71a37927789 *src/lowerConvexHull.c
 bf86c748325280f43252cd4f53596839 *tests/testthat/test_as.list-functions.R
 8e701cc8a2da430957729275bf9e855d *tests/testthat/test_as.matrix-functions.R
 6190f4bc3eba28a0bc2a1deef66ad37f *tests/testthat/test_as.matrix-methods.R
-f0c6d6810ac4af4e7e14af64ff0c0c90 *tests/testthat/test_averageMassSpectra-functions.R
+8db722abda1c1823b95db4f1cda7bc08 *tests/testthat/test_averageMassSpectra-functions.R
 c292e0b8d60d72a6539c0bece6fd4a46 *tests/testthat/test_binPeaks-functions.R
 a98a6fd8a8a621ad46a3e0fc5c100bf0 *tests/testthat/test_calculateLabelPositions-functions.R
 485ab564461621a410af15e00f405859 *tests/testthat/test_calibrateIntensity-methods.R
