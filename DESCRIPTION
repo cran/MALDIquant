@@ -1,6 +1,6 @@
 Package: MALDIquant
-Version: 1.22
-Date: 2022-11-10
+Version: 1.22.1
+Date: 2023-03-20
 Title: Quantitative Analysis of Mass Spectrometry Data
 Authors@R: c(
     person(
@@ -43,7 +43,7 @@ LazyLoad: yes
 VignetteBuilder: knitr
 RoxygenNote: 7.2.1
 NeedsCompilation: yes
-Packaged: 2022-11-10 10:31:07 UTC; sebastian
+Packaged: 2023-03-20 08:59:18 UTC; sebastian
 Author: Sebastian Gibb [aut, cre] (<https://orcid.org/0000-0001-7406-4443>),
   Korbinian Strimmer [ths] (<https://orcid.org/0000-0001-7917-2056>),
   Sigurdur Smarason [ctb],
@@ -51,4 +51,4 @@ Author: Sebastian Gibb [aut, cre] (<https://orcid.org/0000-0001-7406-4443>),
   Paolo Inglese [ctb]
 Maintainer: Sebastian Gibb <mail@sebastiangibb.de>
 Repository: CRAN
-Date/Publication: 2022-11-10 11:00:02 UTC
+Date/Publication: 2023-03-20 21:10:02 UTC

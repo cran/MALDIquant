@@ -2,6 +2,12 @@ RELEASE HISTORY OF THE "MALDIquant" PACKAGE
 ===========================================
 
 
+CHANGES IN MALDIquant VERSION 1.22.1 [2023-03-20]:
+--------------------------------------------------
+
+* Use symbols instead of names in `.Call` for faster lookup of C functions.
+
+
 CHANGES IN MALDIquant VERSION 1.22 [2022-11-10]:
 ------------------------------------------------
 

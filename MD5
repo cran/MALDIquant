@@ -1,6 +1,6 @@
-adf6c67922b245d61179b4611346eea5 *DESCRIPTION
-28b02ef8db94e440d25e3835f3d9d652 *NAMESPACE
-ccbf291b7d4a197755d451585348c021 *NEWS
+8bffd27a988bf2751016bdfca4df9182 *DESCRIPTION
+7a664c44fdbfea58bfd68c9b8200197d *NAMESPACE
+dcd36e7914fd7796c03017911b34b336 *NEWS
 2d718254fdc4b0015d8b6afbd5b1ef1c *R/AllClasses.R
 09c9128c16a5072e190ce3fd8b814e30 *R/AllGenerics.R
 339a94899120936b51b692058b568e3b *R/Deprecated.R
@@ -15,14 +15,14 @@ c97fcb1d020bd6a28f5e4d05c84f8bc5 *R/alignSpectra-functions.R
 e3e59f5908c6862234b76cf33ae8873e *R/calculateLabelPositions-functions.R
 e1484e422d1bd8b6456ff9a07bab9b5b *R/calibrateIntensity-functions.R
 0a011b244f72ab39478fe170b223cd8c *R/calibrateIntensity-methods.R
-71ff2cddb13a79d4b47f62c3698979fb *R/colMedians-functions.R
+029a496a5adbdc3de27fc4bc981b136c *R/colMedians-functions.R
 3643b8346119c55c42668acfc409d1d7 *R/constructor-functions.R
 365f71ca6890fc8812e5058dd42560d8 *R/coordinates-methods.R
 0a12a58641b937a488debd2c310fd68f *R/deprecated-functions.R
 eafa4318646d3084a93d185852bbc5cd *R/detectPeaks-methods.R
 8f5d3e995f474c3bb1297a913c798d6f *R/determineWarpingFunctions-functions.R
 57d54099884e47e5302099d892df3d01 *R/doByLabels-functions.R
-2fdf7431b55c6ec4735c790c3300701e *R/estimateBaseline-functions.R
+b7e89ae30f8d2fb73882001416e34c46 *R/estimateBaseline-functions.R
 3fcfde8fc894579f40eb18c973ac169a *R/estimateBaseline-methods.R
 abfe7e1ddaa8569d9dcc8a8dda43da66 *R/estimateNoise-functions.R
 798c6c0fd55b12b6030041ad1292a561 *R/estimateNoise-methods.R
@@ -43,7 +43,7 @@ bf131974b05cf326cf41eafcda90f78e *R/isValidHalfWindowSize-functions.R
 2df22e672bec493ca30732ad04748bb8 *R/lapply-functions.R
 d813e5cc45bfa88a09a6df84d81a31da *R/length-methods.R
 6cb116fcca286eac128f58b6d5665a77 *R/lines-methods.R
-3cd216c8076dd929e262791c75405025 *R/localMaxima-functions.R
+f8b3dc26a042903a4a30cd1d7d43055e *R/localMaxima-functions.R
 7a2c61ddf4d6eaf0aae1c09131501ea8 *R/mapply-functions.R
 09234c4655a45dce3e77ebee7c4daeb7 *R/mass-methods.R
 840a8d10d188a4966eb43ccb71e40445 *R/match.closest-functions.R
@@ -52,7 +52,7 @@ fec8406bb793f288a71c08e4b00b0c7e *R/merge-functions.R
 6dbbe512dbebcc8271abdcb813ff1751 *R/metaData-methods.R
 419863fffd61d9a36079af74c899b47e *R/monoisotopic-functions.R
 17df8ea5914d3234d610088653225901 *R/monoisotopicPeaks-methods.R
-69ec5cbd168514cfc2b753a51e736642 *R/morphologicalFilter-functions.R
+e0395a2b832f33dfab0866eda8023ca9 *R/morphologicalFilter-functions.R
 25d1cb691610de16a4a0e5705b399851 *R/msiSlices-functions.R
 bf8d6c724a39f8e95e005139838a4132 *R/mz-methods.R
 f0facd86d5a8cb6666f81e26d5f30541 *R/onAttach.R
@@ -79,8 +79,8 @@ e5a957e3665317ec1e6f1aa7631d2cc7 *R/unlist-functions.R
 8626c8afb82f7ee5559c3954536dc476 *R/valid-methods.R
 02465762be6507f6376ca0d0b63bdef4 *R/warp-functions.R
 6cfb13e8b0858cd2981bc9b84ebc1bb6 *R/warpingFunction-functions.R
-ea124a494ad7922985532ad3b308e4d5 *build/partial.rdb
-d2aef533b141cfe64b8305613f6ffbd4 *build/vignette.rds
+7f2094c7b4d5faa522b624cffc621f8b *build/partial.rdb
+54ce9887fe20494404293b3bf8355d5b *build/vignette.rds
 325598b0f8bcbe241bf33882d83b6f85 *data/fiedler2009subset.RData
 b1d4b3db5f8a9d68fc4692e30026986e *demo/00Index
 cd6a6ad12205a639b80a67a1a5080723 *demo/MALDIquant.R
@@ -91,7 +91,7 @@ c9360cb1fb38da8fc547d5ad59422b5b *demo/workflow.R
 5e12cef49db57ed9a9b5df7c2755d135 *inst/CITATION
 ddc49331fc65ae8449e0929cf4ad29cc *inst/doc/MALDIquant-intro.R
 4b3e8e194487f141112bddefb2cca81e *inst/doc/MALDIquant-intro.Rnw
-24290bb62b4ed5f558010c266af951b9 *inst/doc/MALDIquant-intro.pdf
+c427e23b25424e3206528e18af65934a *inst/doc/MALDIquant-intro.pdf
 51c34f13482569c43b11c191e627c496 *man/AbstractMassObject-class.Rd
 c1713d2d9b7cf6f8f2d9b6fb60594e41 *man/MALDIquant-defunct.Rd
 bfcc36bbb605f08d9d49ee40c5ffa7ca *man/MALDIquant-deprecated.Rd
