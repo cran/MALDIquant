@@ -1,6 +1,6 @@
-8bffd27a988bf2751016bdfca4df9182 *DESCRIPTION
+514413c9ce0401e85a2d78d484c6a330 *DESCRIPTION
 7a664c44fdbfea58bfd68c9b8200197d *NAMESPACE
-dcd36e7914fd7796c03017911b34b336 *NEWS
+c8a0dcbc140eccb69bf1efe9102bfe45 *NEWS
 2d718254fdc4b0015d8b6afbd5b1ef1c *R/AllClasses.R
 09c9128c16a5072e190ce3fd8b814e30 *R/AllGenerics.R
 339a94899120936b51b692058b568e3b *R/Deprecated.R
@@ -20,7 +20,7 @@ e1484e422d1bd8b6456ff9a07bab9b5b *R/calibrateIntensity-functions.R
 365f71ca6890fc8812e5058dd42560d8 *R/coordinates-methods.R
 0a12a58641b937a488debd2c310fd68f *R/deprecated-functions.R
 eafa4318646d3084a93d185852bbc5cd *R/detectPeaks-methods.R
-8f5d3e995f474c3bb1297a913c798d6f *R/determineWarpingFunctions-functions.R
+bdd414e53b7a5fe6326c203a13c80d0b *R/determineWarpingFunctions-functions.R
 57d54099884e47e5302099d892df3d01 *R/doByLabels-functions.R
 b7e89ae30f8d2fb73882001416e34c46 *R/estimateBaseline-functions.R
 3fcfde8fc894579f40eb18c973ac169a *R/estimateBaseline-methods.R
@@ -79,8 +79,8 @@ e5a957e3665317ec1e6f1aa7631d2cc7 *R/unlist-functions.R
 8626c8afb82f7ee5559c3954536dc476 *R/valid-methods.R
 02465762be6507f6376ca0d0b63bdef4 *R/warp-functions.R
 6cfb13e8b0858cd2981bc9b84ebc1bb6 *R/warpingFunction-functions.R
-7f2094c7b4d5faa522b624cffc621f8b *build/partial.rdb
-54ce9887fe20494404293b3bf8355d5b *build/vignette.rds
+f61db891eb928123aba4412ca322f508 *build/partial.rdb
+6fcb6c594b15321e6a413dc55e997f9b *build/vignette.rds
 325598b0f8bcbe241bf33882d83b6f85 *data/fiedler2009subset.RData
 b1d4b3db5f8a9d68fc4692e30026986e *demo/00Index
 cd6a6ad12205a639b80a67a1a5080723 *demo/MALDIquant.R
@@ -90,8 +90,8 @@ c250741acaccf4baa0b0f9f3a2d8933f *demo/warping.R
 c9360cb1fb38da8fc547d5ad59422b5b *demo/workflow.R
 5e12cef49db57ed9a9b5df7c2755d135 *inst/CITATION
 ddc49331fc65ae8449e0929cf4ad29cc *inst/doc/MALDIquant-intro.R
-4b3e8e194487f141112bddefb2cca81e *inst/doc/MALDIquant-intro.Rnw
-c427e23b25424e3206528e18af65934a *inst/doc/MALDIquant-intro.pdf
+012ac59abeef3810caeaafeb78ccecc8 *inst/doc/MALDIquant-intro.Rnw
+c5fb4b251f59911f2f91770bd9cb2852 *inst/doc/MALDIquant-intro.pdf
 51c34f13482569c43b11c191e627c496 *man/AbstractMassObject-class.Rd
 c1713d2d9b7cf6f8f2d9b6fb60594e41 *man/MALDIquant-defunct.Rd
 bfcc36bbb605f08d9d49ee40c5ffa7ca *man/MALDIquant-deprecated.Rd
@@ -199,5 +199,5 @@ baba5299f469d4cfc0b02f88031d5d95 *tests/testthat/test_subset-methods.R
 dc2bac6f8e7b0305966ce9d34c7939d4 *tests/testthat/test_valid-functions.R
 67e2bfb8da9e408214939ddff4a6ad70 *tests/testthat/test_warp-functions.R
 e9fcbba719208af5463784ad2ca27699 *tests/testthat/test_warpingFunctions-functions.R
-4b3e8e194487f141112bddefb2cca81e *vignettes/MALDIquant-intro.Rnw
+012ac59abeef3810caeaafeb78ccecc8 *vignettes/MALDIquant-intro.Rnw
 5c072541fc956025aecacd9dc2129c6a *vignettes/bibliography.bib
