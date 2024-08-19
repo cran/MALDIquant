@@ -1,6 +1,6 @@
-514413c9ce0401e85a2d78d484c6a330 *DESCRIPTION
+3de6ce4a87a85c4d67abe36a2d948bce *DESCRIPTION
 7a664c44fdbfea58bfd68c9b8200197d *NAMESPACE
-c8a0dcbc140eccb69bf1efe9102bfe45 *NEWS
+624a11a2054a6717e4d35e8a333f34f3 *NEWS
 2d718254fdc4b0015d8b6afbd5b1ef1c *R/AllClasses.R
 09c9128c16a5072e190ce3fd8b814e30 *R/AllGenerics.R
 339a94899120936b51b692058b568e3b *R/Deprecated.R
@@ -79,8 +79,8 @@ e5a957e3665317ec1e6f1aa7631d2cc7 *R/unlist-functions.R
 8626c8afb82f7ee5559c3954536dc476 *R/valid-methods.R
 02465762be6507f6376ca0d0b63bdef4 *R/warp-functions.R
 6cfb13e8b0858cd2981bc9b84ebc1bb6 *R/warpingFunction-functions.R
-f61db891eb928123aba4412ca322f508 *build/partial.rdb
-6fcb6c594b15321e6a413dc55e997f9b *build/vignette.rds
+b52aabe9a2757fc86742763db9dafc9b *build/partial.rdb
+e1d56435775d72c93760206e6ba0e57b *build/vignette.rds
 325598b0f8bcbe241bf33882d83b6f85 *data/fiedler2009subset.RData
 b1d4b3db5f8a9d68fc4692e30026986e *demo/00Index
 cd6a6ad12205a639b80a67a1a5080723 *demo/MALDIquant.R
@@ -88,14 +88,14 @@ cd6a6ad12205a639b80a67a1a5080723 *demo/MALDIquant.R
 9d4b1343695f6eb16b6fec4a8f1a4839 *demo/peaks.R
 c250741acaccf4baa0b0f9f3a2d8933f *demo/warping.R
 c9360cb1fb38da8fc547d5ad59422b5b *demo/workflow.R
-5e12cef49db57ed9a9b5df7c2755d135 *inst/CITATION
+d5de701083687097e322f8572445d743 *inst/CITATION
 ddc49331fc65ae8449e0929cf4ad29cc *inst/doc/MALDIquant-intro.R
 012ac59abeef3810caeaafeb78ccecc8 *inst/doc/MALDIquant-intro.Rnw
-c5fb4b251f59911f2f91770bd9cb2852 *inst/doc/MALDIquant-intro.pdf
+f590febb41a468ab0ef95196dc11fb9f *inst/doc/MALDIquant-intro.pdf
 51c34f13482569c43b11c191e627c496 *man/AbstractMassObject-class.Rd
 c1713d2d9b7cf6f8f2d9b6fb60594e41 *man/MALDIquant-defunct.Rd
 bfcc36bbb605f08d9d49ee40c5ffa7ca *man/MALDIquant-deprecated.Rd
-6af5c9441f5bbaf5249fc9941eb355a0 *man/MALDIquant-package.Rd
+039e79475295d402e93d5847deb3c95b *man/MALDIquant-package.Rd
 41c88a37ec70c1340d6a2eb207473014 *man/MALDIquant-parallel.Rd
 df391ea361beeaa0530329966cca0c41 *man/MassPeaks-class.Rd
 2699a4d32ca11d7ffb7cc538a7ecb2b2 *man/MassSpectrum-class.Rd
@@ -109,7 +109,7 @@ cae8ffe055eb6032619a9d492dc3a36f *man/detectPeaks-methods.Rd
 ff2f2bb09583fb48a54ce1823f5f6964 *man/determineWarpingFunctions-functions.Rd
 f74806aa03e54853712502f813323cfc *man/estimateBaseline-methods.Rd
 3b18f3da427a6e412d4e740f514cf0e3 *man/estimateNoise-methods.Rd
-47a77a1f4780c7e833b7e57ad458cfaa *man/fiedler2009subset.Rd
+4d3c9cc9e97524852f4628b02a484dea *man/fiedler2009subset.Rd
 10fafa6d95a14b0b73e7df4b7c1bd723 *man/filterPeaks-functions.Rd
 055ae87f133c796dbbd1004c773d2405 *man/findEmptyMassObjects-functions.Rd
 be212c2d2278c08b98b718ce5a635345 *man/intensityMatrix-functions.Rd
@@ -132,7 +132,7 @@ fb066b9188bd95095f8200caede3341e *man/smoothIntensity-methods.Rd
 60981e9053676a37966435e95997ab2b *src/colMedians.c
 7e79decc63a6cc375710d9045502d201 *src/init.c
 84bbe5fae4c01cf58bf6849828eb1775 *src/localMaxima.c
-d7dc99ca5017916b68b3a71a37927789 *src/lowerConvexHull.c
+f988f172923f91917f560b18416b4d37 *src/lowerConvexHull.c
 6fad5941d2d7d8188cc07e2ae7391583 *src/morphologicalFilters.c
 5ea261ad15a1cc2d9bdbbbceff8c6ee6 *src/snip.c
 912144481b4c12b9881702c42f4ad11a *tests/testthat.R
